@@ -13,16 +13,15 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private Integer credit;
-	private boolean administrateur;
+	private boolean administrateur=false;
 	
 	public Utilisateur() {
 		super();
 	}
 	
-	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Integer credit, boolean administrateur) {
 		super();
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -36,10 +35,10 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 	
-	public Integer getnoUtilisateur() {
+	public Integer getNoUtilisateur() {
 		return noUtilisateur;
 	}
-	public void setnoUtilisateur(Integer noUtilisateur) {
+	public void setNoUtilisateur(Integer noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 	public String getPseudo() {
@@ -78,10 +77,10 @@ public class Utilisateur {
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
-	public String getcodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
-	public void setcodePostal(String codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 	public String getVille() {
@@ -90,10 +89,10 @@ public class Utilisateur {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	public String getmotDePasse() {
+	public String getMotDePasse() {
 		return motDePasse;
 	}
-	public void setmotDePasse(String motDePasse) {
+	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
 	public Integer getCredit() {
