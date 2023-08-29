@@ -1,18 +1,18 @@
-package dal;
+package fr.eni.encheres.dal.gestionEncheres;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.model.ArticleVendu;
-import fr.formation.task.bo.Task;
-import fr.formation.task.dal.DALException;
-import fr.formation.task.dal.util.ConnectionProvider;
+import fr.eni.encheres.dal.util.ConnectionProvider;
+import fr.eni.encheres.dal.util.DALException;
+
 
 public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	
@@ -26,8 +26,8 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, article.getnomArticle());
 			stmt.setString(2,article.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(article.getdateDebutEncheres()));
-			stmt.setTimestamp(4, Timestamp.valueOf(article.getdateFinEncheres()));
+			stmt.setDate(3, Date.valueOf(article.getdateDebutEncheres()));
+			stmt.setDate(4, Date.valueOf(article.getdateDebutEncheres()));
 			stmt.setInt(5, article.getprixVente());
 			int nb = stmt.executeUpdate();
 			if(nb>0) {
@@ -53,10 +53,12 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			while(rs.next()) {
 				ArticleVendu article = new ArticleVendu(rs.getString("nomArticle"),
 							rs.getString("description"),
-							rs.getTimestamp("dateDebutEncheres").toLocalDateTime(),
-							rs.getTimestamp("dateFFinEncheres").toLocalDateTime(),
+							rs.getDate("dateDebutEncheres").toLocalDate(),
+							rs.getDate("dateFinEncheres").toLocalDate(),
 							rs.getInt("miseAPrix"),
-							rs.getInt("prixVente")
+							rs.getInt("prixVente"),
+							rs.getInt("noUtilisateur"),
+							rs.getInt("noCategorie")
 						);
 				article.setnoArticle(rs.getInt("noArticle"));
 				result.add(article);
