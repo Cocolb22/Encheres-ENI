@@ -13,7 +13,8 @@ public class Enchere {
 	private Integer montantEnchere;
 	
 	
-	public Enchere(Integer noUtilisateur, Integer noArticle, LocalDateTime dateEnchere, Integer montantEnchere) {
+	
+	public Enchere( Integer noUtilisateur, Integer noArticle, LocalDateTime dateEnchere, Integer montantEnchere) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.noArticle = noArticle;
@@ -21,10 +22,7 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 	
-	
-	public Enchere() {
-		super();
-	}
+
 
 
 	public Integer getnoEnchere() {
