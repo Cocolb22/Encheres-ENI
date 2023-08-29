@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.ihm.enchere;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,15 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class HelloWorld
+ * Servlet implementation class EnchereServlet
  */
-public class HelloWorld extends HttpServlet {
+public class EnchereServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloWorld() {
+    public EnchereServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
