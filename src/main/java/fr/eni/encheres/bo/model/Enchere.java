@@ -12,6 +12,8 @@ public class Enchere {
 	private LocalDateTime dateEnchere;
 	private Integer montantEnchere;
 	
+	
+	
 	public Enchere(Integer noEnchere, Integer noUtilisateur, Integer noArticle, LocalDateTime dateEnchere, Integer montantEnchere) {
 		super();
 		this.noEnchere = noEnchere;
@@ -20,10 +22,28 @@ public class Enchere {
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 	}
+	
+	
+
+	public Enchere(Integer noEnchere, Utilisateur utilisateur, Integer noUtilisateur, ArticleVendu article,
+			Integer noArticle, LocalDateTime dateEnchere, Integer montantEnchere) {
+		super();
+		this.noEnchere = noEnchere;
+		this.utilisateur = utilisateur;
+		this.noUtilisateur = noUtilisateur;
+		this.article = article;
+		this.noArticle = noArticle;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+	}
+
 
 	public Enchere() {
 		super();
 	}
+
+
+
 
 	public Integer getnoEnchere() {
 		return noEnchere;
