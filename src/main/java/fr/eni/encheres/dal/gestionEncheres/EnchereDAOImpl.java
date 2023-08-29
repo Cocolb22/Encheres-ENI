@@ -38,6 +38,8 @@ public class EnchereDAOImpl implements EnchereDAO {
         }
     }
 
+
+
     @Override
     public List<Enchere> getAll() throws DALException {
         List<Enchere> result = new ArrayList<>();
@@ -47,9 +49,7 @@ public class EnchereDAOImpl implements EnchereDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Enchere enchere = new Enchere(
-                		rs.getString("utilisateur"),
                         rs.getInt("noUtilisateur"),
-                        rs.getString("article"),
                         rs.getInt("noArticle"),
                         rs.getTimestamp("dateEnchere").toLocalDateTime(),
                         rs.getInt("montantEnchere"));
