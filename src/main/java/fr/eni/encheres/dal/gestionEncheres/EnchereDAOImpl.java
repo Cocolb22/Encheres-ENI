@@ -34,7 +34,7 @@ public class EnchereDAOImpl implements EnchereDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DALException("Erreur lors de l'insertion de l'enchère.", e);
+            throw new DALException("ms_insert");
         }
     }
 
@@ -47,7 +47,9 @@ public class EnchereDAOImpl implements EnchereDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Enchere enchere = new Enchere(
+                		rs.getString("utilisateur"),
                         rs.getInt("noUtilisateur"),
+                        rs.getString("article"),
                         rs.getInt("noArticle"),
                         rs.getTimestamp("dateEnchere").toLocalDateTime(),
                         rs.getInt("montantEnchere"));
@@ -55,7 +57,7 @@ public class EnchereDAOImpl implements EnchereDAO {
                 result.add(enchere);
             }
         } catch (SQLException e) {
-            throw new DALException("Erreur lors de la récupération des enchères.", e);
+            throw new DALException("ms_getall");
         }
         return result;
     }
