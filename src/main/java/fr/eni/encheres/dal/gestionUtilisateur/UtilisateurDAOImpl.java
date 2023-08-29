@@ -3,14 +3,14 @@ package fr.eni.encheres.dal.gestionUtilisateur;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.dal.util.CodeResultDAL;
 import fr.eni.encheres.dal.util.ConnectionProvider;
-import fr.eni.encheres.dal.util.DALException;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
@@ -20,7 +20,14 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
-	public void insert(Utilisateur utilisateur) throws DALException {
+	public void insert(Utilisateur utilisateur) throws BusinessException {
+		
+		if(utilisateur == null) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_NULL);
+			throw be;
+		}
+		
 		try (Connection con = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, utilisateur.getPseudo());
@@ -42,14 +49,16 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				}
 			}
 		}
-		catch(SQLException e) {
-			throw new DALException("ms_insert");
+		catch(Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_ECHEC);
+			throw be;
 		}
-	
 	}
 
 	@Override
-	public List<Utilisateur> findByLoginAndPassword(String pseudo, String motDePasse) throws DALException {
+	public List<Utilisateur> findByLoginAndPassword(String pseudo, String motDePasse) throws BusinessException {
 		List<Utilisateur> result= new ArrayList<>();
 		
 		try (Connection con = ConnectionProvider.getConnection()){
@@ -72,21 +81,24 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				result.add(Utilisateur);
 			}
 		}
-		catch(SQLException e) {
-			throw new DALException("ms_insert");
+		catch(Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_ECHEC);
+			throw be;
 		}
 		
 		return result;
 	}
 
 	@Override
-	public void update(Utilisateur utilisateur) throws DALException {
+	public void update(Utilisateur utilisateur) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Utilisateur utilisateur) throws DALException {
+	public void delete(Utilisateur utilisateur) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}
