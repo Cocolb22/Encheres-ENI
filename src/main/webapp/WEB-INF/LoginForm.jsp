@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<jsp:include page="Header.jsp"/>
+
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6">
         <h2 class="mb-3">Connexion</h2>
