@@ -38,7 +38,7 @@
         </div>
         <div class="mt-3">
             <p>Vous n'avez pas de compte?</p>
-           <a href="UtilisateurServlet?action=inscription" class="btn btn-secondary">S'inscrire</a>
+           <a href="HomePageServlet?action=inscription" class="btn btn-secondary">S'inscrire</a>
         </div>
     </div>
 </div>
