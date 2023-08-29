@@ -3,7 +3,6 @@ package fr.eni.encheres.dal.gestionUtilisateur;
 import java.util.List;
 
 import fr.eni.encheres.bo.model.Utilisateur;
-import fr.eni.encheres.dal.util.DALException;
 
 public interface UtilisateurDAO {
 

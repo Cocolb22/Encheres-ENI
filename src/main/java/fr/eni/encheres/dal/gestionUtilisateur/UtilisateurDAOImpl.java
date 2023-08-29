@@ -10,7 +10,6 @@ import java.util.List;
 
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.dal.util.ConnectionProvider;
-import fr.eni.encheres.dal.util.DALException;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
