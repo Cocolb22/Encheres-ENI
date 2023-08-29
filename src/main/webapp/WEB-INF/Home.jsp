@@ -18,7 +18,7 @@
 <div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
 
 <div class="filters">
-    <form action="UtilisateurServlet" method="get" style="display: flex">
+    <form action="HomePageServlet" method="get" style="display: flex">
         <div style="margin: 10px">
             <label for="recherche">Rechercher :</label>
             <input type="text" id="recherche" name="recherche" placeholder="Entrez votre recherche">

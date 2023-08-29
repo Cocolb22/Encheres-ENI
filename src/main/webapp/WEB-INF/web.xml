@@ -11,13 +11,13 @@
   </welcome-file-list>
    <servlet>
     <description></description>
-    <display-name>UtilisateurServlet</display-name>
-    <servlet-name>UtilisateurServlet</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.utilisateur.UtilisateurServlet</servlet-class>
+    <display-name>HomePageServlet</display-name>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.HomePageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UtilisateurServlet</servlet-name>
-    <url-pattern>/UtilisateurServlet</url-pattern>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/HomePageServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
