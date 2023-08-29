@@ -19,4 +19,24 @@
     <servlet-name>HelloWorld</servlet-name>
     <url-pattern>/HelloWorld</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtilisateurServlet</display-name>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.UtilisateurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <url-pattern>/UtilisateurServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EnchereServlet</display-name>
+    <servlet-name>EnchereServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.enchere.EnchereServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EnchereServlet</servlet-name>
+    <url-pattern>/EnchereServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
