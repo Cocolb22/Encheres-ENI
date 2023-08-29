@@ -1,11 +1,13 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, article.getnomArticle());
 			stmt.setString(2,article.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(article.getdateDebutEncheres()));
-			stmt.setTimestamp(4, Timestamp.valueOf(article.getdateFinEncheres()));
+			stmt.setDate(3, (Date) article.getdateDebutEncheres());
+			stmt.setDate(4, LocalDate(article.getdateFinEncheres()));
 			stmt.setInt(5, article.getprixVente());
 			int nb = stmt.executeUpdate();
 			if(nb>0) {
@@ -52,9 +54,9 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				ArticleVendu article = new ArticleVendu(rs.getString("nomArticle"),
-							rs.getString("description"),
-							rs.getTimestamp("dateDebutEncheres").toLocalDateTime(),
-							rs.getTimestamp("dateFFinEncheres").toLocalDateTime(),
+							rs.setString("description"),
+							rs.getDate("dateDebutEncheres").toLocalDate(),
+							rs.getDate("dateFFinEncheres"),
 							rs.getInt("miseAPrix"),
 							rs.getInt("prixVente")
 						);
