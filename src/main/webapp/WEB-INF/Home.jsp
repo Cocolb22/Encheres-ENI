@@ -13,21 +13,12 @@
 </head>
 <body>
 
-<div class="header">
-	<div class="title">
-	<h1>Eni Encheres</h1>
-	</div>
+<jsp:include page="Header.jsp"/>
 
-	<div class="login">
-		<a href="autrePage.jsp"> S'inscrire</a>
-		<a href="autrePage.jsp"> Se connecter</a>
-	</div>
-</div>
-
-<div style="text-align: center"><h1>Liste des enchères</h1> </div>
+<div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
 
 <div class="filters">
-    <form action="rechercher.jsp" method="get" style="display: flex">
+    <form action="UtilisateurServlet" method="get" style="display: flex">
         <div style="margin: 10px">
             <label for="recherche">Rechercher :</label>
             <input type="text" id="recherche" name="recherche" placeholder="Entrez votre recherche">
