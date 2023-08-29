@@ -6,7 +6,7 @@ public class Enchere {
 
 	private Integer noEnchere;
 	private Utilisateur utilisateur;
-	private Integer noUtilisateur = utilisateur.getnoUtilisateur();
+	private Integer noUtilisateur = utilisateur.getNoUtilisateur();
 	private ArticleVendu article;
 	private Integer noArticle = article.getnoArticle();
 	private LocalDateTime dateEnchere;

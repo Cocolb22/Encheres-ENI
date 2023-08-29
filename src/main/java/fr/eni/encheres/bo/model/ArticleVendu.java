@@ -12,7 +12,7 @@ public class ArticleVendu {
 	private Integer prixInitial;
 	private Integer prixVente;
 	private Utilisateur utilisateur;
-	private Integer noUtilisateur = utilisateur.getnoUtilisateur();
+	private Integer noUtilisateur = utilisateur.getNoUtilisateur();
 	private Categorie categorie;
 	private Integer noCategorie = categorie.getnoCategorie();
 	
