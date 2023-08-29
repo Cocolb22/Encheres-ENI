@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class EnchereServlet
  */
+
 public class EnchereServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
