@@ -24,10 +24,18 @@ public class UtilisateurServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        
+        if ("inscription".equals(action)) {
+            inscription(request, response);
+        } else if ("login".equals(action)) {
+            login(request, response);
+        }
+        
+        // Si l'action n'est pas "inscription", rediriger vers Home.jsp
+        request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,4 +45,13 @@ public class UtilisateurServlet extends HttpServlet {
 		
 	}
 
+	private void inscription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/InscriptionForm.jsp").forward(request, response);
+		
+	}
+	
+	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/LoginForm.jsp").forward(request, response);
+		
+	}
 }
