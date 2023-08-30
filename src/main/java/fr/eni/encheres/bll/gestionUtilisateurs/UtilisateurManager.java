@@ -9,6 +9,6 @@ public interface UtilisateurManager {
 	public void updateUtilisateur (Utilisateur utilisateur);
 	public void deleteUtilisateur (Utilisateur utilisateur);
 	public Utilisateur showUtilisateur (Utilisateur utilisateur);
-	public Utilisateur connectUtilisateur (String pseudo, String motDePasse);
+	public Utilisateur connectUtilisateur (String pseudo, String motDePasse) throws BusinessException;
 	public Utilisateur disconnectUtilisateur();
 }

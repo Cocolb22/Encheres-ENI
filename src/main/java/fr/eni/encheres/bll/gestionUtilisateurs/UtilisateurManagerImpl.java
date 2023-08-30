@@ -51,9 +51,15 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur connectUtilisateur(String pseudo, String motDePasse) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur connectUtilisateur(String pseudo, String motDePasse) throws BusinessException {
+		BusinessException  be = new BusinessException();
+		Utilisateur utilisateur = dao.findByLoginAndPassword(pseudo, motDePasse);
+		if(utilisateur != null) {
+			return utilisateur;
+		} else {
+			be.ajouterErreur(CodeResultDAL.CHECK_CONNECTION_ECHEC);
+			throw be;
+		}
 	}
 
 	@Override

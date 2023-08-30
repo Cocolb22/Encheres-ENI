@@ -2,12 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>Encheres-ENI</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
+    <welcome-file>Home</welcome-file>
   </welcome-file-list>
    <servlet>
     <description></description>
@@ -21,12 +16,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>FormServlet</display-name>
-    <servlet-name>FormServlet</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.utilisateur.FormServlet</servlet-class>
+    <display-name>InscriptionServlet</display-name>
+    <servlet-name>InscriptionServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.InscriptionServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FormServlet</servlet-name>
-    <url-pattern>/FormServlet</url-pattern>
+    <servlet-name>InscriptionServlet</servlet-name>
+    <url-pattern>/InscriptionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
 </web-app>
