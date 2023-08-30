@@ -12,10 +12,8 @@
    <servlet>
     <description></description>
     <display-name>HomePageServlet</display-name>
-    <servlet-name>HomePageServlet</servlet-name><servlet-ci.encheres.ihm.utilisateur.UtilisateurServlet</servlet-class>
-=======
+    <servlet-name>HomePageServlet</servlet-name>
     <servlet-class>fr.eni.encheres.ihm.utilisateur.HomePageServlet</servlet-class>
->>>>>>> branch 'develop' of https://github.com/Cocolb22/Encheres-ENI.git
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePageServlet</servlet-name>

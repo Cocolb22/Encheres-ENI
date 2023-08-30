@@ -6,16 +6,16 @@
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		type="javax.sql.DataSource"
 		
-<<<<<<< HEAD
+
 		url="jdbc:sqlserver://10.44.101.24;databasename=troc_encheres;integratedSecurity=false;encrypt=false;trustServerCertificate=false"
-=======
-		url="jdbc:sqlserver://localhost;databasename=TASK;;integratedSecurity=false;encrypt=false;trustServerCertificate=false"
->>>>>>> branch 'develop' of https://github.com/Cocolb22/Encheres-ENI.git
+
+
 		username="sa"
 		password="Pa$$w0rd"
 		
 		maxTotal="100"
 		maxIdle="30"
-		maxWaitMillis="10000"
+		maxWaitMillis ="10000"
 	/>
+		
 </Context>

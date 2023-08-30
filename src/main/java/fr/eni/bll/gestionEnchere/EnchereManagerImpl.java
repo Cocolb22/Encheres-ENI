@@ -41,6 +41,24 @@ public class EnchereManagerImpl implements EnchereManager {
 		
 	}
 
+	@Override
+	public List<Enchere> findByCategorie(Integer noCategorie) throws BLLException {
+		try{
+			return dao.findByCategorie(noCategorie);
+		}catch(DALException e) {
+			throw new BLLException("ms_getall");
+		}
+	}
+
+	@Override
+	public List<Enchere> findByNomArticle(String nomArticle) throws BLLException {
+		try{
+			return dao.findByNomArticle(nomArticle);
+		}catch(DALException e) {
+			throw new BLLException("ms_getall");
+		}
+	}
+
 
 	
 	

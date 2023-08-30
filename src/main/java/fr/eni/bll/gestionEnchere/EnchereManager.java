@@ -11,6 +11,9 @@ public interface EnchereManager {
 	
 	public List<Enchere> getAll() throws BLLException;
 	
+	public List<Enchere> findByCategorie(Integer noCategorie) throws BLLException;
+	
+	public List<Enchere> findByNomArticle(String nomArticle) throws BLLException;
 
 		
 	

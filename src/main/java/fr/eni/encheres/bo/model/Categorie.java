@@ -5,11 +5,11 @@ public class Categorie {
 	private Integer noCategorie;
 	private String libelle;
 	
-	public Categorie(Integer noCategorie, String libelle) {
+	public Categorie(String libelle) {
 		super();
-		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
+	
 
 	public Categorie() {
 		super();

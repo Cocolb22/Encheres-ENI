@@ -61,5 +61,59 @@ public class EnchereDAOImpl implements EnchereDAO {
         }
         return result;
     }
+
+
+    @Override
+    public List<Enchere> findByCategorie(Integer noCategorie) throws DALException {
+        List<Enchere> result = new ArrayList<>();
+        String query = SELECT + " INNER JOIN Article ON Enchere.noArticle = Article.noArticle WHERE Article.noCategorie = ?";
+        
+        try (Connection con = ConnectionProvider.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, noCategorie);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Enchere enchere = new Enchere(
+                    rs.getInt("noUtilisateur"),
+                    rs.getInt("noArticle"),
+                    rs.getTimestamp("dateEnchere").toLocalDateTime(),
+                    rs.getInt("montantEnchere")
+                );
+                enchere.setnoEnchere(rs.getInt("noEnchere"));
+                result.add(enchere);
+            }
+        } catch (SQLException e) {
+            throw new DALException("ms_findByCategorie");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Enchere> findByNomArticle(String nomArticle) throws DALException {
+        List<Enchere> result = new ArrayList<>();
+        String query = SELECT + " INNER JOIN Article ON Enchere.noArticle = Article.noArticle WHERE Article.nomArticle = ?";
+        
+        try (Connection con = ConnectionProvider.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, nomArticle);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Enchere enchere = new Enchere(
+                    rs.getInt("noUtilisateur"),
+                    rs.getInt("noArticle"),
+                    rs.getTimestamp("dateEnchere").toLocalDateTime(),
+                    rs.getInt("montantEnchere")
+                );
+                enchere.setnoEnchere(rs.getInt("noEnchere"));
+                result.add(enchere);
+            }
+        } catch (SQLException e) {
+            throw new DALException("ms_findByNomArticle");
+        }
+        return result;
+    }
+
+
+
 }
 
