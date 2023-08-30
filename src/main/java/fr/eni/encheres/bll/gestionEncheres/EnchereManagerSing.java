@@ -1,4 +1,4 @@
-package fr.eni.bll.gestionEnchere;
+package fr.eni.encheres.bll.gestionEncheres;
 
 public class EnchereManagerSing {
 	private static EnchereManager instance;
