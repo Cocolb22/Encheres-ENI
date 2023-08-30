@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,7 @@
 <div class="container">
 	<div class="transparent-card">
 	    <h1 class="text-center">Formulaire d'inscription</h1>
-	    <form>
+	    <form action="InscriptionServlet" method="post">
 	        <div class="row">
 	            <div class="col-md-6">
 	                <!-- Champs de gauche -->
@@ -26,7 +26,7 @@
 	                    <input type="text" class="form-control" id="nom" name="nom" required>
 	                </div>
 	                <div class="form-group">
-	                    <label for="prenom">Prénom :</label>
+	                    <label for="prenom">PrÃ©nom :</label>
 	                    <input type="text" class="form-control" id="prenom" name="prenom" required>
 	                </div>
 	                <div class="form-group">
@@ -38,8 +38,8 @@
 	                    <input type="email" class="form-control" id="email" name="email" required>
 	                </div>
 	                <div class="form-group">
-	                    <label for="telephone">Téléphone :</label>
-	                    <input type="tel" class="form-control" id="telephone" name="telephone" required>
+	                    <label for="telephone">TÃ©lÃ©phone :</label>
+	                    <input type="tel" class="form-control" id="telephone" name="telephone">
 	                </div>
 	            </div>
 	            <div class="col-md-6">

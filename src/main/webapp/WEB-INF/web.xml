@@ -9,7 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>HomePageServlet</display-name>
     <servlet-name>HomePageServlet</servlet-name>
@@ -28,5 +28,35 @@
   <servlet-mapping>
     <servlet-name>FormServlet</servlet-name>
     <url-pattern>/FormServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EncheresServlet</display-name>
+    <servlet-name>EncheresServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.EncheresServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EncheresServlet</servlet-name>
+    <url-pattern>/EncheresServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VenteArticleServlet</display-name>
+    <servlet-name>VenteArticleServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.VenteArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VenteArticleServlet</servlet-name>
+    <url-pattern>/VenteArticleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Utilisateur</display-name>
+    <servlet-name>Utilisateur</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.Utilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Utilisateur</servlet-name>
+    <url-pattern>/Utilisateur</url-pattern>
   </servlet-mapping>
 </web-app>
