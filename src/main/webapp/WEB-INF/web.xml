@@ -31,32 +31,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>EncheresServlet</display-name>
-    <servlet-name>EncheresServlet</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.encheres.EncheresServlet</servlet-class>
+    <display-name>UtilisateurServlet</display-name>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.UtilisateurServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EncheresServlet</servlet-name>
-    <url-pattern>/EncheresServlet</url-pattern>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <url-pattern>/UtilisateurServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>VenteArticleServlet</display-name>
-    <servlet-name>VenteArticleServlet</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.encheres.VenteArticleServlet</servlet-class>
+    <display-name>VenteArtcileServlet</display-name>
+    <servlet-name>VenteArtcileServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.VenteArtcileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>VenteArticleServlet</servlet-name>
-    <url-pattern>/VenteArticleServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Utilisateur</display-name>
-    <servlet-name>Utilisateur</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.utilisateur.Utilisateur</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Utilisateur</servlet-name>
-    <url-pattern>/Utilisateur</url-pattern>
+    <servlet-name>VenteArtcileServlet</servlet-name>
+    <url-pattern>/VenteArtcileServlet</url-pattern>
   </servlet-mapping>
 </web-app>
