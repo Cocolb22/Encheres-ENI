@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/inscriptionForm.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/couleurs.css">
@@ -17,6 +18,11 @@
 <div class="container">
 	<div class="transparent-card">
 	    <h1 class="text-center">Formulaire d'inscription</h1>
+	    
+	    <c:if test="${listeCodesErreur != null}">
+	    	<p>CODE ERREUR : ${listeCodesErreur} </p>
+	    </c:if>
+	    
 	    <form action="InscriptionServlet" method="post">
 	        <div class="row">
 	            <div class="col-md-6">

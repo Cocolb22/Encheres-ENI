@@ -3,9 +3,8 @@ package fr.eni.encheres.dal.gestionUtilisateurs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
@@ -14,21 +13,16 @@ import fr.eni.encheres.dal.util.ConnectionProvider;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
-	final String SELECT = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS";
+	final String SELECT = "SELECT * FROM UTILISATEURS WHERE pseudo=?, mot_de_passe=?";
 	//final String DELETE = "DELETE no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS";
 	//final String UPDATE = "UPDATE no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS";
 	final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
-	public void insert(Utilisateur utilisateur) throws BusinessException {
-		
-		if(utilisateur == null) {
-			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_NULL);
-			throw be;
-		}
-		
-		try (Connection con = ConnectionProvider.getConnection()){
+	public void insert(Utilisateur utilisateur) {
+		Connection con;
+		try {
+			con = ConnectionProvider.getConnection();
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, utilisateur.getPseudo());
 			stmt.setString(2, utilisateur.getNom());
@@ -48,24 +42,21 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 					utilisateur.setNoUtilisateur(rs.getInt(1));
 				}
 			}
-		}
-		catch(Exception e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_ECHEC);
-			throw be;
 		}
+			
 	}
 
 	@Override
-	public List<Utilisateur> findByLoginAndPassword(String pseudo, String motDePasse) throws BusinessException {
-		List<Utilisateur> result= new ArrayList<>();
-		
+	public Utilisateur findByLoginAndPassword(String pseudo, String motDePasse) throws BusinessException {
+		Utilisateur utilisateur = new Utilisateur();
 		try (Connection con = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = con.prepareStatement(SELECT);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				Utilisateur Utilisateur = new Utilisateur(rs.getString("pseudo"),
+				utilisateur = new Utilisateur(rs.getString("pseudo"),
 							rs.getString("nom"),
 							rs.getString("prenom"),
 							rs.getString("email"),
@@ -77,8 +68,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 							rs.getInt("credit"),
 							rs.getInt("administrateur")==1?true:false
 						);
-				Utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-				result.add(Utilisateur);
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			}
 		}
 		catch(Exception e) {
@@ -88,7 +78,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			throw be;
 		}
 		
-		return result;
+		return utilisateur;
 	}
 
 	@Override
