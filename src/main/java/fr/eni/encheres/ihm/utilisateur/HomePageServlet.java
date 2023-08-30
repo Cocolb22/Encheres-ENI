@@ -38,7 +38,6 @@ public class HomePageServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
 	}
 
 	private void inscription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
