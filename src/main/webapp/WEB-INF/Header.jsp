@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<c:if test="${user == null}">
+<c:if test="${utilisateurInscrit == null}">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
 	    <div class="container">
 	      <a href="${pageContext.request.contextPath}/HomePageServlet" class="navbar-brand">Eni Enchères</a>
@@ -33,7 +33,7 @@
 		</div>
   	</nav>
  </c:if>
-<c:if test="${user != null}">
+<c:if test="${utilisateurInscrit != null}">
  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
 	    <div class="container">
 	      <a href="${pageContext.request.contextPath}/HomePageServlet" class="navbar-brand">Eni Enchères</a>
@@ -54,7 +54,7 @@
 	            		<a class="nav-link" aria-current="page" href="UtilisateurServlet?action=get">Mon profil</a>
 	        		</li>
 	        		<li class="nav-item">
-	            		<a class="nav-link" aria-current="page" href="HomePageServlet?action=login">Déconnexion</a>
+	            		<a class="nav-link" aria-current="page" href="HomePageServlet?action=deconnexion">Déconnexion</a>
 	        		</li>       
 	    		</ul>
 			</div>

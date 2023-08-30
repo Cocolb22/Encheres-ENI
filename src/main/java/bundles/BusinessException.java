@@ -28,4 +28,16 @@ public class BusinessException extends Exception {
 	public boolean hasErreurs() {
 		return listeCodesErreur.size() > 0;
 	}
+
+	@Override
+	public String toString() {
+		return "BusinessException [listeCodesErreur=" + listeCodesErreur + "]";
+	}
+
+	@Override
+	public String getMessage() {
+		return toString();
+	}
+	
+	
 }

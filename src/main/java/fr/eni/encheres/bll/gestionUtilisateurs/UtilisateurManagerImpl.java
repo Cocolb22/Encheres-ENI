@@ -26,10 +26,11 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		
 		
 		if(be.hasErreurs()) {
+			System.out.println(be);
 			throw be;
+		} else {
+			dao.insert(utilisateur);
 		}
-		
-		dao.insert(utilisateur);
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private void validerEmail(String email, BusinessException be) throws BusinessException {
-		if(email == null || email.isBlank() || email.length() >= 20 || !email.contains("@")) {
+		if(email == null || email.isBlank() || email.length() >= 100 || !email.contains("@")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_EMAIL_ECHEC);
 		};
 	}

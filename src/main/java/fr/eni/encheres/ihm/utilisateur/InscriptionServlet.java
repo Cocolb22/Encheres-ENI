@@ -44,14 +44,18 @@ public class InscriptionServlet extends HttpServlet {
 		
 		try {
 			manager.addUtilisateur(utilisateurInscrit, confirmationMotDePasse);
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurInscrit", utilisateurInscrit);
 			
+			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			request.getRequestDispatcher("/WEB-INF/InscriptionForm.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 	}
 
 }

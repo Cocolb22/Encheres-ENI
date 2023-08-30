@@ -3,6 +3,7 @@ package fr.eni.encheres.dal.gestionUtilisateurs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import bundles.BusinessException;
@@ -18,15 +19,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
-	public void insert(Utilisateur utilisateur) throws BusinessException {
-		
-		if(utilisateur == null) {
-			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_NULL);
-			throw be;
-		}
-		
-		try (Connection con = ConnectionProvider.getConnection()){
+	public void insert(Utilisateur utilisateur) {
+		Connection con;
+		try {
+			con = ConnectionProvider.getConnection();
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, utilisateur.getPseudo());
 			stmt.setString(2, utilisateur.getNom());
@@ -46,13 +42,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 					utilisateur.setNoUtilisateur(rs.getInt(1));
 				}
 			}
-		}
-		catch(Exception e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodeResultDAL.INSERT_OBJECT_ECHEC);
-			throw be;
 		}
+			
 	}
 
 	@Override

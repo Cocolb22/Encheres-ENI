@@ -56,12 +56,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Utilisateur</display-name>
-    <servlet-name>Utilisateur</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.utilisateur.Utilisateur</servlet-class>
+    <display-name>UtilisateurServlet</display-name>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.utilisateur.UtilisateurServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Utilisateur</servlet-name>
-    <url-pattern>/Utilisateur</url-pattern>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <url-pattern>/UtilisateurServlet</url-pattern>
   </servlet-mapping>
 </web-app>
