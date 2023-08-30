@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -16,7 +17,12 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6">
         <h2 class="mb-3">Connexion</h2>
-        <form action="ConnexionServlet" method="post">
+        
+        <c:if test="${listeCodesErreur != null}">
+	    	<p>CODE ERREUR : ${listeCodesErreur} </p>
+	    </c:if>
+	    
+        <form action="LoginServlet" method="post">
             <div class="mb-3">
                 <label for="pseudo" class="form-label">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" class="form-control" required>
