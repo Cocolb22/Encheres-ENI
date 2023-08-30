@@ -16,7 +16,7 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6">
         <h2 class="mb-3">Connexion</h2>
-        <form action="ConnexionServlet" method="post">
+        <form action="FormServlet" method="post">
             <div class="mb-3">
                 <label for="pseudo" class="form-label">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" class="form-control" required>

@@ -56,7 +56,7 @@ public class InscriptionServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/WEB-INF/InscriptionForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/HomePage.jsp").forward(request, response);
 	}
 
 }

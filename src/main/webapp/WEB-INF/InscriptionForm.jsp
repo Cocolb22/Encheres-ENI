@@ -68,7 +68,7 @@
 	        </div>
 	        <div class="text-center">
 	            <button type="submit" class="btn btn-primary m-2">S'inscrire</button>
-	              <a href="${pageContext.request.contextPath}/HomePageServlet" class="btn btn-primary m-2">Annuler</a>
+	            <a href="${pageContext.request.contextPath}/HomePageServlet" class="btn btn-primary m-2">Annuler</a>
 
 	        </div>
 	    </form>
