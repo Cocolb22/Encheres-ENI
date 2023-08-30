@@ -1,4 +1,4 @@
-package fr.eni.encheres.dal.gestionUtilisateur;
+package fr.eni.encheres.dal.gestionUtilisateurs;
 
 public class DAOFactUtilisateur {
 	public static UtilisateurDAO getUtilisateurDAO() {

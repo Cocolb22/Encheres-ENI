@@ -1,4 +1,4 @@
-package fr.eni.encheres.dal.gestionUtilisateur;
+package fr.eni.encheres.dal.gestionUtilisateurs;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
