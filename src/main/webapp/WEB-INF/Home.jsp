@@ -15,9 +15,11 @@
 
 <jsp:include page="Header.jsp"/>
 
-<div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
+<div class="container p-4">
 
-<div class="filters">
+<div ><h1>Liste des enchères</h1> </div>
+
+<div class="filters mt-5">
     <form action="HomePageServlet" method="get" style="display: flex">
         <div style="margin: 10px">
             <label for="recherche">Rechercher :</label>
@@ -41,7 +43,7 @@
 </div>
 
 
-<div class="container">
+<div class="card">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -57,6 +59,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </body>

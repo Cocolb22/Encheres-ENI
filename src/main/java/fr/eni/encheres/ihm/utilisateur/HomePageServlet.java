@@ -32,6 +32,7 @@ public class HomePageServlet extends HttpServlet {
             login(request, response);
         }
         
+        
         // Si l'action n'est pas "inscription", rediriger vers Home.jsp
         request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
     }
