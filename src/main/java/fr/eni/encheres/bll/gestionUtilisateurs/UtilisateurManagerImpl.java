@@ -2,8 +2,8 @@ package fr.eni.encheres.bll.gestionUtilisateurs;
 
 import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
-import fr.eni.encheres.dal.gestionUtilisateurs.DAOFactUtilisateur;
-import fr.eni.encheres.dal.gestionUtilisateurs.UtilisateurDAO;
+import fr.eni.encheres.dal.gestionUtilisateur.DAOFactUtilisateur;
+import fr.eni.encheres.dal.gestionUtilisateur.UtilisateurDAO;
 import fr.eni.encheres.dal.util.CodeResultDAL;
 
 public class UtilisateurManagerImpl implements UtilisateurManager {

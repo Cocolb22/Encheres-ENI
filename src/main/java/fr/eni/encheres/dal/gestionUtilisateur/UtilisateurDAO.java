@@ -1,4 +1,4 @@
-package fr.eni.encheres.dal.gestionUtilisateurs;
+package fr.eni.encheres.dal.gestionUtilisateur;
 
 import java.util.List;
 

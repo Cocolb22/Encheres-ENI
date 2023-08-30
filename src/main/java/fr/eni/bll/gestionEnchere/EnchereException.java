@@ -1,4 +1,4 @@
-package fr.eni.encheres.bll.gestionEncheres;
+package fr.eni.bll.gestionEnchere;
 
 public class EnchereException extends Exception {
 	public EnchereException(String message) {
