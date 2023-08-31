@@ -42,13 +42,7 @@ function updateCheckboxes(column) {
 
 <jsp:include page="Header.jsp"/>
 
-<<<<<<< HEAD
 <div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
-=======
-<div class="container p-4">
->>>>>>> branch 'gestion_encheres' of https://github.com/Cocolb22/Encheres-ENI.git
-
-<div ><h1>Liste des ench�res</h1> </div>
 
 <div class="filters mt-5">
     <form action="HomePageServlet" method="get" style="display: flex">
@@ -95,17 +89,19 @@ function updateCheckboxes(column) {
  </c:if>
 
 
-<div class="card">
+${model.lstEnchere}
+
+<!-- <div class="card">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
         
         <div class="col-md-4">
-                <!-- Utilisez la classe d'image réactive pour limiter la largeur de l'image -->
+                Utilisez la classe d'image réactive pour limiter la largeur de l'image
                 <img src="https://m.media-amazon.com/images/I/61SRHAZd7ML._AC_UF1000,1000_QL80_.jpg" alt="tenue de François" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title"><a href=""> ${model.lstEnchere}</a></h5>
+                    <h5 class="card-title"><a href=""> </a></h5>
                     <p class="card-text">Prix : </p>
                     <p class="card-text"><small class="text-body-secondary">Fin de l'enchère: </small></p>
                     <br />
@@ -115,7 +111,7 @@ function updateCheckboxes(column) {
       
         </div>
     </div>
-</div>
+</div> -->
 </div>
 
 </body>
