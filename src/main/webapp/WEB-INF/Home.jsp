@@ -10,6 +10,33 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous" defer></script>
 <title>Home Page</title>
+
+<script>
+function updateCheckboxes(column) {
+    var checkboxes = document.querySelectorAll("." + column + " input[type='checkbox']");
+    var oppositeColumn = column === "achat" ? "vente" : "achat";
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.disabled = false;
+    });
+
+    var selectedCheckboxes = document.querySelectorAll("." + column + " input[type='checkbox']:checked");
+
+    if (selectedCheckboxes.length > 0) {
+        var oppositeCheckboxes = document.querySelectorAll("." + oppositeColumn + " input[type='checkbox']");
+        oppositeCheckboxes.forEach(function(checkbox) {
+            checkbox.disabled = true;
+        });
+    } else {
+        var oppositeCheckboxes = document.querySelectorAll("." + oppositeColumn + " input[type='checkbox']");
+        oppositeCheckboxes.forEach(function(checkbox) {
+            checkbox.disabled = false;
+        });
+    }
+}
+</script>
+
+
 </head>
 <body>
 
@@ -24,7 +51,7 @@
             <input type="text" id="recherche" name="recherche" placeholder="Entrez votre recherche">
         </div>
         
-        <div class="categories"  style="margin: 10px">
+        <div class="categories">
             <label for="categorie">Catégorie :</label>
             <select id="categorie" name="categorie">
                 <option value="categorie1">Informatique</option>
@@ -39,6 +66,27 @@
         </div>
     </form>
 </div>
+
+<c:if test="${utilisateurInscrit != null}">
+	 <div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
+    <div class="btn-group-vertical " role="group" aria-label="Basic checkbox toggle button group">
+        <div class="col achat grid"> 
+            <h3>Achat</h3>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
+        </div>
+        <div class="col vente grid"> 
+            <h3>Vente</h3>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
+            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
+        </div>
+
+    </div>
+    
+</div>
+ </c:if>
 
 
 <div class="container">
@@ -61,3 +109,5 @@
 
 </body>
 </html>
+
+
