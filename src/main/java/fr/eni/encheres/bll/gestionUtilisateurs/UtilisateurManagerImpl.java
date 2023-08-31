@@ -2,8 +2,8 @@ package fr.eni.encheres.bll.gestionUtilisateurs;
 
 import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
-import fr.eni.encheres.dal.gestionUtilisateur.DAOFactUtilisateur;
-import fr.eni.encheres.dal.gestionUtilisateur.UtilisateurDAO;
+import fr.eni.encheres.dal.gestionUtilisateurs.DAOFactUtilisateur;
+import fr.eni.encheres.dal.gestionUtilisateurs.UtilisateurDAO;
 import fr.eni.encheres.dal.util.CodeResultDAL;
 
 public class UtilisateurManagerImpl implements UtilisateurManager {
@@ -26,10 +26,11 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		
 		
 		if(be.hasErreurs()) {
+			System.out.println(be);
 			throw be;
+		} else {
+			dao.insert(utilisateur);
 		}
-		
-		dao.insert(utilisateur);
 	}
 
 	@Override
@@ -51,9 +52,15 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur connectUtilisateur(String pseudo, String motDePasse) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur connectUtilisateur(String pseudo, String motDePasse) throws BusinessException {
+		BusinessException  be = new BusinessException();
+		Utilisateur utilisateur = dao.findByLoginAndPassword(pseudo, motDePasse);
+		if(utilisateur != null) {
+			return utilisateur;
+		} else {
+			be.ajouterErreur(CodeResultDAL.CHECK_CONNECTION_ECHEC);
+			throw be;
+		}
 	}
 
 	@Override
@@ -81,7 +88,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private void validerEmail(String email, BusinessException be) throws BusinessException {
-		if(email == null || email.isBlank() || email.length() >= 20 || !email.contains("@")) {
+		if(email == null || email.isBlank() || email.length() >= 100 || !email.contains("@")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_EMAIL_ECHEC);
 		};
 	}

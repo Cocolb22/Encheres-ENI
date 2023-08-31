@@ -1,10 +1,8 @@
-package fr.eni.bll.gestionEnchere;
+package fr.eni.encheres.bll.gestionEncheres;
 
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.dal.gestionEncheres.DAOFact;
 import fr.eni.encheres.dal.gestionEncheres.EnchereDAO;
@@ -16,33 +14,31 @@ public class EnchereManagerImpl implements EnchereManager {
 	
 
 	@Override
-	public void addEnchere(Enchere enchere) throws BLLException {
+	public void addEnchere(Enchere enchere) throws EnchereException {
 
 		if(enchere.getdateEnchere().isBefore(LocalDateTime.now())) {
-			throw new BLLException("ms_endenchere");
+			throw new EnchereException("ms_endenchere");
 		}
 		if(enchere.getmontantEnchere() > enchere.getmontantEnchere() ) {
-			throw new BLLException("ms_mauvaiseoffre");
+			throw new EnchereException("ms_mauvaiseoffre");
 		}
 		try{
 			dao.insert(enchere);
 		}catch(DALException e ) {
-			throw new BLLException("ms_add");
+			throw new EnchereException("ms_add");
 		}
 	}
 
 	@Override
-	public List<Enchere> getAll() throws BLLException {
+	public List<Enchere> getAll() throws EnchereException {
 		try{
 			return dao.getAll();
 		}catch(DALException e) {
-			throw new BLLException("ms_getall");
+			e.printStackTrace();
+			throw new EnchereException("ms_getall");
 		}
 		
 	}
 
-
-	
-	
 
 }

@@ -12,13 +12,26 @@ public class ArticleVendu {
 	private Integer prixInitial;
 	private Integer prixVente;
 	private Utilisateur utilisateur;
-	private Integer noUtilisateur = utilisateur.getNoUtilisateur();
 	private Categorie categorie;
-	private Integer noCategorie = categorie.getnoCategorie();
+	
+	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente,
+			Utilisateur utilisateur, Categorie categorie) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
 	
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente,
-			Integer noUtilisateur, Integer noCategorie) {
+			Utilisateur utilisateur, Categorie categorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -26,8 +39,8 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.noUtilisateur = noUtilisateur;
-		this.noCategorie = noCategorie;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 	}
 
 	public ArticleVendu() {
@@ -90,20 +103,20 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 	}
 	
-	public Integer getnoUtilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setnoUtilisateur(Integer noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public Integer getnoCategorie() {
-		return noCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
-	public void setnoCategorie(Integer noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	@Override
@@ -111,7 +124,7 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description="
 				+ description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres="
 				+ dateFinEncheres + ", prixInitial=" + prixInitial + ", prixVente=" + prixVente 
-				+ ", noUtilisateur=" + noUtilisateur + ", noCategorie=" + noCategorie + "]";
+				+ ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
 	}
 	
 	
