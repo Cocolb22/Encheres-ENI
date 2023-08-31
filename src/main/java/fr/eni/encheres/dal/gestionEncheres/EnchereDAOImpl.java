@@ -26,6 +26,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	    INNER JOIN UTILISATEURS u ON e.no_utilisateur = u.no_utilisateur
 	    INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article
     	INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
+    	LEFT JOIN RETRAITS r ON r.no_article = a.no_article
     		    		""";
     final String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
 
@@ -33,18 +34,19 @@ public class EnchereDAOImpl implements EnchereDAO {
     public void insert(Enchere enchere) throws DALException {
         try (Connection con = ConnectionProvider.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, enchere.getUtilisateur().getNoUtilisateur());
-            stmt.setObject(2, enchere.getArticle().getnoArticle());
-            stmt.setTimestamp(3, Timestamp.valueOf(enchere.getdateEnchere()));
-            stmt.setInt(4, enchere.getmontantEnchere());
+            stmt.setObject(1, enchere.getEnchereur().getNoUtilisateur());
+            stmt.setObject(2, enchere.getArticleVendu().getNoArticle());
+            stmt.setTimestamp(3, Timestamp.valueOf(enchere.getDateEnchere()));
+            stmt.setInt(4, enchere.getMontantEnchere());
             int nb = stmt.executeUpdate();
             if (nb > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()) {
-                    enchere.setnoEnchere(rs.getInt(1));
+                    enchere.setNoEnchere(rs.getInt(1));
                 }
             }
         } catch (SQLException e) {
+        	e.printStackTrace();
             throw new DALException("ms_insert");
         }
     }
@@ -87,7 +89,8 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("prix_initial"),
             			rs.getInt("prix_vente"),
             			utilisateur,
-            			categorie
+            			categorie,
+            			null	//TODO : ajouter Retrait
             			);
                 Enchere enchere = new Enchere(
                 		rs.getInt("no_enchere"),

@@ -16,10 +16,10 @@ public class EnchereManagerImpl implements EnchereManager {
 	@Override
 	public void addEnchere(Enchere enchere) throws EnchereException {
 
-		if(enchere.getdateEnchere().isBefore(LocalDateTime.now())) {
+		if(enchere.getDateEnchere().isBefore(LocalDateTime.now())) {
 			throw new EnchereException("ms_endenchere");
 		}
-		if(enchere.getmontantEnchere() > enchere.getmontantEnchere() ) {
+		if(enchere.getMontantEnchere() > enchere.getMontantEnchere() ) {
 			throw new EnchereException("ms_mauvaiseoffre");
 		}
 		try{

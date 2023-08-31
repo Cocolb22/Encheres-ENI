@@ -9,25 +9,19 @@ import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.bo.model.Utilisateur;
 
 public class EnchereModel {
-	
-	private Utilisateur utilisateur;
-	private ArticleVendu article;
-	private LocalDateTime dateFinEnchere;
-	private Integer prix;
-	
 
 	private String message = "";
-	private Enchere current = new Enchere(utilisateur, article, dateFinEnchere, prix);
+	private Enchere currentEnchere;
 	private List<Enchere> lstEnchere = new ArrayList<>();
 	
 	public EnchereModel() {
 		
 	}
 
-	public EnchereModel(String message, Enchere current, List<Enchere> lstEnchere) {
+	public EnchereModel(String message, Enchere enchere, List<Enchere> lstEnchere) {
 		super();
 		this.message = message;
-		this.current = current;
+		this.currentEnchere = enchere;
 		this.lstEnchere = lstEnchere;
 	}
 
@@ -39,12 +33,12 @@ public class EnchereModel {
 		this.message = message;
 	}
 
-	public Enchere getCurrent() {
-		return current;
+	public Enchere getCurrentEnchere() {
+		return currentEnchere;
 	}
 
-	public void setCurrent(Enchere current) {
-		this.current = current;
+	public void setCurrentEnchere(Enchere current) {
+		this.currentEnchere = current;
 	}
 
 	public List<Enchere> getLstEnchere() {
@@ -57,7 +51,7 @@ public class EnchereModel {
 
 	@Override
 	public String toString() {
-		return "EnchereModel [message=" + message + ", current=" + current + ", lstEnchere=" + lstEnchere + "]";
+		return "EnchereModel [message=" + message + ", currentEnchere=" + currentEnchere + ", lstEnchere=" + lstEnchere + "]";
 	}
 	
 	

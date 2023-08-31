@@ -13,10 +13,11 @@ public class ArticleVendu {
 	private Integer prixVente;
 	private Utilisateur utilisateur;
 	private Categorie categorie;
+	private Retrait pointRetrait;
 	
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente,
-			Utilisateur utilisateur, Categorie categorie) {
+			Utilisateur utilisateur, Categorie categorie, Retrait pointRetrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -27,11 +28,12 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
+		this.pointRetrait = pointRetrait;
 	}
 	
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente,
-			Utilisateur utilisateur, Categorie categorie) {
+			Utilisateur utilisateur, Categorie categorie, Retrait pointRetrait) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -41,25 +43,26 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
+		this.pointRetrait = pointRetrait;
 	}
 
 	public ArticleVendu() {
 		super();
 	}
 
-	public Integer getnoArticle() {
+	public Integer getNoArticle() {
 		return noArticle;
 	}
 
-	public void setnoArticle(Integer noArticle) {
+	public void setNoArticle(Integer noArticle) {
 		this.noArticle = noArticle;
 	}
 
-	public String getnomArticle() {
+	public String getNomArticle() {
 		return nomArticle;
 	}
 
-	public void setnomArticle(String nomArticle) {
+	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
 
@@ -71,38 +74,38 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public LocalDate getdateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
-	public void setdateDebutEncheres(LocalDate dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public LocalDate getdateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public void setdateFinEncheres(LocalDate dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public Integer getprixInitial() {
+	public Integer getPrixInitial() {
 		return prixInitial;
 	}
 
-	public void setprixInitial(Integer prixInitial) {
+	public void setPrixInitial(Integer prixInitial) {
 		this.prixInitial = prixInitial;
 	}
 
-	public Integer getprixVente() {
+	public Integer getPrixVente() {
 		return prixVente;
 	}
 
-	public void setprixVente(Integer prixVente) {
+	public void setPrixVente(Integer prixVente) {
 		this.prixVente = prixVente;
 	}
-	
+
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
@@ -118,13 +121,21 @@ public class ArticleVendu {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+	
+	public Retrait getPointRetrait() {
+		return pointRetrait;
+	}
+
+	public void setPointRetrait(Retrait pointRetrait) {
+		this.pointRetrait = pointRetrait;
+	}
 
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description="
 				+ description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres="
 				+ dateFinEncheres + ", prixInitial=" + prixInitial + ", prixVente=" + prixVente 
-				+ ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
+				+ ", utilisateur=" + utilisateur + ", categorie=" + categorie + ", retrait=" + pointRetrait + "]";
 	}
 	
 	
