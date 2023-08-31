@@ -28,7 +28,7 @@
 	    
 	    <form action="InscriptionServlet" method="post">
 	        <div class="row">
-	            <div class="col-md-6">
+	            <div class="col-md-6 p-3">
 	                <!-- Champs de gauche -->
 	                <div class="form-group">
 	                    <label for="nom">Nom :</label>
@@ -51,7 +51,7 @@
 	                    <input type="tel" class="form-control" id="telephone" name="telephone">
 	                </div>
 	            </div>
-	            <div class="col-md-6">
+	            <div class="col-md-6 p-3">
 	                <!-- Champs de droite -->
 	                <div class="form-group">
 	                    <label for="rue">Rue :</label>

@@ -56,3 +56,35 @@ body{
 .elements {
 	margin: 10px;
 }
+
+.transparent-card {
+    background-color: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
+    padding: 20px; /* Espacement interne */
+    margin: 60px;
+    border-radius: 20px;
+    font-weight: bold;
+	}
+
+#categorie {
+	height: 30px;
+	margin: 10px;
+	
+}
+
+.checkbox-label {
+    border: none !important;
+    color: black !important;
+    font-weight: bold !important;
+    transition: color 0.3s ease;
+}
+
+.checkbox-label:hover {
+    border: none !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: bold !important;
+
+}
+
+.grid {
+    display: contents;
+}
