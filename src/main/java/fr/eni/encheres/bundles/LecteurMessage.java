@@ -1,4 +1,4 @@
-package bundles;
+package fr.eni.encheres.bundles;
 
 import java.util.ResourceBundle;
 
@@ -9,7 +9,7 @@ private static ResourceBundle rb;
 	//charge le fichier contenant les messages
 	static {
 		try {
-			rb = ResourceBundle.getBundle("fr.eni.javaee.module4.messages.messages_erreur");
+			rb = ResourceBundle.getBundle("fr.eni.encheres.bundles.messages");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,7 @@
 package fr.eni.encheres.bll.gestionUtilisateurs;
 
-import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 import fr.eni.encheres.dal.gestionUtilisateurs.DAOFactUtilisateur;
 import fr.eni.encheres.dal.gestionUtilisateurs.UtilisateurDAO;
 import fr.eni.encheres.dal.util.CodeResultDAL;
@@ -11,10 +11,8 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public void addUtilisateur(Utilisateur utilisateur, String confirmationMDP) throws BusinessException {
-		
+
 		BusinessException  be = new BusinessException();
-		validerUtilisateur(utilisateur, confirmationMDP, be);
-		
 		
 		if(be.hasErreurs()) {
 			System.out.println(be);
@@ -93,7 +91,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	private void validerTelephone(String telephone, BusinessException be) throws BusinessException {
-		if(telephone.length() >= 15) {
+		if(telephone.length() >= 15 || !telephone.matches("\\d+")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_TELEPHONE_ECHEC);
 		};
 	}
@@ -105,7 +103,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private void validerCodePostal(String codePostal, BusinessException be) throws BusinessException {
-		if(codePostal == null || codePostal.isBlank() || codePostal.length() >= 10) {
+		if(codePostal == null || codePostal.isBlank() || codePostal.length() >= 10 || !codePostal.matches("\\d+")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_CODE_POSTAL_ECHEC);
 		};
 	}
@@ -135,6 +133,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private void validerUtilisateur(Utilisateur utilisateur, String confirmationMDP, BusinessException be) throws BusinessException {
+		
 		validerPseudo(utilisateur.getPseudo(), be);
 		validerNom(utilisateur.getNom(), be);
 		validerPrenom(utilisateur.getPrenom(), be);

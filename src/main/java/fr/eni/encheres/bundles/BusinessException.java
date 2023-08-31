@@ -1,4 +1,4 @@
-package bundles;
+package fr.eni.encheres.bundles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,11 @@ public class BusinessException extends Exception {
 	
 	public BusinessException() {
 		listeCodesErreur = new ArrayList<Integer>();
+	}
+	
+	public BusinessException(int code) {
+		this();
+		ajouterErreur(code);
 	}
 	
 	public void ajouterErreur(int code) {
