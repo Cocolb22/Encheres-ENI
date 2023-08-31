@@ -60,7 +60,7 @@ public class HomePageServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EnchereModel model = (EnchereModel) request.getSession().getAttribute("model");
-		Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurInscrit")
+		Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurInscrit");
 		try {
 			//model.setCurrent(new Enchere());
 			model.setLstEnchere(manager.getAll());
