@@ -13,16 +13,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	public void addUtilisateur(Utilisateur utilisateur, String confirmationMDP) throws BusinessException {
 		
 		BusinessException  be = new BusinessException();
-		validerPseudo(utilisateur.getPseudo(), be);
-		validerNom(utilisateur.getNom(), be);
-		validerPrenom(utilisateur.getPrenom(), be);
-		validerEmail(utilisateur.getEmail(), be);
-		validerTelephone(utilisateur.getTelephone(), be);
-		validerRue(utilisateur.getRue(), be);
-		validerCodePostal(utilisateur.getCodePostal(), be);
-		validerVille(utilisateur.getVille(), be);
-		validerMotDePasse(utilisateur.getMotDePasse(), be);
-		validerConfirmationMDP(confirmationMDP, utilisateur.getMotDePasse(), be);
+		validerUtilisateur(utilisateur, confirmationMDP, be);
 		
 		
 		if(be.hasErreurs()) {
@@ -34,21 +25,35 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public void updateUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void updateUtilisateur(Utilisateur utilisateur, String confirmationMdp) throws BusinessException {
+		BusinessException be = new BusinessException();
+//		utilisateur = dao.findByLoginAndPassword(utilisateur.getPseudo(), utilisateur.getMotDePasse());
+		validerUtilisateur(utilisateur, confirmationMdp, be);
+		validerNoUtilisateur(utilisateur.getNoUtilisateur(), be);
+		
+		System.out.println(utilisateur);
+		
+		if(be.hasErreurs()) {
+			System.out.println(be);
+			throw be;
+		} else {
+			dao.update(utilisateur, utilisateur.getNoUtilisateur());
+		}
 		
 	}
 
 	@Override
-	public void deleteUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void deleteUtilisateur(Utilisateur utilisateur)throws BusinessException {
+		BusinessException be = new BusinessException();
+		validerNoUtilisateur(utilisateur.getNoUtilisateur(), be);
 		
-	}
-
-	@Override
-	public Utilisateur showUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		if(be.hasErreurs()) {
+			System.out.println(be);
+			throw be;
+		} else {
+			dao.delete(utilisateur.getNoUtilisateur());
+		}
+		
 	}
 
 	@Override
@@ -63,12 +68,6 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		}
 	}
 
-	@Override
-	public Utilisateur disconnectUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	private void validerPseudo(String pseudo, BusinessException be) throws BusinessException {
 		if(pseudo == null || pseudo.isBlank() || pseudo.length() >= 30) {
 			be.ajouterErreur(CodeResultDAL.INSERT_PSEUDO_ECHEC);
@@ -127,5 +126,24 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		if(!motDePasseConfirmation.equals(motDePasse)) {
 			be.ajouterErreur(CodeResultDAL.INSERT_CONFIRMATION_MDP_ECHEC);
 		};
+	}
+	
+	private void validerNoUtilisateur(Integer noUtilisateur, BusinessException be) throws BusinessException {
+		if(noUtilisateur == null || noUtilisateur < 1) {
+			be.ajouterErreur(CodeResultDAL.INSERT_NO_UTILISATEUR_ECHEC);
+		}
+	}
+	
+	private void validerUtilisateur(Utilisateur utilisateur, String confirmationMDP, BusinessException be) throws BusinessException {
+		validerPseudo(utilisateur.getPseudo(), be);
+		validerNom(utilisateur.getNom(), be);
+		validerPrenom(utilisateur.getPrenom(), be);
+		validerEmail(utilisateur.getEmail(), be);
+		validerTelephone(utilisateur.getTelephone(), be);
+		validerRue(utilisateur.getRue(), be);
+		validerCodePostal(utilisateur.getCodePostal(), be);
+		validerVille(utilisateur.getVille(), be);
+		validerMotDePasse(utilisateur.getMotDePasse(), be);
+		validerConfirmationMDP(confirmationMDP, utilisateur.getMotDePasse(), be);
 	}
 }

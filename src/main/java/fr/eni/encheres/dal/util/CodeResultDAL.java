@@ -15,4 +15,5 @@ public abstract class CodeResultDAL {
 	public static final int INSERT_MOT_DE_PASSE_ECHEC = 20008;
 	public static final int INSERT_CONFIRMATION_MDP_ECHEC = 20009;
 	public static final int CHECK_CONNECTION_ECHEC= 20010;
+	public static final int INSERT_NO_UTILISATEUR_ECHEC=20011;
 }
