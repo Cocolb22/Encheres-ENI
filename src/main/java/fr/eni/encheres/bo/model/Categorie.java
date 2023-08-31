@@ -1,9 +1,14 @@
 package fr.eni.encheres.bo.model;
 
 public class Categorie {
-	
+
 	private Integer noCategorie;
 	private String libelle;
+	
+	public Categorie(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
 	
 	public Categorie(Integer noCategorie, String libelle) {
 		super();
@@ -29,6 +34,11 @@ public class Categorie {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+	
+	@Override
+	public String toString() {
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
 	}
 	
 

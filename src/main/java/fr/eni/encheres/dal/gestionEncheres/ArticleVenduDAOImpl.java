@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.model.ArticleVendu;
+import fr.eni.encheres.bo.model.Categorie;
+import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.dal.util.ConnectionProvider;
 import fr.eni.encheres.dal.util.DALException;
 
 
 public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	
-	final String SELECT = "SELECT noArticle, nomArticle, description, dateDebutEncheres, dateFFinEncheres, miseAPrix, prixVente, etatVente FROM ArticleVendu";
-	final String INSERT = "INSERT INTO (noArticle, nomArticle, description, dateDebutEncheres, dateFFinEncheres, miseAPrix, prixVente) VALUES (?,?,?,?,?,?,?,?)";
+	final String SELECT = "SELECT * FROM ARTICLES_VENDUS";
+	final String INSERT = "INSERT INTO (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente) VALUES (?,?,?,?,?,?,?,?)";
 	
 
 	@Override
@@ -51,16 +53,35 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			PreparedStatement stmt = con.prepareStatement(SELECT);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				ArticleVendu article = new ArticleVendu(rs.getString("nomArticle"),
+            	Categorie categorie = new Categorie(
+            			rs.getInt("no_categorie"),
+            			rs.getString("libelle")
+            			);
+            	Utilisateur utilisateur = new Utilisateur(
+            			rs.getInt("no_utilisateur"),
+            			rs.getString("pseudo"),
+            			rs.getString("nom"),
+            			rs.getString("prenom"),
+            			rs.getString("email"),
+            			rs.getString("telephone"),
+            			rs.getString("rue"),
+            			rs.getString("code_postal"),
+            			rs.getString("ville"),
+            			rs.getString("mot_de_passe"),
+            			rs.getInt("credit"),
+            			rs.getBoolean("administrateur")
+            			);
+				ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),
+							rs.getString("nom_article"),
 							rs.getString("description"),
-							rs.getDate("dateDebutEncheres").toLocalDate(),
-							rs.getDate("dateFinEncheres").toLocalDate(),
-							rs.getInt("miseAPrix"),
-							rs.getInt("prixVente"),
-							rs.getInt("noUtilisateur"),
-							rs.getInt("noCategorie")
+							rs.getDate("date_debut_encheres").toLocalDate(),
+							rs.getDate("date_fin_encheres").toLocalDate(),
+							rs.getInt("mise_a_prix"),
+							rs.getInt("prix_vente"),
+							utilisateur,
+							categorie
 						);
-				article.setnoArticle(rs.getInt("noArticle"));
 				result.add(article);
 			}
 		}

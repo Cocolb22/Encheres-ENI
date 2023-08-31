@@ -34,13 +34,11 @@ public class EnchereManagerImpl implements EnchereManager {
 		try{
 			return dao.getAll();
 		}catch(DALException e) {
+			e.printStackTrace();
 			throw new EnchereException("ms_getall");
 		}
 		
 	}
 
-
-	
-	
 
 }
