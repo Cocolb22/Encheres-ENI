@@ -43,19 +43,6 @@ public class HomePageServlet extends HttpServlet {
             request.getSession().setAttribute("model", model);
         	request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
         }
-        
-        
-       /* EnchereModel model = new EnchereModel();
-        
-        try {
-        	model.setLstEnchere(manager.getAll());
-        }catch(EnchereException e){
-        	model.setMessage("zut alors");
-        }
-        request.setAttribute("model", model);
-        request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);*/
-        
-        
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

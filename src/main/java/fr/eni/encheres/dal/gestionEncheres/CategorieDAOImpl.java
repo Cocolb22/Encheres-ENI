@@ -12,7 +12,7 @@ import fr.eni.encheres.dal.util.ConnectionProvider;
 import fr.eni.encheres.dal.util.DALException;
 
 public class CategorieDAOImpl implements CategorieDAO {
-	
+
 	final String SELECT = "SELECT * FROM CATEGORIES";
 
 	@Override

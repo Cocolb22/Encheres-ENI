@@ -148,6 +148,7 @@ public class EnchereDAOImpl implements EnchereDAO {
         return result;
     }
 
+<<<<<<< HEAD
     @Override
     public List<Enchere> findByNomArticle(String nomArticle) throws DALException {
         List<Enchere> result = new ArrayList<>();
@@ -172,5 +173,8 @@ public class EnchereDAOImpl implements EnchereDAO {
         }
         return result;
     }*/
+
+
+   
 }
 

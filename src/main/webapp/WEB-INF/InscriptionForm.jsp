@@ -15,7 +15,7 @@
 
 <jsp:include page="Header.jsp"/>
 
-<div class="container">
+
 	<div class="transparent-card">
 	    <h1 class="text-center">Formulaire d'inscription</h1>
 	    
@@ -79,7 +79,7 @@
 	        </div>
 	    </form>
 	</div>
-</div>
+
 
 
 </body>
