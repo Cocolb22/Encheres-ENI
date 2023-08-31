@@ -14,8 +14,8 @@ import fr.eni.encheres.dal.util.ConnectionProvider;
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
 	final String SELECT = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?;";
-	//final String DELETE = "DELETE no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS";
-	//final String UPDATE = "UPDATE no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS";
+	final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
+	final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?;";
 	final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
@@ -85,14 +85,45 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void update(Utilisateur utilisateur) throws BusinessException {
-		// TODO Auto-generated method stub
+	public void update(Utilisateur utilisateur, Integer noUtilisateur) throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = con.prepareStatement(UPDATE);
+			stmt.setString(1, utilisateur.getPseudo());
+			stmt.setString(2, utilisateur.getNom());
+			stmt.setString(3, utilisateur.getPrenom());
+			stmt.setString(4, utilisateur.getEmail());
+			stmt.setString(5, utilisateur.getTelephone());
+			stmt.setString(6, utilisateur.getRue());
+			stmt.setString(7, utilisateur.getCodePostal());
+			stmt.setString(8, utilisateur.getVille());
+			stmt.setString(9, utilisateur.getMotDePasse());
+			stmt.setInt(10, utilisateur.getCredit());
+			stmt.setInt(11,utilisateur.isAdministrateur()?1:0);
+			stmt.setInt(12, noUtilisateur);
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
 	@Override
-	public void delete(Utilisateur utilisateur) throws BusinessException {
-		// TODO Auto-generated method stub
+	public void delete(Integer noUtilisateur) throws BusinessException {
 		
+		try (Connection con = ConnectionProvider.getConnection()) {
+			
+			PreparedStatement stmt = con.prepareStatement(DELETE);
+			stmt.setInt(1, noUtilisateur);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 	}
 }
