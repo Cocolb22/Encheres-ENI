@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="fr.eni.encheres.bundles.LecteurMessage" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,9 @@
 	    <h1 class="text-center">Formulaire d'inscription</h1>
 	    
 	    <c:if test="${listeCodesErreur != null}">
-	    	<p>CODE ERREUR : ${listeCodesErreur} </p>
+	    	<c:forEach items="${listeCodesErreur}" var="codeErreur">
+	    		<p>${LecteurMessage.getMessageErreur(codeErreur)} </p>
+	    	</c:forEach>
 	    </c:if>
 	    
 	    <form action="InscriptionServlet" method="post">

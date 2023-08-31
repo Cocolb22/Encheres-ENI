@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="fr.eni.encheres.bundles.LecteurMessage" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +17,15 @@
 
 <jsp:include page="Header.jsp"/>
 
-
 	<div class="container d-flex justify-content-center align-items-center vh-100">
 	    <div class="col-md-6 transparent-card">
 	        <h2 class="mb-3">Connexion</h2>
 	        
 	        <c:if test="${listeCodesErreur != null}">
-		    	<p>CODE ERREUR : ${listeCodesErreur} </p>
-		    </c:if>
+          <c:forEach items="${listeCodesErreur}" var="codeErreur">
+            <p>${LecteurMessage.getMessageErreur(codeErreur)} </p>
+          </c:forEach>
+	      </c:if>
 		    
 	        <form action="LoginServlet" method="post">
 	            <div class="mb-3">
@@ -57,7 +59,5 @@
 	        </div>
 	    </div>
 	</div>
-
-
 </body>
 </html>

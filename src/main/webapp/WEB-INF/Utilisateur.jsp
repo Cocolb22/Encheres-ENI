@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="fr.eni.encheres.bundles.LecteurMessage" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +12,22 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous" defer></script>
     
-<title>Page Utilisateur</title>
+<title>Mon profil</title>
 </head>
 <body>
 
 <jsp:include page="Header.jsp"/>
 
-
 <div class="container transparent-card">
 
 	<h1> Bonjour ${utilisateurInscrit.pseudo }</h1>
+  
+  <c:if test="${listeCodesErreur != null}">
+	    	<c:forEach items="${listeCodesErreur}" var="codeErreur">
+	    		<p>${LecteurMessage.getMessageErreur(codeErreur)} </p>
+	    	</c:forEach>
+	    </c:if>
+  
  	<form action="InscriptionServlet" method="post">
         <div class="row">
             <div class="col-md-6 p-3">
@@ -80,9 +87,5 @@
 			</div>
     </form>
 </div>
-
-
-
-
 </body>
 </html>

@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import bundles.BusinessException;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			Utilisateur utilisateurInscrit = manager.connectUtilisateur(pseudo, motDePasse);
+			System.out.println(utilisateurInscrit);
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurInscrit", utilisateurInscrit);
 			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
