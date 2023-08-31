@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import bundles.BusinessException;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 
 public class UtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

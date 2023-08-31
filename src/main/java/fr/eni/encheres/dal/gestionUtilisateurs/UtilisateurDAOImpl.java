@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 import fr.eni.encheres.dal.util.CodeResultDAL;
 import fr.eni.encheres.dal.util.ConnectionProvider;
 
@@ -17,9 +19,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
 	final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?;";
 	final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-
+	final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	@Override
-	public void insert(Utilisateur utilisateur) {
+	public void insert(Utilisateur utilisateur) throws BusinessException {
 		Connection con;
 		try {
 			con = ConnectionProvider.getConnection();
@@ -43,8 +45,15 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			if(e.getMessage().contains("UQ_UTILISATEURS_EMAIL")) {
+				BusinessException be = new BusinessException(20013);
+				throw be;
+			} else if (e.getMessage().contains("UQ_UTILISATEURS_PSEUDO")) {
+				BusinessException be = new BusinessException(20012);
+				throw be;
+			}
 		}
 			
 	}
@@ -125,5 +134,38 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Utilisateur> getUsers() throws BusinessException {
+		List <Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+		Utilisateur utilisateur = null ;
+		try (Connection con = ConnectionProvider.getConnection()){
+			PreparedStatement stmt = con.prepareStatement(SELECT_ALL);
+			
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
+							rs.getString("pseudo"),
+							rs.getString("nom"),
+							rs.getString("prenom"),
+							rs.getString("email"),
+							rs.getString("telephone"),
+							rs.getString("rue"),
+							rs.getString("code_postal"),
+							rs.getString("ville"),
+							rs.getString("mot_de_passe"),
+							rs.getInt("credit"),
+							rs.getInt("administrateur")==1?true:false
+						);
+			}
+			utilisateurs.add(utilisateur);
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
+		return utilisateurs;
 	}
 }

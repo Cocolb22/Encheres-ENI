@@ -1,7 +1,7 @@
 package fr.eni.encheres.bll.gestionUtilisateurs;
 
-import bundles.BusinessException;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 
 public interface UtilisateurManager {
 
