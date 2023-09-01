@@ -7,25 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
+import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
 
-/**
- * Servlet implementation class VenteArticleServlet
- */
 public class VenteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public VenteArticleServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private VenteArticleManager articleManager = VenteArticleManagerSing.getInstance();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateurInscrit");
@@ -34,10 +22,12 @@ public class VenteArticleServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String nomArticle = request.getParameter("nomArticle");
+		String descriptionArticle = request.getParameter("description");
+		
+		
 		
 		String action = request.getParameter("action");
 		

@@ -27,7 +27,7 @@
 				<div class="form-body">
 					 <div class="mb-3">
 			                <label for="article" class="form-label form-label-sm">Article</label>
-			                <input type="text" id="article" name="article" class="form-control" required>
+			                <input type="text" id="article" name="nomArticle" class="form-control" required>
 			            </div>
 			            <div class="mb-3">
 			                <label for="description" class="form-label form-label-sm">Description</label>
