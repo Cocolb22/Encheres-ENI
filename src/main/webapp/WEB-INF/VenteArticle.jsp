@@ -13,74 +13,80 @@
 <title>Vente article servlet</title>
 </head>
 <body>
-<h1>Vendre un article</h1>
 
-	<div class="container">
-		<h1> Bonjour ${utilisateurInscrit.pseudo }</h1>		
-		<form action="VenteArticleServlet" method="post">
-			 <div class="mb-3">
-	                <label for="article" class="form-label">Article</label>
-	                <input type="text" id="article" name="article" class="form-control" required>
-	            </div>
-	            <div class="mb-3">
-	                <label for="description" class="form-label">Description</label>
-	                <input type="text" id="description" name="description" class="form-control" required>
-	            </div>
-	            <div class="categories">
-		            <label for="categorie">Catégorie :</label>
-		            <select id="categorie" name="categorie">
-		                <option value="informatique">Informatique</option>
-		                <option value="vetement">Vetement</option>
-		                <option value="ameublement">Ameublement</option>
-		                <option value="sport&loisiers">Sport et loisirs</option>
-		            </select>
-        		</div>
+<jsp:include page="Header.jsp"/>
 
-        		 <div class="mb-3">
-	                <label for="image" class="form-label">Image</label>
-	                <input type="image" id="image" name="image" class="form-control" required>
-	            </div>
-	             <div class="mb-3">
-	                <label for="description" class="form-label">Mise à prix</label>
-	               <input type="number" step="10" min="0" id="miseAPrix" name="miseAPrix" class="form-control" required>
-	            </div>
-	             <div class="mb-3">
-	                <label for="description" class="form-label">Date de début de l'enchère</label>
-	               <input type="date" id="dateDébut" name="dateDébut" class="form-control" required>
-	            </div>
-	            <div class="mb-3">
-	                <label for="description" class="form-label">Date de fin de l'enchère</label>
-	               <input type="date" id="dateFin" name="dateFin" class="form-control" required>
-	            </div>
-	            
-	            <div class="retrait">
-	            	<div class="mb-3">
-	               		<label for="rue" class="form-label">Rue</label>
-	               		<input type="text" id="rue" name="rue" class="form-control" value="${utilisateurInscrit.rue }" required>
-	            	</div>
-	            	<div class="mb-3">
-	               		<label for="codePostal" class="form-label">Code Postal</label>
-	               		<input type="text" id="codePostal" name="codePostal" class="form-control" value="${utilisateurInscrit.codePostal }" required>
-	            	</div>
-	            	<div class="mb-3">
-	               		<label for="ville" class="form-label">Ville</label>
-	               		<input type="text" id="ville" name="ville" class="form-control" value="${utilisateurInscrit.ville }" required>
-	            	</div>
-	            </div>
-	            <div class="btn-list">
-	            	<div class="row d-flex">
-					     <div class="col-md-6 p-2 d-flex justify-content-end">
-					     	<button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="update">Enregistrer</button>
-					     </div>
-					     <div class="col-md-6 p-2 d-flex justify-content-start">
-					     	<button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="delete">Supprimer</button>
-					     </div>
-					</div>
-	            </div>
-        		
+<h1 class="m-3 d-flex justify-content-center text-align-center">Vendre un article</h1>
+
+	<div class="container pb-5">
 		
-		</form>
-	
+		<div class="container p-5">	
+			
+			<form action="VenteArticleServlet" method="post">
+				
+				<div class="form-body">
+					 <div class="mb-3">
+			                <label for="article" class="form-label form-label-sm">Article</label>
+			                <input type="text" id="article" name="article" class="form-control" required>
+			            </div>
+			            <div class="mb-3">
+			                <label for="description" class="form-label form-label-sm">Description</label>
+			                <input type="text" id="description" name="description" class="form-control" required>
+			            </div>
+			            <div class="categories mb-3">
+				            <label for="categorie">Catégorie :</label>
+				            <select id="categorie" name="categorie" class="rounded">
+				                <option value="informatique">Informatique</option>
+				                <option value="vetement">Vetement</option>
+				                <option value="ameublement">Ameublement</option>
+				                <option value="sport&loisiers">Sport et loisirs</option>
+				            </select>
+		        		</div>
+		
+		        		 <div class="mb-3">
+			                <label for="image" class="form-label form-label-sm">Image</label>
+			                    <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
+			            </div>
+			             <div class="mb-3">
+			                <label for="description" class="form-label form-label-sm">Mise à prix</label>
+			               <input type="number" step="10" min="0" id="miseAPrix" name="miseAPrix" class="form-control" required>
+			            </div>
+			             <div class="mb-3">
+			                <label for="description" class="form-label form-label-sm">Date de début de l'enchère</label>
+			               <input type="date" id="dateDébut" name="dateDébut" class="form-control" required>
+			            </div>
+			            <div class="mb-3">
+			                <label for="description" class="form-label form-label-sm">Date de fin de l'enchère</label>
+			               <input type="date" id="dateFin" name="dateFin" class="form-control" required>
+			            </div>
+			        </div>    
+		            <div class="retrait">
+		            	<div class="mb-3">
+		            	<h5>Point de retrait:</h5>
+		               		<label for="rue" class="form-label form-label-sm">Rue</label>
+		               		<input type="text" id="rue" name="rue" class="form-control" value="${utilisateurInscrit.rue }" required>
+		            	</div>
+		            	<div class="mb-3">
+		               		<label for="codePostal" class="form-label form-label-sm">Code Postal</label>
+		               		<input type="text" id="codePostal" name="codePostal" class="form-control" value="${utilisateurInscrit.codePostal }" required>
+		            	</div>
+		            	<div class="mb-3">
+		               		<label for="ville" class="form-label form-label-sm">Ville</label>
+		               		<input type="text" id="ville" name="ville" class="form-control" value="${utilisateurInscrit.ville }" required>
+		            	</div>
+		            </div>
+		            <div class="btn-list">
+		            	<div class="row d-flex">
+						     <div class="col-md-6 p-2 d-flex justify-content-end">
+						     	<button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="enregistrer">Enregistrer</button>
+						     </div>
+						     <div class="col-md-6 p-2 d-flex justify-content-start">
+						     	<button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="annuler">Annuler</button>
+						     </div>
+						</div>
+		            </div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
