@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -44,75 +45,76 @@ function updateCheckboxes(column) {
 
 <div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
 
-<div class="filters mt-5">
-    <form action="HomePageServlet" method="get" style="display: flex">
-        <div style="margin: 10px">
-            <label for="recherche">Rechercher :</label>
-            <input type="text" id="recherche" name="recherche" placeholder="Entrez votre recherche">
-        </div>
-        
-        <div class="categories">
-            <label for="categorie">Catégorie :</label>
-            <select id="categorie" name="categorie">
-                <option value="categorie1">Informatique</option>
-                <option value="categorie2">Vetement</option>
-                <option value="categorie3">Ameublement</option>
-                <option value="categorie4">Sport et loisirs</option>
-            </select>
-        </div>
-        
-        <div>
-            <button type="submit" class="submit"  style="margin: 10px">Rechercher</button>
-        </div>
-    </form>
-</div>
+	<div class="filters mt-5">
+	    <form action="HomePageServlet" method="post" style="display: flex">
+	        <div style="margin: 10px">
+	            <label for="recherche">Rechercher :</label>
+	            <input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
+	        </div>
+	        
+	        <div class="categories">
+	            <label for="categorie">Catégorie :</label>
+	            <select id="categorie" name="categorie">
+					<c:forEach items="${categorie}" var="lstCategorie"> 
+	                <option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+	                </c:forEach>
+	                
+	            </select>
+	        </div>
+	        
+	        <div>
+	            <button type="submit" class="submit" name="BT_SELECT_CATEGORIE" value="recherche" style="margin: 10px">Rechercher</button>
+	        </div>
+	    </form>
+	</div>
+
 
 <c:if test="${utilisateurInscrit != null}">
-	 <div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
-    <div class=" btn-group-verticla " role="group" aria-label="Basic checkbox toggle button group">
-    
-	        <div class="col achat grid"> 
-	            <h3>Achat</h3>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
-	        </div>
-	        <div class="col vente grid"> 
-	            <h3>Vente</h3>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
-	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
-	        </div>
+
+<div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
+    <div class="btn-group-vertical d-flex flex-row" role="group" aria-label="Basic checkbox toggle button group">
+        <div class="col achat grid"> 
+            <h3>Achat</h3>
+            <label class="btn  checkbox-label"><input name="achatEnchereOuverte" type="checkbox" onchange="updateCheckboxes('achat')" >Enchères ouvertes</label>
+            <label class="btn  checkbox-label"><input name="achatEnchereEnCours" type="checkbox" onchange="updateCheckboxes('achat')" >En cours</label>
+            <label class="btn  checkbox-label"><input name="achatEnchereRemportées" type="checkbox" onchange="updateCheckboxes('achat')" >Remportées</label>
+        </div>
+        <div class="col vente grid"> 
+            <h3>Vente</h3>
+            <label class="btn  checkbox-label"><input name="venteEnchereEnCours" type="checkbox" onchange="updateCheckboxes('vente')" >En cours</label>
+            <label class="btn  checkbox-label"><input name="venteEnchereDebutes" type="checkbox" onchange="updateCheckboxes('vente')" >Débutées</label>
+            <label class="btn  checkbox-label"><input name="VenteEnchereTermines" type="checkbox" onchange="updateCheckboxes('vente')" >Terminées</label>
+        </div>
     </div>
     
 </div>
  </c:if>
 
 
-${model.lstEnchere}
-
-<!-- <div class="card">
+<div class="card">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
-        
-        <div class="col-md-4">
-                Utilisez la classe d'image réactive pour limiter la largeur de l'image
-                <img src="https://m.media-amazon.com/images/I/61SRHAZd7ML._AC_UF1000,1000_QL80_.jpg" alt="tenue de François" class="img-fluid">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"><a href=""> </a></h5>
-                    <p class="card-text">Prix : </p>
-                    <p class="card-text"><small class="text-body-secondary">Fin de l'enchère: </small></p>
-                    <br />
-                    <p class="card-text"><small class="text-body-secondary">Vendeur: </small></p>
-                </div>
-            </div>
-      
+        <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">        
+	        <div class="col-md-4">
+	            Utilisez la classe d'image réactive pour limiter la largeur de l'image
+	            <img src="https://m.media-amazon.com/images/I/61SRHAZd7ML._AC_UF1000,1000_QL80_.jpg" alt="tenue de François" class="img-fluid">
+	         </div>
+	         <div class="col-md-8">
+	            <div class="card-body">
+	            	<%-- <c:forEach items="${enchere.articleVendu}" var="article">  --%>
+	                    <h5 class="card-title"><a href=""> ${enchere.articleVendu.nomArticle}</a></h5>
+	               	<%-- </c:forEach> --%>
+	                    <p class="card-text">Prix : ${enchere.montantEnchere} points</p>
+	                    <p class="card-text"><small class="text-body-secondary">Fin de l'enchère: ${enchere.articleVendu.dateFinEncheres}</small></p>
+	                    <br />                    
+	                    <p class="card-text"><small class="text-body-secondary">Vendeur: ${enchere.articleVendu.utilisateur.pseudo}</small></p>
+	             </div>
+	         </div>
+      	</c:forEach>
         </div>
     </div>
-</div> -->
-</div>
+</div> 
+
 
 </body>
 </html>
