@@ -1,14 +1,21 @@
 package fr.eni.encheres.ihm.encheres;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.time.LocalDate;
 
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
+import fr.eni.encheres.bo.model.ArticleVendu;
+import fr.eni.encheres.bo.model.Categorie;
+import fr.eni.encheres.bo.model.Retrait;
+import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 
 public class VenteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,20 +29,42 @@ public class VenteArticleServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
+		Utilisateur utilisateurInscrit = (Utilisateur) session.getAttribute("utilisateurInscrit");
+		
 		String nomArticle = request.getParameter("nomArticle");
 		String descriptionArticle = request.getParameter("description");
+		String libelleCategorie = request.getParameter("categorie");
+		Integer prixInitial = Integer.parseInt(request.getParameter("miseAPrix"));
+		LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"));
+		LocalDate dateFin = LocalDate.parse(request.getParameter("dateFin"));
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
 		
 		
+		Retrait retrait = new Retrait(rue, codePostal, ville);
+		Categorie categorie = new Categorie(libelleCategorie);
 		
-		String action = request.getParameter("action");
+		ArticleVendu articleVendu = new ArticleVendu(nomArticle, descriptionArticle, dateDebut, dateFin, prixInitial, null, utilisateurInscrit, categorie, retrait);
 		
-		 if ("enregistrer".equals(action)) {
-	            enregistrer(request, response);
-	        } else if ("annuler".equals(action)) {
-	            supprimer(request, response);
-	}
+		try {
+			String action = request.getParameter("action");
+			
+			if ("enregistrer".equals(action)) {
+				articleManager.addArticle(articleVendu);
+				enregistrer(request, response);
+		    } else if ("annuler".equals(action)) {
+		        annuler(request, response);
+		    }
+			
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-}
+	}
 
 	private void enregistrer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -43,7 +72,7 @@ public class VenteArticleServlet extends HttpServlet {
 		
 	}
 	
-	private void supprimer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void annuler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 		

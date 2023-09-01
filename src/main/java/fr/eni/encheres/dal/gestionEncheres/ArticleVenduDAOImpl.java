@@ -19,32 +19,20 @@ import fr.eni.encheres.dal.util.ConnectionProvider;
 public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	
 	final String SELECT = """
-			SELECT a.no_article, 
-			nom_article, 
-			description, 
-			date_debut_encheres, 
-			date_fin_encheres, 
-			prix_initial, 
-			prix_vente,
-			a.no_utilisateur,
-			a.no_categorie,
-			r.rue,
-			r.code_postal,
-			r.ville
+			SELECT *
 			FROM ARTICLES_VENDUS a
 			INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur
 			INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
 			LEFT JOIN RETRAITS r ON r.no_article = a.no_article  
 				""";
 	final String INSERT_ARTICLE = """
-			INSERT INTO ARTICLES_VENDUS(
-			no_article, 
+			INSERT INTO ARTICLES_VENDUS( 
 			nom_article, 
 			description, 
 			date_debut_encheres, 
 			date_fin_encheres, 
-			prix_initial, 
-			prix_vente) VALUES (?,?,?,?,?,?,?,?);
+			prix_initial,
+			no_categorie) VALUES (?,?,?,?,?,?);
 				""";
 	
 	final String INSERT_RETRAIT = """
@@ -62,14 +50,9 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			stmt.setString(2,article.getDescription());
 			stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
 			stmt.setDate(4, Date.valueOf(article.getDateDebutEncheres()));
-			stmt.setInt(5, article.getPrixVente());
-			int nb = stmt.executeUpdate();
-			if(nb>0) {
-				ResultSet rs= stmt.getGeneratedKeys();
-				if(rs.next()) {
-					article.setNoArticle(rs.getInt(1));
-				}
-			}
+			stmt.setInt(5, article.getPrixInitial());
+			stmt.setInt(6, article.getCategorie().getNoCategorie());
+			
 			PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getPointRetrait().getRue());
 			pstmt.setString(2, article.getPointRetrait().getCodePostal());
