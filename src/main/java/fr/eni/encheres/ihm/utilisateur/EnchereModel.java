@@ -9,56 +9,50 @@ import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.bo.model.Utilisateur;
 
 public class EnchereModel {
-	
-	private Utilisateur utilisateur;
-	private ArticleVendu article;
-	private LocalDateTime dateFinEnchere;
-	private Integer prix;
-	
 
-	private String message = "";
-	private Enchere current = new Enchere(utilisateur, article, dateFinEnchere, prix);
-	private List<Enchere> lstEnchere = new ArrayList<>();
-	
-	public EnchereModel() {
-		
-	}
+    private String message = "";
+    private Enchere currentEnchere;
+    private List<Enchere> lstEnchere = new ArrayList<>();
+    
+    public EnchereModel() {
+        
+    }
 
-	public EnchereModel(String message, Enchere current, List<Enchere> lstEnchere) {
-		super();
-		this.message = message;
-		this.current = current;
-		this.lstEnchere = lstEnchere;
-	}
+    public EnchereModel(String message, Enchere enchere, List<Enchere> lstEnchere) {
+        super();
+        this.message = message;
+        this.currentEnchere = enchere;
+        this.lstEnchere = lstEnchere;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public Enchere getCurrent() {
-		return current;
-	}
+    public Enchere getCurrentEnchere() {
+        return currentEnchere;
+    }
 
-	public void setCurrent(Enchere current) {
-		this.current = current;
-	}
+    public void setCurrentEnchere(Enchere current) {
+        this.currentEnchere = current;
+    }
 
-	public List<Enchere> getLstEnchere() {
-		return lstEnchere;
-	}
+    public List<Enchere> getLstEnchere() {
+        return lstEnchere;
+    }
 
-	public void setLstEnchere(List<Enchere> lstEnchere) {
-		this.lstEnchere = lstEnchere;
-	}
+    public void setLstEnchere(List<Enchere> lstEnchere) {
+        this.lstEnchere = lstEnchere;
+    }
 
-	@Override
-	public String toString() {
-		return "EnchereModel [message=" + message + ", current=" + current + ", lstEnchere=" + lstEnchere + "]";
-	}
-	
-	
+    @Override
+    public String toString() {
+        return "EnchereModel [message=" + message + ", currentEnchere=" + currentEnchere + ", lstEnchere=" + lstEnchere + "]";
+    }
+    
+    
 }

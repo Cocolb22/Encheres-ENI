@@ -27,6 +27,7 @@ public class VenteArticleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.getRequestDispatcher("/WEB-INF/VenteArticle.jsp").forward(request, response);
+
 	}
 
 	/**
@@ -34,6 +35,25 @@ public class VenteArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String action = request.getParameter("action");
+		
+		 if ("enregistrer".equals(action)) {
+	            enregistrer(request, response);
+	        } else if ("annuler".equals(action)) {
+	            supprimer(request, response);
 	}
 
+}
+
+	private void enregistrer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+		
+	}
+	
+	private void supprimer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+		
+	}
 }

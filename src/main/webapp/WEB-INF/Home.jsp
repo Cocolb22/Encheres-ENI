@@ -42,13 +42,11 @@ function updateCheckboxes(column) {
 
 <jsp:include page="Header.jsp"/>
 
-<<<<<<< HEAD
-<div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
-=======
-<div class="container p-4">
->>>>>>> branch 'gestion_encheres' of https://github.com/Cocolb22/Encheres-ENI.git
 
-<div ><h1>Liste des ench�res</h1> </div>
+<div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
+<div class="container p-4">
+
+<div ><h1>Liste des enchères</h1> </div>
 
 <div class="filters mt-5">
     <form action="HomePageServlet" method="get" style="display: flex">
@@ -75,20 +73,20 @@ function updateCheckboxes(column) {
 
 <c:if test="${utilisateurInscrit != null}">
 	 <div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
-    <div class="btn-group-vertical " role="group" aria-label="Basic checkbox toggle button group">
-        <div class="col achat grid"> 
-            <h3>Achat</h3>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
-        </div>
-        <div class="col vente grid"> 
-            <h3>Vente</h3>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
-        </div>
-
+    <div class=" btn-group-verticla " role="group" aria-label="Basic checkbox toggle button group">
+    
+	        <div class="col achat grid"> 
+	            <h3>Achat</h3>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
+	        </div>
+	        <div class="col vente grid"> 
+	            <h3>Vente</h3>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
+	        </div>
     </div>
     
 </div>
