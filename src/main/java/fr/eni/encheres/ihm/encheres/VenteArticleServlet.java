@@ -7,33 +7,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class VenteArticleServlet
- */
+import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
+import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
+
 public class VenteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public VenteArticleServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private VenteArticleManager articleManager = VenteArticleManagerSing.getInstance();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.getRequestDispatcher("/WEB-INF/VenteArticle.jsp").forward(request, response);
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String nomArticle = request.getParameter("nomArticle");
+		String descriptionArticle = request.getParameter("description");
+		
+		
 		
 		String action = request.getParameter("action");
 		

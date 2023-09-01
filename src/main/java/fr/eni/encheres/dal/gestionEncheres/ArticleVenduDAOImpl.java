@@ -13,9 +13,8 @@ import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
 import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 import fr.eni.encheres.dal.util.ConnectionProvider;
-import fr.eni.encheres.dal.util.DALException;
-
 
 public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	
@@ -56,7 +55,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			""";
 
 	@Override
-	public void insert(ArticleVendu article) throws DALException {
+	public void insert(ArticleVendu article) throws BusinessException {
 		try (Connection con = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = con.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, article.getNomArticle());
@@ -77,12 +76,12 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			pstmt.setString(1, article.getPointRetrait().getVille());
 		}
 		catch(SQLException e) {
-			throw new DALException("ms_insert");
+			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public List<ArticleVendu> getAll() throws DALException {
+	public List<ArticleVendu> getAll() throws BusinessException {
 		
 		List<ArticleVendu> result = new ArrayList<>();
 		
@@ -129,7 +128,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			}
 		}
 		catch(SQLException e) {
-			throw new DALException("ms_insert");
+			e.printStackTrace();
 		}
 		
 		return result;

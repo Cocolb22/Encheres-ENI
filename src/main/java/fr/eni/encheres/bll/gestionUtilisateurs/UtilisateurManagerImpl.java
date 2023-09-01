@@ -25,7 +25,6 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur, String confirmationMdp) throws BusinessException {
 		BusinessException be = new BusinessException();
-//		utilisateur = dao.findByLoginAndPassword(utilisateur.getPseudo(), utilisateur.getMotDePasse());
 		validerUtilisateur(utilisateur, confirmationMdp, be);
 		validerNoUtilisateur(utilisateur.getNoUtilisateur(), be);
 		
