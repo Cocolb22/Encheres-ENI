@@ -118,5 +118,3 @@ function updateCheckboxes(column) {
 
 </body>
 </html>
-
-
