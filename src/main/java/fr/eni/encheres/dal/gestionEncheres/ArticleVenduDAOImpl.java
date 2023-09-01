@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
+import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.dal.util.ConnectionProvider;
 import fr.eni.encheres.dal.util.DALException;
@@ -18,14 +19,46 @@ import fr.eni.encheres.dal.util.DALException;
 
 public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	
-	final String SELECT = "SELECT * FROM ARTICLES_VENDUS";
-	final String INSERT = "INSERT INTO (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente) VALUES (?,?,?,?,?,?,?,?)";
+	final String SELECT = """
+			SELECT a.no_article, 
+			nom_article, 
+			description, 
+			date_debut_encheres, 
+			date_fin_encheres, 
+			prix_initial, 
+			prix_vente,
+			a.no_utilisateur,
+			a.no_categorie,
+			r.rue,
+			r.code_postal,
+			r.ville
+			FROM ARTICLES_VENDUS a
+			INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur
+			INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
+			LEFT JOIN RETRAITS r ON r.no_article = a.no_article  
+				""";
+	final String INSERT_ARTICLE = """
+			INSERT INTO ARTICLES_VENDUS(
+			no_article, 
+			nom_article, 
+			description, 
+			date_debut_encheres, 
+			date_fin_encheres, 
+			prix_initial, 
+			prix_vente) VALUES (?,?,?,?,?,?,?,?);
+				""";
 	
+	final String INSERT_RETRAIT = """
+			INSERT INTO RETRAITS(
+			rue,
+			code_postal,
+			ville) VALUES (?,?,?);
+			""";
 
 	@Override
 	public void insert(ArticleVendu article) throws DALException {
 		try (Connection con = ConnectionProvider.getConnection()){
-			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = con.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, article.getNomArticle());
 			stmt.setString(2,article.getDescription());
 			stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
@@ -38,6 +71,10 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 					article.setNoArticle(rs.getInt(1));
 				}
 			}
+			PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, article.getPointRetrait().getRue());
+			pstmt.setString(2, article.getPointRetrait().getCodePostal());
+			pstmt.setString(1, article.getPointRetrait().getVille());
 		}
 		catch(SQLException e) {
 			throw new DALException("ms_insert");
@@ -71,17 +108,22 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
             			rs.getInt("credit"),
             			rs.getBoolean("administrateur")
             			);
+            	Retrait pointDeRetrait = new Retrait(
+            			rs.getString("rue"),
+            			rs.getString("code_postal"),
+            			rs.getString("ville")
+            			);
 				ArticleVendu article = new ArticleVendu(
 							rs.getInt("no_article"),
 							rs.getString("nom_article"),
 							rs.getString("description"),
 							rs.getDate("date_debut_encheres").toLocalDate(),
 							rs.getDate("date_fin_encheres").toLocalDate(),
-							rs.getInt("mise_a_prix"),
+							rs.getInt("prix_initial"),
 							rs.getInt("prix_vente"),
 							utilisateur,
 							categorie,
-							null //TODO : gérer pt de retrait
+							pointDeRetrait
 						);
 				result.add(article);
 			}
