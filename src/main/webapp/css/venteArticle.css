@@ -1,0 +1,14 @@
+.body {
+	color: blue
+}
+
+.form-body{
+	margin: 40px;
+}
+
+.retrait {
+	border: solid 1px lightgray;
+    margin: 40px;
+    padding: 20px;
+    border-radius: 20px;
+}

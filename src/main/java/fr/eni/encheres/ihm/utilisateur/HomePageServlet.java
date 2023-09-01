@@ -24,7 +24,7 @@ public class HomePageServlet extends HttpServlet {
             login(request, response);
         } else if ("deconnexion".equals(action)) {
             deconnexion(request, response);
-        } else { // Si l'action n'est pas "inscription", rediriger vers Home.jsp
+        } else {
         	EnchereModel model = new EnchereModel();
             try {
             	model.setLstEnchere(manager.getAll());
@@ -40,11 +40,9 @@ public class HomePageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EnchereModel model = (EnchereModel) request.getSession().getAttribute("model");
 		try {
-//			Enchere enchere = new Enchere();
-//			model.setCurrentEnchere(enchere);
 			model.setLstEnchere(manager.getAll());
 		} catch (EnchereException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);

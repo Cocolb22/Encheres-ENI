@@ -69,20 +69,20 @@ function updateCheckboxes(column) {
 
 <c:if test="${utilisateurInscrit != null}">
 	 <div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
-    <div class="btn-group-vertical " role="group" aria-label="Basic checkbox toggle button group">
-        <div class="col achat grid"> 
-            <h3>Achat</h3>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
-        </div>
-        <div class="col vente grid"> 
-            <h3>Vente</h3>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
-            <label class="btn  checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
-        </div>
-
+    <div class=" btn-group-verticla " role="group" aria-label="Basic checkbox toggle button group">
+    
+	        <div class="col achat grid"> 
+	            <h3>Achat</h3>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">En cours</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('achat')">Remportées</label>
+	        </div>
+	        <div class="col vente grid"> 
+	            <h3>Vente</h3>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">En cours</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Débutées</label>
+	            <label class="btn checkbox-label"><input type="checkbox" onchange="updateCheckboxes('vente')">Terminées</label>
+	        </div>
     </div>
     
 </div>
