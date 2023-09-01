@@ -45,6 +45,4 @@ public class Retrait {
 		return "Retrait [rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
 	}
 
-	
-	
 }

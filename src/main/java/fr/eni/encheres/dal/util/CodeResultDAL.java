@@ -18,5 +18,14 @@ public abstract class CodeResultDAL {
 	public static final int INSERT_NO_UTILISATEUR_ECHEC=20011;
 	public static final int EMAIL_ALREADY_EXIST = 20013;
 	public static final int PSEUDO_ALREADY_EXIST = 20012;
-	
+	public static final int INSERT_NO_ARTICLE_ECHEC = 30000;
+	public static final int INSERT_NOM_ARTICLE_ECHEC = 30001;
+	public static final int INSERT_DESCRIPTION_ARTICLE_ECHEC = 30002;
+	public static final int INSERT_DATE_DEBUT_ARTICLE_ECHEC = 30003;
+	public static final int INSERT_DATE_FIN_ARTICLE_ECHEC = 30004;
+	public static final int INSERT_PRIX_INITIAL_ARTICLE_ECHEC = 30005;
+	public static final int INSERT_PRIX_VENTE_ARTICLE_ECHEC = 30006;
+	public static final int INSERT_RUE_RETRAIT_ECHEC = 30007;
+	public static final int INSERT_CP_RETRAIT = 30009;
+	public static final int INSERT_VILLE_RETRAIT_ECHEC = 30009;	
 }

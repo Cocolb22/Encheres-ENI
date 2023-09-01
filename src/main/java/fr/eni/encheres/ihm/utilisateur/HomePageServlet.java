@@ -8,7 +8,6 @@ import java.io.IOException;
 import fr.eni.encheres.bll.gestionEncheres.EnchereException;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
-import fr.eni.encheres.bo.model.Enchere;
 
 
 public class HomePageServlet extends HttpServlet {
