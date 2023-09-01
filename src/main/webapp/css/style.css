@@ -58,12 +58,12 @@ body{
 }
 
 .transparent-card {
-    background-color: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
-    padding: 20px; /* Espacement interne */
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px; 
     margin: 60px;
     border-radius: 20px;
     font-weight: bold;
-	}
+}
 
 #categorie {
 	height: 30px;

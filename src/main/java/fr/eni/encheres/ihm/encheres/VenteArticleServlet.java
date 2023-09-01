@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import fr.eni.encheres.bo.model.Utilisateur;
+
 /**
  * Servlet implementation class VenteArticleServlet
  */
@@ -25,6 +27,8 @@ public class VenteArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateurInscrit");
 		
 		request.getRequestDispatcher("/WEB-INF/VenteArticle.jsp").forward(request, response);
 
