@@ -70,6 +70,7 @@ function updateCheckboxes(column) {
 
 
 <c:if test="${utilisateurInscrit != null}">
+
 <div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
     <div class="btn-group-vertical d-flex flex-row" role="group" aria-label="Basic checkbox toggle button group">
         <div class="col achat grid"> 
@@ -84,7 +85,6 @@ function updateCheckboxes(column) {
             <label class="btn  checkbox-label"><input name="venteEnchereDebutes" type="checkbox" onchange="updateCheckboxes('vente')" >Débutées</label>
             <label class="btn  checkbox-label"><input name="VenteEnchereTermines" type="checkbox" onchange="updateCheckboxes('vente')" >Terminées</label>
         </div>
-
     </div>
     
 </div>

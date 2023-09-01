@@ -16,7 +16,6 @@ import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
 
 
-
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EnchereManager managerEnchere = EnchereManagerSing.getInstance();
