@@ -7,7 +7,7 @@ import fr.eni.encheres.dal.util.DALException;
 
 public interface RetraitDAO {
 	
-	public void insert(Retrait retrait) throws DALException;
+	public void insert(int idArticle, Retrait retrait) throws DALException;
 	public List<Retrait> findByNoArticle(Integer noArticle) throws DALException;
 
 }

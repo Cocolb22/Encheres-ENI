@@ -26,16 +26,16 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	public void insert(ArticleVendu article) throws DALException {
 		try (Connection con = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, article.getnomArticle());
+			stmt.setString(1, article.getNomArticle());
 			stmt.setString(2,article.getDescription());
-			stmt.setDate(3, Date.valueOf(article.getdateDebutEncheres()));
-			stmt.setDate(4, Date.valueOf(article.getdateDebutEncheres()));
-			stmt.setInt(5, article.getprixVente());
+			stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
+			stmt.setDate(4, Date.valueOf(article.getDateDebutEncheres()));
+			stmt.setInt(5, article.getPrixVente());
 			int nb = stmt.executeUpdate();
 			if(nb>0) {
 				ResultSet rs= stmt.getGeneratedKeys();
 				if(rs.next()) {
-					article.setnoArticle(rs.getInt(1));
+					article.setNoArticle(rs.getInt(1));
 				}
 			}
 		}
@@ -80,7 +80,8 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 							rs.getInt("mise_a_prix"),
 							rs.getInt("prix_vente"),
 							utilisateur,
-							categorie
+							categorie,
+							null //TODO : gérer pt de retrait
 						);
 				result.add(article);
 			}

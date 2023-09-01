@@ -20,11 +20,11 @@ public class Categorie {
 		super();
 	}
 
-	public Integer getnoCategorie() {
+	public Integer getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setnoCategorie(Integer noCategorie) {
+	public void setNoCategorie(Integer noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 
