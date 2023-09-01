@@ -5,15 +5,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import fr.eni.encheres.bll.gestionEncheres.EnchereException;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.eni.encheres.bll.categories.CategorieManager;
+import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
-import fr.eni.encheres.bo.model.Enchere;
+import fr.eni.encheres.bll.util.BLLException;
+import fr.eni.encheres.bo.model.Categorie;
+
 
 
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EnchereManager manager = EnchereManagerSing.getInstance();
+	private EnchereManager managerEnchere = EnchereManagerSing.getInstance();
+	private CategorieManager managerCategorie = CategorieManagerSing.getInstance();
+	
   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,29 +34,62 @@ public class HomePageServlet extends HttpServlet {
         } else if ("deconnexion".equals(action)) {
             deconnexion(request, response);
         } else { // Si l'action n'est pas "inscription", rediriger vers Home.jsp
-        	EnchereModel model = new EnchereModel();
-            try {
-            	model.setLstEnchere(manager.getAll());
-            }catch(EnchereException e){
+        	EnchereModel modelEnchere = new EnchereModel();
+        	List<Categorie> categorie = new ArrayList<>();
+        	try {
+        		categorie = managerCategorie.getAll();
+            	modelEnchere.setLstEnchere(managerEnchere.getAll());
+            }catch(BLLException e){
             	e.printStackTrace();
-            	model.setMessage("zut alors");
+            	modelEnchere.setMessage("zut alors");
             }
-            request.setAttribute("model", model);
+        	request.setAttribute("categorie", categorie);
+            request.setAttribute("modelEnchere", modelEnchere);
         	request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
         }
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EnchereModel model = (EnchereModel) request.getSession().getAttribute("model");
-		try {
-//			Enchere enchere = new Enchere();
-//			model.setCurrentEnchere(enchere);
-			model.setLstEnchere(manager.getAll());
-		} catch (EnchereException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+		
+    	List<Categorie> categorie = new ArrayList<>();
+    	EnchereModel modelEnchere = new EnchereModel();
+   
+    	if(request.getParameter("BT_SELECT_CATEGORIE") != null) {
+    		if(request.getParameter("categorie") != null && request.getParameter("nomArticle").equals("")) {
+    			
+	            try {
+	            	categorie = managerCategorie.getAll();	            
+	            	modelEnchere.setLstEnchere(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))));
+	            }catch(BLLException e){
+	            	e.printStackTrace();
+	            	modelEnchere.setMessage("zut alors");
+	            }
+	            
+    		}else if(!request.getParameter("nomArticle").equals("") ) {
+    		
+	    		try {
+	            	categorie = managerCategorie.getAll();
+	            	modelEnchere.setLstEnchere(managerEnchere.findByNomArticle(request.getParameter("nomArticle")));
+	            }catch(BLLException e){
+	            	e.printStackTrace();
+	            	modelEnchere.setMessage("zut alors");
+	            }
+    		
+    		}else {
+    		
+	    		try {
+	            	categorie = managerCategorie.getAll();
+	            	modelEnchere.setLstEnchere(managerEnchere.getAll());
+	            }catch(BLLException e){
+	            	e.printStackTrace();
+	            	modelEnchere.setMessage("zut alors");
+	            }
+    		}
+    	
+	        request.setAttribute("categorie", categorie);
+	        request.setAttribute("modelEnchere", modelEnchere);
+			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+    	}
 		
 	}
 

@@ -56,7 +56,6 @@ public class EnchereDAOImpl implements EnchereDAO {
     @Override
     public List<Enchere> getAll() throws DALException {
         List<Enchere> result = new ArrayList<>();
-        System.out.println(result);
 
         try (Connection con = ConnectionProvider.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(SELECT);
@@ -105,77 +104,123 @@ public class EnchereDAOImpl implements EnchereDAO {
         	e.printStackTrace();
             throw new DALException("ms_getall");
         }
-        System.out.println(result);
         return result;
     }
 
 
-
-	@Override
-	public List<Enchere> findByCategorie(Integer noCategorie) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public List<Enchere> findByNomArticle(String nomArticle) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
     
     
- /*   @Override
+   @Override
     public List<Enchere> findByCategorie(Integer noCategorie) throws DALException {
         List<Enchere> result = new ArrayList<>();
-        String query = SELECT + " INNER JOIN Article ON Enchere.noArticle = Article.noArticle WHERE Article.noCategorie = ?";
-        
+        String query = SELECT + " WHERE a.no_categorie = ?";
+
         try (Connection con = ConnectionProvider.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setInt(1, noCategorie);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+            	Categorie categorie = new Categorie(
+            			rs.getInt("no_categorie"),
+            			rs.getString("libelle")
+            			);
+            	Utilisateur utilisateur = new Utilisateur(
+            			rs.getInt("no_utilisateur"),
+            			rs.getString("pseudo"),
+            			rs.getString("nom"),
+            			rs.getString("prenom"),
+            			rs.getString("email"),
+            			rs.getString("telephone"),
+            			rs.getString("rue"),
+            			rs.getString("code_postal"),
+            			rs.getString("ville"),
+            			rs.getString("mot_de_passe"),
+            			rs.getInt("credit"),
+            			rs.getBoolean("administrateur")
+            			);
+            	ArticleVendu article = new ArticleVendu(
+            			rs.getInt("no_article"),
+            			rs.getString("nom_article"),
+            			rs.getString("description"),
+            			rs.getDate("date_debut_encheres").toLocalDate(),
+            			rs.getDate("date_fin_encheres").toLocalDate(),
+            			rs.getInt("prix_initial"),
+            			rs.getInt("prix_vente"),
+            			utilisateur,
+            			categorie,
+            			null	//TODO : ajouter Retrait
+            			);
                 Enchere enchere = new Enchere(
-                    rs.getInt("noUtilisateur"),
-                    rs.getInt("noArticle"),
-                    rs.getTimestamp("dateEnchere").toLocalDateTime(),
-                    rs.getInt("montantEnchere")
-                );
-                enchere.setnoEnchere(rs.getInt("noEnchere"));
+                		rs.getInt("no_enchere"),
+                		utilisateur,
+                        article,
+                        rs.getTimestamp("date_enchere").toLocalDateTime(),
+                        rs.getInt("montant_enchere")
+                        );
                 result.add(enchere);
             }
         } catch (SQLException e) {
             throw new DALException("ms_findByCategorie");
         }
+        System.out.println(result);
         return result;
     }
 
-<<<<<<< HEAD
+
     @Override
     public List<Enchere> findByNomArticle(String nomArticle) throws DALException {
         List<Enchere> result = new ArrayList<>();
-        String query = SELECT + " INNER JOIN Article ON Enchere.noArticle = Article.noArticle WHERE Article.nomArticle = ?";
-        
+        String query = SELECT + " WHERE a.nom_article LIKE ?";
         try (Connection con = ConnectionProvider.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, nomArticle);
+            stmt.setString(1,"%" + nomArticle +"%" );
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+            	Categorie categorie = new Categorie(
+            			rs.getInt("no_categorie"),
+            			rs.getString("libelle")
+            			);
+            	Utilisateur utilisateur = new Utilisateur(
+            			rs.getInt("no_utilisateur"),
+            			rs.getString("pseudo"),
+            			rs.getString("nom"),
+            			rs.getString("prenom"),
+            			rs.getString("email"),
+            			rs.getString("telephone"),
+            			rs.getString("rue"),
+            			rs.getString("code_postal"),
+            			rs.getString("ville"),
+            			rs.getString("mot_de_passe"),
+            			rs.getInt("credit"),
+            			rs.getBoolean("administrateur")
+            			);
+            	ArticleVendu article = new ArticleVendu(
+            			rs.getInt("no_article"),
+            			rs.getString("nom_article"),
+            			rs.getString("description"),
+            			rs.getDate("date_debut_encheres").toLocalDate(),
+            			rs.getDate("date_fin_encheres").toLocalDate(),
+            			rs.getInt("prix_initial"),
+            			rs.getInt("prix_vente"),
+            			utilisateur,
+            			categorie,
+            			null	//TODO : ajouter Retrait
+            			);
                 Enchere enchere = new Enchere(
-                    rs.getInt("noUtilisateur"),
-                    rs.getInt("noArticle"),
-                    rs.getTimestamp("dateEnchere").toLocalDateTime(),
-                    rs.getInt("montantEnchere")
-                );
-                enchere.setnoEnchere(rs.getInt("noEnchere"));
+                		rs.getInt("no_enchere"),
+                		utilisateur,
+                        article,
+                        rs.getTimestamp("date_enchere").toLocalDateTime(),
+                        rs.getInt("montant_enchere")
+                        );
                 result.add(enchere);
             }
         } catch (SQLException e) {
+        	e.printStackTrace();
             throw new DALException("ms_findByNomArticle");
         }
         return result;
-    }*/
+    }
 
 
    
