@@ -35,6 +35,7 @@ public class VenteArticleServlet extends HttpServlet {
 		
 		String nomArticle = request.getParameter("nomArticle");
 		String descriptionArticle = request.getParameter("description");
+		Integer noCategorie = Integer.parseInt(request.getParameter("categorie"));
 		String libelleCategorie = request.getParameter("categorie");
 		Integer prixInitial = Integer.parseInt(request.getParameter("miseAPrix"));
 		LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"));
@@ -45,13 +46,13 @@ public class VenteArticleServlet extends HttpServlet {
 		
 		
 		Retrait retrait = new Retrait(rue, codePostal, ville);
-		Categorie categorie = new Categorie(libelleCategorie);
+		Categorie categorie = new Categorie(noCategorie, libelleCategorie);
 		
 		ArticleVendu articleVendu = new ArticleVendu(nomArticle, descriptionArticle, dateDebut, dateFin, prixInitial, null, utilisateurInscrit, categorie, retrait);
-		
+		System.out.println(utilisateurInscrit.getNoUtilisateur());
 		try {
 			String action = request.getParameter("action");
-			
+			System.out.println(action);
 			if ("enregistrer".equals(action)) {
 				articleManager.addArticle(articleVendu);
 				enregistrer(request, response);

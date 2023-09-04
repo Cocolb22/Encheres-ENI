@@ -36,10 +36,10 @@
 			            <div class="categories mb-3">
 				            <label for="categorie">Catégorie :</label>
 				            <select id="categorie" name="categorie" class="rounded">
-				                <option value="informatique">Informatique</option>
-				                <option value="vetement">Vetement</option>
-				                <option value="ameublement">Ameublement</option>
-				                <option value="sport&loisiers">Sport et loisirs</option>
+				                <option value="1">Informatique</option>
+				                <option value="2">Vetement</option>
+				                <option value="3">Ameublement</option>
+				                <option value="4">Sport et loisirs</option>
 				            </select>
 		        		</div>
 		

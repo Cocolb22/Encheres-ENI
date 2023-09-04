@@ -32,7 +32,8 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			date_debut_encheres, 
 			date_fin_encheres, 
 			prix_initial,
-			no_categorie) VALUES (?,?,?,?,?,?);
+			no_categorie,
+			no_utilisateur) VALUES (?,?,?,?,?,?,?);
 				""";
 	
 	final String INSERT_RETRAIT = """
@@ -52,11 +53,15 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			stmt.setDate(4, Date.valueOf(article.getDateDebutEncheres()));
 			stmt.setInt(5, article.getPrixInitial());
 			stmt.setInt(6, article.getCategorie().getNoCategorie());
+			stmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
+			stmt.executeUpdate();
 			
 			PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getPointRetrait().getRue());
 			pstmt.setString(2, article.getPointRetrait().getCodePostal());
-			pstmt.setString(1, article.getPointRetrait().getVille());
+			pstmt.setString(3, article.getPointRetrait().getVille());
+			
+			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
