@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
+
+import fr.eni.encheres.bll.categories.CategorieManager;
+import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
 import fr.eni.encheres.bo.model.ArticleVendu;
@@ -17,12 +20,21 @@ import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.bundles.BusinessException;
 
+
 public class VenteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private VenteArticleManager articleManager = VenteArticleManagerSing.getInstance();
+	private CategorieManager managerCategorie = CategorieManagerSing.getInstance();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		List<Categorie> categorie = new ArrayList<>();
+		try {
+			categorie = managerCategorie.getAll();
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("categorie", categorie);
 		request.getRequestDispatcher("/WEB-INF/VenteArticle.jsp").forward(request, response);
 
 	}

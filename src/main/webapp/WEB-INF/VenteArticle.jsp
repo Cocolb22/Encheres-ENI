@@ -36,10 +36,9 @@
 			            <div class="categories mb-3">
 				            <label for="categorie">Catégorie :</label>
 				            <select id="categorie" name="categorie" class="rounded">
-				                <option value="1">Informatique</option>
-				                <option value="2">Vetement</option>
-				                <option value="3">Ameublement</option>
-				                <option value="4">Sport et loisirs</option>
+				                <c:forEach items="${categorie}" var="lstCategorie"> 
+	                        <option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+	                      </c:forEach>
 				            </select>
 		        		</div>
 		
