@@ -3,6 +3,7 @@ package fr.eni.encheres.bll.gestionEncheres;
 import java.util.List;
 
 import fr.eni.encheres.bll.util.BLLException;
+import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Enchere;
 
 
@@ -16,6 +17,7 @@ public interface EnchereManager {
 	
 	public List<Enchere> findByNomArticle(String nomArticle) throws BLLException;
 		
-	
+	public Integer meilleureOffre(Integer prixPropose) throws BLLException;
 
+	public Integer getMontantMax(ArticleVendu article) throws BLLException;
 }

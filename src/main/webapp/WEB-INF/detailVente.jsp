@@ -22,7 +22,7 @@
 
 	<jsp:include page="Header.jsp" />
 
-	<h1>Detail vente</h1>
+	<h1>Détail vente</h1>
 
 	<div class="container detail">
 
@@ -36,7 +36,7 @@
 			<h4>Catégorie: ${ articleVendu.categorie.libelle }</h4>
 		</div>
 		<div class="mb-2">
-			<h4>Meilleure offre:</h4>
+			<h4>Meilleure offre: ${enchere.montantEnchere}</h4>
 		</div>
 		<div class="mb-2">
 			<h4>Mise à prix: ${ articleVendu.prixInitial }</h4>
@@ -52,17 +52,16 @@
 		<div class="mb-2">
 			<h4>Vendeur: ${ articleVendu.utilisateur.pseudo }</h4>
 		</div>
-		<div class="mb-2">
-			<label for="propositionPrix" class="form-label form-label-sm">Ma proposition</label>
-			<input type="number" step="10" min="0" id="propositionPrix" name="propositionPrix" class="form-control" required>
-		</div>
-		<div>
-			<a class="nav-link active" aria-current="page" href="DetailVenteServlet?action=encherir">Enchérir</a>
-		</div>
-
-
-
-
+		<form action="DetailVenteServlet" method="post">
+			<div class="mb-2">
+				<label for="propositionPrix" class="form-label form-label-sm">Ma proposition :</label> 
+				<input type="number" step="10" min="0"
+					id="propositionPrix" name="propositionPrix" class="form-control" required>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary m-2" name="encherir">Enchérir</button>
+			</div>
+		</form>
 	</div>
 
 
