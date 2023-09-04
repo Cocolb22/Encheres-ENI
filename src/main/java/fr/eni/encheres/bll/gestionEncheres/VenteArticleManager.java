@@ -9,5 +9,6 @@ public interface VenteArticleManager {
 	
 	public void addArticle(ArticleVendu article) throws BusinessException;
 	public List<ArticleVendu> getAllArticles() throws BusinessException;
+	public ArticleVendu getArticleById(Integer noArticle) throws BusinessException;
 
 }

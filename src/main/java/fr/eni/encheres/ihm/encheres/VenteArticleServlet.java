@@ -1,6 +1,7 @@
 package fr.eni.encheres.ihm.encheres;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,12 +9,14 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
+import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
 import fr.eni.encheres.bo.model.Retrait;

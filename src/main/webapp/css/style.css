@@ -4,16 +4,13 @@ body{
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	
+  cursor: url('https://m.media-amazon.com/images/I/41FQJUt9SbL.__AC_SX300_SY300_QL70_ML2_.jpg'),auto;
 }
 
 .header{
 	display: flex;
     justify-content: space-between;
-}
-
-.title{
-	color: blueviolet;
-	text-align: center;
 }
 
  .login {
@@ -58,12 +55,12 @@ body{
 }
 
 .transparent-card {
-    background-color: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
-    padding: 20px; /* Espacement interne */
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px; 
     margin: 60px;
     border-radius: 20px;
     font-weight: bold;
-	}
+}
 
 #categorie {
 	height: 30px;
