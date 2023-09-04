@@ -5,8 +5,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
@@ -14,6 +17,7 @@ import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
+import fr.eni.encheres.bo.model.Enchere;
 
 
 public class HomePageServlet extends HttpServlet {
@@ -36,7 +40,7 @@ public class HomePageServlet extends HttpServlet {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-        		categorie = managerCategorie.getAll();
+        		categorie =  managerCategorie.getAll();
             	modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
             	e.printStackTrace();
@@ -52,13 +56,29 @@ public class HomePageServlet extends HttpServlet {
 		
     	List<Categorie> categorie = new ArrayList<>();
     	EnchereModel modelEnchere = new EnchereModel();
+    	Object sessionUser = request.getSession().getAttribute("utilisateurInscrit");
+
    
     	if(request.getParameter("BT_SELECT_CATEGORIE") != null) {
     		if(request.getParameter("categorie") != null && request.getParameter("nomArticle").equals("")) {
     			
 	            try {
+	            	
 	            	categorie = managerCategorie.getAll();	            
-	            	modelEnchere.setLstEnchere(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))));
+	            	
+	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
+	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
+	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
+	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+	            			sessionUser));
+	            	}else {
+	            		modelEnchere.setLstEnchere(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))));
+	            	}
+	            	
 	            }catch(BLLException e){
 	            	e.printStackTrace();
 	            	modelEnchere.setMessage("zut alors");
@@ -67,8 +87,21 @@ public class HomePageServlet extends HttpServlet {
     		}else if(!request.getParameter("nomArticle").equals("") ) {
     		
 	    		try {
+	    			
 	            	categorie = managerCategorie.getAll();
-	            	modelEnchere.setLstEnchere(managerEnchere.findByNomArticle(request.getParameter("nomArticle")));
+	            	
+	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
+	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByNomArticle(request.getParameter("nomArticle")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
+	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
+	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+	            			sessionUser));
+	            	}else {
+	            		modelEnchere.setLstEnchere(managerEnchere.findByNomArticle(request.getParameter("nomArticle")));
+	            	}
 	            }catch(BLLException e){
 	            	e.printStackTrace();
 	            	modelEnchere.setMessage("zut alors");
@@ -77,20 +110,36 @@ public class HomePageServlet extends HttpServlet {
     		}else {
     		
 	    		try {
-	            	categorie = managerCategorie.getAll();
-	            	modelEnchere.setLstEnchere(managerEnchere.getAll());
+
+		            	categorie = managerCategorie.getAll();
+		            	
+		            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
+		            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.getAll(),
+		            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
+		            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
+		            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
+		            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
+		            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
+		            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+		            			sessionUser));
+		            	}else {
+		            		modelEnchere.setLstEnchere(managerEnchere.getAll());
+		            	}
+	            	
 	            }catch(BLLException e){
 	            	e.printStackTrace();
 	            	modelEnchere.setMessage("zut alors");
 	            }
     		}
+    		
     	
 	        request.setAttribute("categorie", categorie);
 	        request.setAttribute("modelEnchere", modelEnchere);
 			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-    	}
+        	}
+        }
 		
-	}
+	
 
 	private void inscription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/InscriptionForm.jsp").forward(request, response);

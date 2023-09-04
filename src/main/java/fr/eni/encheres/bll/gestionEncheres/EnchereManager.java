@@ -15,6 +15,17 @@ public interface EnchereManager {
 	public List<Enchere> findByCategorie(Integer noCategorie) throws BLLException;
 	
 	public List<Enchere> findByNomArticle(String nomArticle) throws BLLException;
+	
+	public List<Enchere> filtrer(List<Enchere> lst,
+			boolean achatEnchereOuverte,
+			boolean achatEnchereEnCours,
+			boolean encheresParticipees,
+			boolean encheresGagnees,
+			boolean venteEnchereDebutes,
+			boolean VenteEnchereTermines,
+			Object sessionUser) throws BLLException;
+	
+
 		
 	
 

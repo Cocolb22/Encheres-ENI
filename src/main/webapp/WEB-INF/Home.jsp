@@ -44,54 +44,68 @@ function updateCheckboxes(column) {
 <jsp:include page="Header.jsp"/>
 
 <div style="text-align: center; padding-top: 20px"><h1>Liste des enchères</h1> </div>
+	<div class="container transparent-card d-flex justify-content-center">
+		<div class="p-2 ">
+			<form action="HomePageServlet" method="post" >
+			<div class=" d-flex flex-row">
+				<div class="p-2">
+					<label for="recherche"><h3>Rechercher :</h3></label> <input type="text"
+						id="recherche" name="nomArticle"
+						placeholder="Entrez votre recherche">
+				</div>
 
-	<div class="filters mt-5">
-	    <form action="HomePageServlet" method="post" style="display: flex">
-	        <div style="margin: 10px">
-	            <label for="recherche">Rechercher :</label>
-	            <input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
-	        </div>
-	        
-	        <div class="categories">
-	            <label for="categorie">Catégorie :</label>
-	            <select id="categorie" name="categorie">
-					<c:forEach items="${categorie}" var="lstCategorie"> 
-	                <option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
-	                </c:forEach>
-	                
-	            </select>
-	        </div>
-	        
-	        <div>
-	            <button type="submit" class="submit" name="BT_SELECT_CATEGORIE" value="recherche" style="margin: 10px">Rechercher</button>
-	        </div>
-	    </form>
+				<div class="p-2">
+					<label for="categorie"><h3>Catégorie :</h3></label> <select id="categorie"
+						name="categorie">
+						<c:forEach items="${categorie}" var="lstCategorie">
+							<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+						</c:forEach>
+
+					</select>
+				</div>
+			</div>
+				<c:if test="${utilisateurInscrit != null}">
+
+					<div class="btn-group-vertical  d-flex " role="group"
+						aria-label="Basic checkbox toggle button group">
+						<div class="col achat grid p-2">
+							<h3>Achat :</h3>
+							<label class="btn  checkbox-label"><input value="true"
+								name="achatEnchereOuverte" type="checkbox"
+								onchange="updateCheckboxes('achat')">Enchères ouvertes</label>
+							<label class="btn  checkbox-label"><input value="true"
+								name="achatEnchereEnCours" type="checkbox"
+								onchange="updateCheckboxes('achat')">En cours</label>
+							<label class="btn  checkbox-label"><input value="true"
+								name="achatEnchereRemportées" type="checkbox"
+								onchange="updateCheckboxes('achat')">Remportées</label>
+						</div>
+						<div class="col vente grid p-2">
+							<h3>Vente :</h3>
+							<label class="btn  checkbox-label"><input value="true"
+								name="venteEnchereEnCours" type="checkbox"
+								onchange="updateCheckboxes('vente')">En cours</label> <label
+								class="btn  checkbox-label"><input value="true"
+								name="venteEnchereDebutes" type="checkbox"
+								onchange="updateCheckboxes('vente')">Débutées</label> <label
+								class="btn  checkbox-label"><input value="true"
+								name="VenteEnchereTermines" type="checkbox"
+								onchange="updateCheckboxes('vente')">Terminées</label>
+						</div>
+					</div>
+				</c:if>
+		</div>
+						<div class="d-flex flex-column justify-content-center p-4">
+					<button type="submit" class="btn btn-primary btn-lg" name="BT_SELECT_CATEGORIE"
+						value="recherche" style="margin: 10px">Rechercher</button>
+				</div>
+			</form>
 	</div>
 
 
-<c:if test="${utilisateurInscrit != null}">
 
-<div class="container transparent-card d-flex flex-column align-items-center justify-content-center text-align-center">
-    <div class="btn-group-vertical d-flex flex-row" role="group" aria-label="Basic checkbox toggle button group">
-        <div class="col achat grid"> 
-            <h3>Achat</h3>
-            <label class="btn  checkbox-label"><input name="achatEnchereOuverte" type="checkbox" onchange="updateCheckboxes('achat')" >Enchères ouvertes</label>
-            <label class="btn  checkbox-label"><input name="achatEnchereEnCours" type="checkbox" onchange="updateCheckboxes('achat')" >En cours</label>
-            <label class="btn  checkbox-label"><input name="achatEnchereRemportées" type="checkbox" onchange="updateCheckboxes('achat')" >Remportées</label>
-        </div>
-        <div class="col vente grid"> 
-            <h3>Vente</h3>
-            <label class="btn  checkbox-label"><input name="venteEnchereEnCours" type="checkbox" onchange="updateCheckboxes('vente')" >En cours</label>
-            <label class="btn  checkbox-label"><input name="venteEnchereDebutes" type="checkbox" onchange="updateCheckboxes('vente')" >Débutées</label>
-            <label class="btn  checkbox-label"><input name="VenteEnchereTermines" type="checkbox" onchange="updateCheckboxes('vente')" >Terminées</label>
-        </div>
-    </div>
-    
-</div>
- </c:if>
-
-
-<div class="card">
+<div class="container d-flex flex_column">
+	<div class="card">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
         <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">        
@@ -114,7 +128,7 @@ function updateCheckboxes(column) {
         </div>
     </div>
 </div> 
-
+</div>
 
 </body>
 </html>

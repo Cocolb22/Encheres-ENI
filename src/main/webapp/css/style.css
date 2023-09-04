@@ -29,10 +29,7 @@ body{
 }
 
 
-.filters {
-	display: flex;
-    justify-content: center;
-}
+
 
 .submit {
 	text-align: center;
@@ -44,7 +41,6 @@ body{
 	width: 600px; 
 	height: 300px;
 	display: flex;
-	margin: 20px;
 	align-items: center;
 }
 
@@ -85,6 +81,6 @@ body{
 
 }
 
-.grid {
+/*.grid {
     display: contents;
-}
+}*/

@@ -1,8 +1,11 @@
 package fr.eni.encheres.bll.gestionEncheres;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Enchere;
@@ -14,7 +17,7 @@ import fr.eni.encheres.dal.util.DALException;
 
 public class EnchereManagerImpl implements EnchereManager {
 	
-	private EnchereDAO dao = DAOFact.getEnchereDAO();
+	private EnchereDAO daoEnchere = DAOFact.getEnchereDAO();
 	
 
 	@Override
@@ -27,7 +30,7 @@ public class EnchereManagerImpl implements EnchereManager {
 			throw new BLLException("ms_mauvaiseoffre");
 		}
 		try{
-			dao.insert(enchere);
+			daoEnchere.insert(enchere);
 		}catch(DALException e ) {
 			throw new BLLException("ms_add");
 		}
@@ -36,7 +39,7 @@ public class EnchereManagerImpl implements EnchereManager {
 	@Override
 	public List<Enchere> getAll() throws BLLException {
 		try{
-			return dao.getAll();
+			return daoEnchere.getAll();
 		}catch(DALException e) {
 			e.printStackTrace();
 			throw new BLLException("ms_getall");
@@ -47,7 +50,7 @@ public class EnchereManagerImpl implements EnchereManager {
 	@Override
 	public List<Enchere> findByCategorie(Integer noCategorie) throws BLLException {
 		try{
-			return dao.findByCategorie(noCategorie);
+			return daoEnchere.findByCategorie(noCategorie);
 		}catch(DALException e) {
 			e.printStackTrace();
 			throw new BLLException("ms_getall");
@@ -57,12 +60,43 @@ public class EnchereManagerImpl implements EnchereManager {
 	@Override
 	public List<Enchere> findByNomArticle(String nomArticle) throws BLLException {
 		try{
-			return dao.findByNomArticle(nomArticle);
+			return daoEnchere.findByNomArticle(nomArticle);
 		}catch(DALException e) {
 			e.printStackTrace();
 			throw new BLLException("ms_getall");
 		}
 	}
+
+	public List<Enchere> filtrer(List<Enchere> lst, boolean achatEnchereOuverte, boolean achatEnchereEnCours,
+			boolean encheresParticipees, boolean encheresGagnees, boolean venteEnchereDebutes,
+			boolean VenteEnchereTermines, Object sessionUser) throws BLLException {
+		Stream<Enchere> stream = lst.stream();
+		
+		if(achatEnchereOuverte) {
+			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()));
+		}
+		if(achatEnchereEnCours) {
+			stream = stream.filter(enchere -> enchere.getEnchereur().equals(sessionUser) && enchere.getEnchereur().equals(sessionUser));
+		}
+		if(encheresParticipees) {
+			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) && enchere.getEnchereur().equals(sessionUser));
+		}
+		if(encheresGagnees) {
+			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getPseudo().equals(sessionUser));
+		}
+		if(venteEnchereDebutes) {
+			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getPseudo().equals(sessionUser));
+		}
+		if(VenteEnchereTermines) {
+			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getPseudo().equals(sessionUser));
+		}
+
+		return stream.toList();
+		
+		
+	}
+
+
 
 
 }
