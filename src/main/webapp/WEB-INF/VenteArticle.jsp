@@ -37,8 +37,8 @@
 				            <label for="categorie">Catégorie :</label>
 				            <select id="categorie" name="categorie" class="rounded">
 				                <c:forEach items="${categorie}" var="lstCategorie"> 
-	                <option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
-	                </c:forEach>
+	                        <option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+	                      </c:forEach>
 				            </select>
 		        		</div>
 		
@@ -47,15 +47,15 @@
 			                    <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
 			            </div>
 			             <div class="mb-3">
-			                <label for="description" class="form-label form-label-sm">Mise à prix</label>
+			                <label for="miseAPrix" class="form-label form-label-sm">Mise à prix</label>
 			               <input type="number" step="10" min="0" id="miseAPrix" name="miseAPrix" class="form-control" required>
 			            </div>
 			             <div class="mb-3">
-			                <label for="description" class="form-label form-label-sm">Date de début de l'enchère</label>
-			               <input type="date" id="dateDébut" name="dateDébut" class="form-control" required>
+			                <label for="dateDebut" class="form-label form-label-sm">Date de début de l'enchère</label>
+			               <input type="date" id="dateDebut" name="dateDebut" class="form-control" required>
 			            </div>
 			            <div class="mb-3">
-			                <label for="description" class="form-label form-label-sm">Date de fin de l'enchère</label>
+			                <label for="dateFin" class="form-label form-label-sm">Date de fin de l'enchère</label>
 			               <input type="date" id="dateFin" name="dateFin" class="form-control" required>
 			            </div>
 			        </div>    
