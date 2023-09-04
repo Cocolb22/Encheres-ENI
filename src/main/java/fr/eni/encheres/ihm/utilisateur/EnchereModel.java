@@ -1,12 +1,12 @@
 package fr.eni.encheres.ihm.utilisateur;
 
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.bo.model.ArticleVendu;
+
 import fr.eni.encheres.bo.model.Enchere;
-import fr.eni.encheres.bo.model.Utilisateur;
+
 
 public class EnchereModel {
 
