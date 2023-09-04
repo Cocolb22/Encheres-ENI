@@ -16,8 +16,6 @@ public class VenteArticleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateurInscrit");
-		
 		request.getRequestDispatcher("/WEB-INF/VenteArticle.jsp").forward(request, response);
 
 	}

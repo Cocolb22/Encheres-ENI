@@ -6,16 +6,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
+import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
+import fr.eni.encheres.bo.model.Enchere;
 
 /**
  * Servlet implementation class DetailVenteServlet
  */
 public class DetailVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
+	private EnchereManager manager = EnchereManagerSing.getInstance();
+	
+	 private List<Enchere> lstEnchere = new ArrayList<>();
+	
+	
     public DetailVenteServlet() {
         super();
         // TODO Auto-generated constructor stub
