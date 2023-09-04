@@ -102,7 +102,7 @@ function updateCheckboxes(column) {
 	         <div class="col-md-8">
 	            <div class="card-body">
 	            	<%-- <c:forEach items="${enchere.articleVendu}" var="article">  --%>
-	                    <h5 class="card-title"><a href=""> ${enchere.articleVendu.nomArticle}</a></h5>
+	                    <h5 class="card-title"> <a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}"> ${enchere.articleVendu.nomArticle}</a></h5>
 	               	<%-- </c:forEach> --%>
 	                    <p class="card-text">Prix : ${enchere.montantEnchere} points</p>
 	                    <p class="card-text"><small class="text-body-secondary">Fin de l'enchère: ${enchere.articleVendu.dateFinEncheres}</small></p>
