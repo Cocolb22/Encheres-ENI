@@ -53,9 +53,12 @@
 			<h4>Vendeur: ${ articleVendu.utilisateur.pseudo }</h4>
 		</div>
 		<div class="mb-2">
-			<h4>Ma proposition:</h4>
+			<label for="propositionPrix" class="form-label form-label-sm">Ma proposition</label>
+			<input type="number" step="10" min="0" id="propositionPrix" name="propositionPrix" class="form-control" required>
 		</div>
-
+		<div>
+			<a class="nav-link active" aria-current="page" href="DetailVenteServlet?action=encherir">Enchérir</a>
+		</div>
 
 
 
