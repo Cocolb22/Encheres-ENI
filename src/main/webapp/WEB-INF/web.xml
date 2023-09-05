@@ -64,4 +64,24 @@
     <servlet-name>UtilisateurServlet</servlet-name>
     <url-pattern>/UtilisateurServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DetailVente</display-name>
+    <servlet-name>DetailVente</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.DetailVente</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailVente</servlet-name>
+    <url-pattern>/DetailVente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DetailVenteServlet</display-name>
+    <servlet-name>DetailVenteServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.DetailVenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailVenteServlet</servlet-name>
+    <url-pattern>/DetailVenteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

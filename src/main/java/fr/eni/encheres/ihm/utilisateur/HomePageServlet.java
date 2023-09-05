@@ -21,13 +21,11 @@ import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
 import fr.eni.encheres.bo.model.Enchere;
 
-
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EnchereManager managerEnchere = EnchereManagerSing.getInstance();
 	private CategorieManager managerCategorie = CategorieManagerSing.getInstance();
-	
-  
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     	String action = request.getParameter("action");
@@ -156,21 +154,21 @@ public class HomePageServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
         	}
         }
-		
-	
 
-	private void inscription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void inscription(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/InscriptionForm.jsp").forward(request, response);
-		
+
 	}
-	
+
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/LoginForm.jsp").forward(request, response);
-		
+
 	}
-	
-	private void deconnexion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	private void deconnexion(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getSession().invalidate();
-    	request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 	}
 }

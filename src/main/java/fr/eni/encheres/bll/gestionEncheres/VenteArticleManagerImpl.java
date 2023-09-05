@@ -101,4 +101,10 @@ public class VenteArticleManagerImpl implements VenteArticleManager {
 			be = new BusinessException(30009);
 		};
 	}
+
+	@Override
+	public ArticleVendu getArticleById(Integer noArticle) throws BusinessException {
+		
+			return dao.getArticleById(noArticle);
+	}
 }
