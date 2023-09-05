@@ -4,8 +4,7 @@ body{
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	
-  cursor: url('https://m.media-amazon.com/images/I/41FQJUt9SbL.__AC_SX300_SY300_QL70_ML2_.jpg'),auto;
+
 }
 
 .header{
@@ -26,7 +25,10 @@ body{
 }
 
 
-
+.filters {
+	display: flex;
+    justify-content: center;
+}
 
 .submit {
 	text-align: center;
@@ -38,6 +40,7 @@ body{
 	width: 600px; 
 	height: 300px;
 	display: flex;
+	margin: 20px;
 	align-items: center;
 }
 
@@ -78,6 +81,22 @@ body{
 
 }
 
-/*.grid {
+.grid {
     display: contents;
-}*/
+}
+
+.a-title{
+	text-decoration: none !important;
+	color: black;
+}
+
+.card {
+  	box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+  	transition: all .3s ease;
+}
+
+.card:hover {
+	transform: translate3D(0,-1px,0) scale(1.03);
+  	box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+  	transition: all .3s ease; 
+}

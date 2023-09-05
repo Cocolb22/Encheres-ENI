@@ -28,13 +28,15 @@
 	      </c:if>
 		    
 	        <form action="LoginServlet" method="post">
-	            <div class="mb-3">
-	                <label for="pseudo" class="form-label">Pseudo</label>
-	                <input type="text" id="pseudo" name="pseudo" class="form-control" required>
-	            </div>
-	            <div class="mb-3">
-	                <label for="motDePasse" class="form-label">Mot de passe</label>
-	                <input type="password" id="motDePasse" name="motDePasse" class="form-control" required>
+	        	<div class="row">
+		            <div class="col-md-6 p-3">
+		                <label for="pseudo" class="form-label">Pseudo :</label>
+		                <input type="text" id="pseudo" name="pseudo" class="form-control" required>
+		            </div>
+		            <div class="col-md-6 p-3">
+		                <label for="motDePasse" class="form-label">Mot de passe: </label>
+		                <input type="password" id="motDePasse" name="motDePasse" class="form-control" required>
+		            </div>
 	            </div>
 	            <div class="d-flex justify-content-center align-items-center">
 	             	<button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center">Connexion</button>

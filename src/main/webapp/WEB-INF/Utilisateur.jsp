@@ -18,7 +18,7 @@
 
 <jsp:include page="Header.jsp"/>
 
-<div class="container transparent-card">
+<div class="container transparent-card" style="max-width:750px">
 
 	<h1> Bonjour ${utilisateurInscrit.pseudo }</h1>
   

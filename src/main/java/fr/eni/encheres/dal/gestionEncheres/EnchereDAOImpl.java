@@ -7,7 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
@@ -104,7 +108,29 @@ public class EnchereDAOImpl implements EnchereDAO {
         	e.printStackTrace();
             throw new DALException("ms_getall");
         }
-        return result;
+		
+		
+
+		Comparator<Enchere> dateComparator = Comparator.comparing(Enchere::getDateEnchere);
+		
+		// Trie de la liste d'enchères par date en ordre décroissant
+		List<Enchere> enchereTrieParDate = result.stream()
+		    .sorted(dateComparator.reversed()) 
+		    .collect(Collectors.toList());
+
+		//Set pour stocker les numéros d'articles sans doublons
+		Set<Integer> noArticlesUniques = new HashSet<>();
+		List<Enchere> dernieresEncheresSansDoublon = new ArrayList<>();
+
+		// Parcoure des enchères trié par date et ajout des enchères correspondant aux articles uniques
+		for (Enchere enchere : enchereTrieParDate) {
+		    int noArticle = enchere.getArticleVendu().getNoArticle();
+		    if (!noArticlesUniques.contains(noArticle)) {
+		        dernieresEncheresSansDoublon.add(enchere);
+		        noArticlesUniques.add(noArticle);
+		    }
+		}
+        return dernieresEncheresSansDoublon;
     }
 
 
@@ -162,8 +188,26 @@ public class EnchereDAOImpl implements EnchereDAO {
         } catch (SQLException e) {
             throw new DALException("ms_findByCategorie");
         }
-        System.out.println(result);
-        return result;
+		Comparator<Enchere> dateComparator = Comparator.comparing(Enchere::getDateEnchere);
+		
+		// Trie de la liste d'enchères par date en ordre décroissant
+		List<Enchere> enchereTrieParDate = result.stream()
+		    .sorted(dateComparator.reversed()) 
+		    .collect(Collectors.toList());
+
+		//Set pour stocker les numéros d'articles sans doublons
+		Set<Integer> noArticlesUniques = new HashSet<>();
+		List<Enchere> dernieresEncheresSansDoublon = new ArrayList<>();
+
+		// Parcoure des enchères trié par date et ajout des enchères correspondant aux articles uniques
+		for (Enchere enchere : enchereTrieParDate) {
+		    int noArticle = enchere.getArticleVendu().getNoArticle();
+		    if (!noArticlesUniques.contains(noArticle)) {
+		        dernieresEncheresSansDoublon.add(enchere);
+		        noArticlesUniques.add(noArticle);
+		    }
+		}
+        return dernieresEncheresSansDoublon;
     }
 
 
@@ -219,7 +263,26 @@ public class EnchereDAOImpl implements EnchereDAO {
         	e.printStackTrace();
             throw new DALException("ms_findByNomArticle");
         }
-        return result;
+		Comparator<Enchere> dateComparator = Comparator.comparing(Enchere::getDateEnchere);
+		
+		// Trie de la liste d'enchères par date en ordre décroissant
+		List<Enchere> enchereTrieParDate = result.stream()
+		    .sorted(dateComparator.reversed()) 
+		    .collect(Collectors.toList());
+
+		//Set pour stocker les numéros d'articles sans doublons
+		Set<Integer> noArticlesUniques = new HashSet<>();
+		List<Enchere> dernieresEncheresSansDoublon = new ArrayList<>();
+
+		// Parcoure des enchères trié par date et ajout des enchères correspondant aux articles uniques
+		for (Enchere enchere : enchereTrieParDate) {
+		    int noArticle = enchere.getArticleVendu().getNoArticle();
+		    if (!noArticlesUniques.contains(noArticle)) {
+		        dernieresEncheresSansDoublon.add(enchere);
+		        noArticlesUniques.add(noArticle);
+		    }
+		}
+        return dernieresEncheresSansDoublon;
     }
 
 
