@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,12 @@
 <title>Detail vente</title>
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/style.css">
+	href="${pageContext.request.contextPath}/css/detailVente.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/couleurs.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
 	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
@@ -22,49 +24,67 @@
 
 	<jsp:include page="Header.jsp" />
 
-	<h1>Detail vente</h1>
+	<h1 class="detail">Détail vente</h1>
 
-	<div class="container detail">
+	<div class="container transparent-card p-4" style="max-width: 750px;">
 
-		<div class="mb-2">
-			<h4>Article: ${ articleVendu.nomArticle }</h4>
+		<div class="mb-3 ps-2 element">
+			<p><<span style="font-weight: bold;">Article :</span>  ${ articleVendu.nomArticle }</p>
 		</div>
-		<div class="mb-2">
-			<h4>Description: ${ articleVendu.description }</h4>
+		<div class="mb-3 ps-2 element">
+			<p><span style="font-weight: bold;">Description :</span>  ${ articleVendu.description }</p>
 		</div>
-		<div class="mb-2">
-			<h4>Catégorie: ${ articleVendu.categorie.libelle }</h4>
+		<div class="mb-3 ps-2 element">
+			<p><span style="font-weight: bold;">Catégorie :</span>  ${ articleVendu.categorie.libelle }</p>
 		</div>
-		<div class="mb-2">
-			<h4>Meilleure offre:</h4>
+		<div class="mb-3 ps-2 element">
+		<p><span style="font-weight: bold;">Meilleure offre :</span> </p>
 		</div>
-		<div class="mb-2">
-			<h4>Mise à prix: ${ articleVendu.prixInitial }</h4>
+		<div class="mb-3 ps-2 element">
+		<p><span style="font-weight: bold;">Mise à prix :</span>  ${ articleVendu.prixInitial } points</p>
 		</div>
-		<div class="mb-2">
-			<h4>Fin de l'enchère: ${ articleVendu.dateFinEncheres }</h4>
+		<div class="mb-5 ps-2 element">
+			<p><span style="font-weight: bold;">Fin de l'enchère:</span>  ${ articleVendu.dateFinEncheres }</p>
 		</div>
-		<div class="mb-2">
-			<h4>Retrait: ${ articleVendu.pointRetrait.rue }</h4>
-			<h4>Retrait: ${ articleVendu.pointRetrait.codePostal }</h4>
-			<h4>Retrait: ${ articleVendu.pointRetrait.ville }</h4>
+		<div class="mb-3 mt-4 ps-2 element retrait">
+			<p class=titre-retrait><span style="font-weight: bold;">Retrait </p>
+			<div class="p-3">
+				<p><span style="font-weight: bold;">Rue:</span> ${articleVendu.pointRetrait.rue}</p>
+				<p><span style="font-weight: bold;">Code Postal:</span> ${articleVendu.pointRetrait.codePostal}</p>
+				<p><span style="font-weight: bold;">Ville:</span> ${articleVendu.pointRetrait.ville}</p>
+			</div>
 		</div>
-		<div class="mb-2">
-			<h4>Vendeur: ${ articleVendu.utilisateur.pseudo }</h4>
-		</div>
-		<div class="mb-2">
-			<label for="propositionPrix" class="form-label form-label-sm">Ma proposition</label>
-			<input type="number" step="10" min="0" id="propositionPrix" name="propositionPrix" class="form-control" required>
-		</div>
-		<div>
-			<a class="nav-link active" aria-current="page" href="DetailVenteServlet?action=encherir">Enchérir</a>
+		<div class="mb-3 ps-2 element">
+			<p><span style="font-weight: bold;">Vendeur :</span> ${ articleVendu.utilisateur.pseudo }</p>
 		</div>
 
 
-
-
+		<div class="container">
+			<div class="row">
+				<c:if test="${utilisateurInscrit != null}">
+					<div class="d-flex justify-content-center text-align-center">
+						<div class="col-sm-6 d-flex justify-content-center ">
+							<label for="propositionPrix" class="form-label form-label-sm m-1 element">Ma
+								proposition</label>
+						</div>
+						<div class="col-sm-6 ">
+							<input type="number" step="10" min="0" id="propositionPrix"
+								name="propositionPrix" class="form-control" required>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-sm-6">
+					<a
+						class="nav-link active btn btn-primary btn-lg btn-block btn-encherir m-2 p-3 "
+						aria-current="page" href="DetailVenteServlet?action=encherir">Enchérir</a>
+				</div>
+			</div>
+		</div>
 	</div>
-
 
 </body>
 </html>

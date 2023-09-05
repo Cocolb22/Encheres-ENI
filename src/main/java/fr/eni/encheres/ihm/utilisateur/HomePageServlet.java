@@ -107,6 +107,19 @@ public class HomePageServlet extends HttpServlet {
 	private void deconnexion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getSession().invalidate();
+		
+		List<Categorie> categorie = new ArrayList<>();
+		EnchereModel modelEnchere = new EnchereModel();
+		try {
+		    categorie = managerCategorie.getAll();
+		    modelEnchere.setLstEnchere(managerEnchere.getAll());
+		} catch (BLLException e) {
+		    e.printStackTrace();
+		    modelEnchere.setMessage("Erreur lors de la récupération des enchères.");
+		}
+		request.setAttribute("categorie", categorie);
+		request.setAttribute("modelEnchere", modelEnchere);
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+
 	}
 }

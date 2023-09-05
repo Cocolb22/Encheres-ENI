@@ -1,0 +1,43 @@
+ body {
+ 	font-family: sans-serif;
+ 	background-image: url('../images/tips-strip-tease-reussi.jpg');
+ 	background-size: cover;
+ 	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+
+ }
+
+ .detail {
+ 	display: flex;
+ 	justify-content: center;
+ 	color: var(--noir);
+ }
+
+ .transparent-card {
+ 	background-color: rgba(255, 255, 255, 0.8);
+ 	padding: 50px;
+ 	margin: 60px;
+ 	border-radius: 20px;
+
+ }
+ 
+ .element {
+	  	font-size: 20px !important;
+ }
+ 
+ .retrait {
+	 border: 0.5px solid var(--noir);
+	 border-radius: 10px;
+	 position: relative;
+ }
+ 
+ .titre-retrait {
+	 position: absolute;
+	 top: -30px;
+ }
+
+ .btn-encherir {
+ 	display: flex;
+ 	align-items: center;
+ 	justify-content: center;
+ }
