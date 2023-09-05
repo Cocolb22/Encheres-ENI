@@ -5,11 +5,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
@@ -38,8 +43,11 @@ public class HomePageServlet extends HttpServlet {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-        		categorie =  managerCategorie.getAll();
-            	modelEnchere.setLstEnchere(managerEnchere.getAll());
+
+
+
+        		categorie = managerCategorie.getAll();
+        		modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
             	e.printStackTrace();
             	modelEnchere.setMessage("zut alors");
