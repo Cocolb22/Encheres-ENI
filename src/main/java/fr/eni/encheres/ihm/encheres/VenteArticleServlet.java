@@ -9,16 +9,21 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
+import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
+import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
+import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.bundles.BusinessException;
@@ -28,6 +33,7 @@ public class VenteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private VenteArticleManager articleManager = VenteArticleManagerSing.getInstance();
 	private CategorieManager managerCategorie = CategorieManagerSing.getInstance();
+	private EnchereManager enchereManager = EnchereManagerSing.getInstance();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Categorie> categorie = new ArrayList<>();
@@ -65,11 +71,18 @@ public class VenteArticleServlet extends HttpServlet {
 		
 		ArticleVendu articleVendu = new ArticleVendu(nomArticle, descriptionArticle, dateDebut, dateFin, prixInitial, null, utilisateurInscrit, categorie, retrait);
 		System.out.println(utilisateurInscrit.getNoUtilisateur());
+		
 		try {
 			String action = request.getParameter("action");
 			System.out.println(action);
 			if ("enregistrer".equals(action)) {
 				articleManager.addArticle(articleVendu);
+				try {
+					Enchere enchere = new Enchere(utilisateurInscrit, articleVendu, articleVendu.getDateDebutEncheres().atTime(LocalTime.now()), articleVendu.getPrixInitial());
+					enchereManager.addEnchere(enchere);
+				} catch (BLLException e) {
+					e.printStackTrace();
+				}
 				enregistrer(request, response);
 		    } else if ("annuler".equals(action)) {
 		        annuler(request, response);

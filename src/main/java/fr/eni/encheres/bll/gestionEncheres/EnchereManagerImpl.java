@@ -25,11 +25,10 @@ public class EnchereManagerImpl implements EnchereManager {
 
 	@Override
 	public void addEnchere(Enchere enchere) throws BLLException {
-
-		if(enchere.getDateEnchere().isBefore(LocalDateTime.now())) {
-			throw new BLLException("ms_endenchere");
-		}
-		if(enchere.getMontantEnchere() > enchere.getMontantEnchere() ) {
+		
+		System.out.println(getMontantMax(enchere.getArticleVendu()));
+		System.out.println(enchere.getMontantEnchere());
+		if(getMontantMax(enchere.getArticleVendu()) < enchere.getMontantEnchere() ) {
 			throw new BLLException("ms_mauvaiseoffre");
 		}
 		try{
@@ -97,13 +96,6 @@ public class EnchereManagerImpl implements EnchereManager {
 		return stream.toList();
 		
 		
-	}
-
-	@Override
-	public Integer meilleureOffre(Integer prixPropose) throws BLLException {
-		prixProposes.add(prixPropose);
-		Collections.sort(prixProposes, (p1, p2) -> p1.compareTo(p2));
-		return prixProposes.get(0);
 	}
 
 	@Override
