@@ -5,13 +5,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
@@ -40,24 +43,11 @@ public class HomePageServlet extends HttpServlet {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-        		Comparator<Enchere> dateComparator = Comparator.comparing(Enchere::getDateEnchere);
 
-        		Optional<Enchere> enchereMaxDate = managerEnchere.getAll().stream()
-        		        .max(dateComparator);
 
-        		    Enchere enchereAvecMaxDate = enchereMaxDate.get();
-
-        		    // Filtrer la liste pour obtenir toutes les enchères ayant la date maximale
-        		    List<Enchere> enchereAvecDateMaxList = managerEnchere.getAll().stream()
-        		            .filter(enchere -> enchere.getDateEnchere().equals(enchereAvecMaxDate.getDateEnchere()))
-        		            .collect(Collectors.toList());
-
-        		    // Vous avez maintenant la liste des enchères avec la date la plus élevée
-        		    enchereAvecDateMaxList.forEach(System.out::println);
-        	
 
         		categorie = managerCategorie.getAll();
-        		modelEnchere.setLstEnchere(enchereAvecDateMaxList);
+        		modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
             	e.printStackTrace();
             	modelEnchere.setMessage("zut alors");
