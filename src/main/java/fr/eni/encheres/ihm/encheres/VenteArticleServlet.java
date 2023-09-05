@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,14 +72,13 @@ public class VenteArticleServlet extends HttpServlet {
 		ArticleVendu articleVendu = new ArticleVendu(nomArticle, descriptionArticle, dateDebut, dateFin, prixInitial, null, utilisateurInscrit, categorie, retrait);
 		System.out.println(utilisateurInscrit.getNoUtilisateur());
 		
-		Enchere enchere = new Enchere(utilisateurInscrit, articleVendu, articleVendu.getDateDebutEncheres().atStartOfDay().plusSeconds(LocalDateTime.now().toLocalTime().toSecondOfDay()), articleVendu.getPrixInitial());
-		
 		try {
 			String action = request.getParameter("action");
 			System.out.println(action);
 			if ("enregistrer".equals(action)) {
 				articleManager.addArticle(articleVendu);
 				try {
+					Enchere enchere = new Enchere(utilisateurInscrit, articleVendu, articleVendu.getDateDebutEncheres().atTime(LocalTime.now()), articleVendu.getPrixInitial());
 					enchereManager.addEnchere(enchere);
 				} catch (BLLException e) {
 					e.printStackTrace();

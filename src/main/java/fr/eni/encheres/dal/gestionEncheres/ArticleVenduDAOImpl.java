@@ -67,6 +67,12 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			stmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
 			stmt.executeUpdate();
 			
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				article.setNoArticle(id);
+			}
+			
 			PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getPointRetrait().getRue());
 			pstmt.setString(2, article.getPointRetrait().getCodePostal());
