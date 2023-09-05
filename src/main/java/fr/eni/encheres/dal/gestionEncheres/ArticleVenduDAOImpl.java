@@ -61,11 +61,17 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			stmt.setString(1, article.getNomArticle());
 			stmt.setString(2, article.getDescription());
 			stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
-			stmt.setDate(4, Date.valueOf(article.getDateDebutEncheres()));
+			stmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
 			stmt.setInt(5, article.getPrixInitial());
 			stmt.setInt(6, article.getCategorie().getNoCategorie());
 			stmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
 			stmt.executeUpdate();
+			
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				article.setNoArticle(id);
+			}
 			
 			PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getPointRetrait().getRue());

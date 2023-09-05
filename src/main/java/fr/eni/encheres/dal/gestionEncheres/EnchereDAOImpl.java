@@ -303,7 +303,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 			e.printStackTrace();
 		}
 		
-		if(montantMax != null) {
+		if(montantMax != null && montantMax > 0) {
 			return montantMax;
 		} else {
 			return article.getPrixInitial();
