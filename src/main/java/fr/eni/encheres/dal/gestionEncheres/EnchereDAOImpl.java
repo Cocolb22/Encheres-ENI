@@ -18,7 +18,7 @@ import fr.eni.encheres.dal.util.DALException;
 
 public class EnchereDAOImpl implements EnchereDAO {
 
-    
+    final String SELECT_MAX = "SELECT MAX(montant_enchere) max_enchere FROM ENCHERES WHERE no_article=?";
 
     final String SELECT = """
     	SELECT *
@@ -34,7 +34,7 @@ public class EnchereDAOImpl implements EnchereDAO {
     public void insert(Enchere enchere) throws DALException {
         try (Connection con = ConnectionProvider.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, enchere.getEnchereur().getNoUtilisateur());
+            stmt.setInt(1, enchere.getEnchereur().getNoUtilisateur());
             stmt.setObject(2, enchere.getArticleVendu().getNoArticle());
             stmt.setTimestamp(3, Timestamp.valueOf(enchere.getDateEnchere()));
             stmt.setInt(4, enchere.getMontantEnchere());
@@ -221,6 +221,32 @@ public class EnchereDAOImpl implements EnchereDAO {
         }
         return result;
     }
+
+
+
+	@Override
+	public Integer selectMontantMaxInteger(ArticleVendu article) throws DALException {
+		Integer montantMax = null;
+		
+		try (Connection con = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = con.prepareStatement(SELECT_MAX);
+			stmt.setInt(1, article.getNoArticle());
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				montantMax = rs.getInt("max_enchere");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(montantMax != null) {
+			return montantMax;
+		} else {
+			return article.getPrixInitial();
+		}
+		
+	}
 
 
    

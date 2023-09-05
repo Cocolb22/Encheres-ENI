@@ -10,7 +10,7 @@ public class ArticleVendu {
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
 	private Integer prixInitial;
-	private Integer prixVente;
+	private Integer prixVente = null;
 	private Utilisateur utilisateur;
 	private Categorie categorie;
 	private Retrait pointRetrait;

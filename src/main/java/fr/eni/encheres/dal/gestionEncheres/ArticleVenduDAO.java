@@ -8,5 +8,6 @@ import fr.eni.encheres.bundles.BusinessException;
 public interface ArticleVenduDAO {
 	public void insert(ArticleVendu article) throws BusinessException;
 	public List<ArticleVendu> getAll() throws BusinessException;
+	public ArticleVendu getArticleById(Integer noArticle) throws BusinessException;
 
 }
