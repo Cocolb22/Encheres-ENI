@@ -27,6 +27,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	    INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article
     	INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
     	LEFT JOIN RETRAITS r ON r.no_article = a.no_article
+    	WHERE 
     		    		""";
     final String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
 
