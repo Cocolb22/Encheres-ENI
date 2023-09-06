@@ -84,4 +84,14 @@
     <servlet-name>DetailVenteServlet</servlet-name>
     <url-pattern>/DetailVenteServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EnchereRemporteServlet</display-name>
+    <servlet-name>EnchereRemporteServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.EnchereRemporteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EnchereRemporteServlet</servlet-name>
+    <url-pattern>/EnchereRemporteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.time.LocalDate" %>
 
 <!DOCTYPE html>
 <html>
@@ -116,7 +117,7 @@
 				<input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
 			</div>
 			<div class="categories">
-				<label for="categorie"><h4>Catégorie :</h4></label> <select id="categorie"name="categorie">
+				<label for="categorie"><h4>Catégorie :</h4></label> <select id="categorie" name="categorie" >
 					<option name="categorie" value="0">Aucune</option>
 					<c:forEach items="${categorie}" var="lstCategorie">
 						<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
@@ -135,11 +136,19 @@
 
 
 	<div class="row">
+
 	<c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
+
         <div class="col-md-4 mb-3 d-flex justify-content-center align-items-center">
-	    	<div class="card ">  
-		    	<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
-	                <div class="row g-0">
+	    	<div class="card ">
+	    	<c:if test="${enchere.articleVendu.dateFinEncheres.isBefore(LocalDate.now())}">
+
+	    			<a href="EnchereRemporteServlet?noArticle=${enchere.articleVendu.noArticle }" class="a-title">
+		    	</c:if> 
+		    	<c:if test="${enchere.articleVendu.dateFinEncheres.isAfter(LocalDate.now())}"> 
+		    		<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
+			    </c:if> 
+               <div class="row g-0">
 	                    <div class=" col-md-4 mt-2 mb-2 ">
 	                        	<img src="${pageContext.request.contextPath}/images/fouet.jpg" class="img-fluid rounded-start" alt="Description of the image">
 	                    </div>
