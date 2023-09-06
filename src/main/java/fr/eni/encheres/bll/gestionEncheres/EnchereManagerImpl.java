@@ -31,7 +31,7 @@ public class EnchereManagerImpl implements EnchereManager {
 		
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
-		if(getMontantMax(enchere.getArticleVendu()) < enchere.getMontantEnchere() ) {
+		if(getMontantMax(enchere.getArticleVendu()) > enchere.getMontantEnchere() ) {
 			throw new BLLException("ms_mauvaiseoffre");
 		}
 		try{
