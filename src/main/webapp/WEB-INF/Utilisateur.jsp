@@ -20,7 +20,11 @@
 
 <div class="container transparent-card" style="max-width:750px">
 
+	<div class="d-flex justify-content-around">
 	<h1> Bonjour ${utilisateurInscrit.pseudo }</h1>
+	<h1> ${utilisateurInscrit.credit } crédits</h1>
+	</div>
+	
   
   <c:if test="${listeCodesErreur != null}">
 	    	<c:forEach items="${listeCodesErreur}" var="codeErreur">
