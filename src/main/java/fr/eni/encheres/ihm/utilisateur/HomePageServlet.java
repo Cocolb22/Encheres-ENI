@@ -7,13 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 
 import fr.eni.encheres.bll.categories.CategorieManager;
@@ -22,7 +17,8 @@ import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
-import fr.eni.encheres.bo.model.Enchere;
+
+import fr.eni.encheres.bo.model.Utilisateur;
 
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +28,7 @@ public class HomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     	String action = request.getParameter("action");
-        
+       
         if ("inscription".equals(action)) {
             inscription(request, response);
         } else if ("login".equals(action)) {
@@ -43,15 +39,13 @@ public class HomePageServlet extends HttpServlet {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-
-
-
         		categorie = managerCategorie.getAll();
         		modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
             	e.printStackTrace();
             	modelEnchere.setMessage("zut alors");
             }
+        	
         	request.setAttribute("categorie", categorie);
             request.setAttribute("modelEnchere", modelEnchere);
         	request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
@@ -62,9 +56,8 @@ public class HomePageServlet extends HttpServlet {
 		
     	List<Categorie> categorie = new ArrayList<>();
     	EnchereModel modelEnchere = new EnchereModel();
-    	Object sessionUser = request.getSession().getAttribute("utilisateurInscrit");
+    	Utilisateur sessionUser = ((Utilisateur) request.getSession().getAttribute("utilisateurInscrit"));
 
-   
     	if(request.getParameter("BT_SELECT_CATEGORIE") != null) {
     		if(request.getParameter("categorie") != null && request.getParameter("nomArticle").equals("")) {
     			
@@ -73,6 +66,7 @@ public class HomePageServlet extends HttpServlet {
 	            	categorie = managerCategorie.getAll();	            
 	            	
 	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
+	            	
 	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
@@ -80,7 +74,7 @@ public class HomePageServlet extends HttpServlet {
 	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
 	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
 	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
-	            			sessionUser));
+	            			sessionUser.getNoUtilisateur()));
 	            	}else {
 	            		modelEnchere.setLstEnchere(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))));
 	            	}
@@ -104,7 +98,7 @@ public class HomePageServlet extends HttpServlet {
 	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
 	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
 	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
-	            			sessionUser));
+	            			sessionUser.getNoUtilisateur()));
 	            	}else {
 	            		modelEnchere.setLstEnchere(managerEnchere.findByNomArticle(request.getParameter("nomArticle")));
 	            	}
@@ -127,7 +121,7 @@ public class HomePageServlet extends HttpServlet {
 		            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
 		            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
 		            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
-		            			sessionUser));
+		            			sessionUser.getNoUtilisateur()));
 		            	}else {
 		            		modelEnchere.setLstEnchere(managerEnchere.getAll());
 		            	}

@@ -24,7 +24,7 @@ public interface EnchereManager {
 			boolean encheresGagnees,
 			boolean venteEnchereDebutes,
 			boolean VenteEnchereTermines,
-			Object sessionUser) throws BLLException;
+			Integer sessionUser) throws BLLException;
 	
 
 		
