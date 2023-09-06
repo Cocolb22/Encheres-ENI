@@ -135,42 +135,7 @@
 
 
 	<div class="row">
-<<<<<<< HEAD
-		<c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
-			<div
-				class="col-md-4 mb-3 d-flex justify-content-center align-items-center">
-				<div class="card ">
-					<div class="row g-0">
-						<div class=" col-md-4 mt-2 mb-2 ">
-							<img src="${pageContext.request.contextPath}/images/fouet.jpg"
-								class="img-fluid rounded-start" alt="Description of the image">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">
-									<a
-										href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}"
-										class="a-title">${enchere.articleVendu.nomArticle}</a>
-								</h5>
-								<p class="card-text">Prix : ${enchere.montantEnchere} points</p>
-								<p class="card-text">
-									<small class="text-muted">Fin de l'enchère:
-										${enchere.articleVendu.dateFinEncheresFormatted}</small>
-								</p>
-								<p class="card-text">
-									<small class="text-muted">Vendeur:
-										${enchere.articleVendu.utilisateur.pseudo}</small>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-
-=======
-    <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
+	<c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
         <div class="col-md-4 mb-3 d-flex justify-content-center align-items-center">
 	    	<div class="card ">  
 		    	<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
@@ -192,6 +157,5 @@
         </div>
     </c:forEach>
 	</div>
->>>>>>> refs/heads/develop
 </body>
 </html>
