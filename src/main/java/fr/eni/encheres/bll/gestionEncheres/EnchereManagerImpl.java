@@ -149,7 +149,7 @@ public class EnchereManagerImpl implements EnchereManager {
 			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(venteEnchereDebutes) {
-			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
+			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(VenteEnchereTermines) {
 			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
@@ -169,6 +169,8 @@ public class EnchereManagerImpl implements EnchereManager {
 			throw new BLLException();
 		}
 	}
+
+
 
 
 }

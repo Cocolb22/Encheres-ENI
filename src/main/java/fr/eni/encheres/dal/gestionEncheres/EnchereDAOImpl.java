@@ -27,8 +27,8 @@ public class EnchereDAOImpl implements EnchereDAO {
     final String SELECT = """
     	SELECT *
 	    FROM ENCHERES e
-	    INNER JOIN UTILISATEURS u ON e.no_utilisateur = u.no_utilisateur
 	    INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article
+	    INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur
     	INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
     	LEFT JOIN RETRAITS r ON r.no_article = a.no_article
     		    		""";

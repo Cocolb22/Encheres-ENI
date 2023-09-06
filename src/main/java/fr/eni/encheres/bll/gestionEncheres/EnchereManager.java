@@ -24,15 +24,10 @@ public interface EnchereManager {
 			boolean encheresGagnees,
 			boolean venteEnchereDebutes,
 			boolean VenteEnchereTermines,
-<<<<<<< HEAD
-			Integer sessionUser) throws BLLException;
-	
 
-		
-	public Integer meilleureOffre(Integer prixPropose) throws BLLException;
-=======
-			Object sessionUser) throws BLLException;
->>>>>>> branch 'develop' of https://github.com/Cocolb22/Encheres-ENI.git
+			Integer sessionUser) throws BLLException;
+
+
 
 	public Integer getMontantMax(ArticleVendu article) throws BLLException;
 }
