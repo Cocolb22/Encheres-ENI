@@ -27,6 +27,7 @@ import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.bundles.BusinessException;
+import fr.eni.encheres.ihm.utilisateur.EnchereModel;
 
 
 public class VenteArticleServlet extends HttpServlet {
@@ -96,14 +97,36 @@ public class VenteArticleServlet extends HttpServlet {
 	}
 
 	private void enregistrer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		List<Categorie> categorie = new ArrayList<>();
+		EnchereModel modelEnchere = new EnchereModel();
+
+		try {
+		    categorie = managerCategorie.getAll();
+		    modelEnchere.setLstEnchere(enchereManager.getAll());
+		} catch (BLLException e) {
+		    e.printStackTrace();
+		    modelEnchere.setMessage("Erreur lors de la récupération des enchères.");
+		}
+
+		request.setAttribute("categorie", categorie);
+		request.setAttribute("modelEnchere", modelEnchere);
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-		
 	}
 	
 	private void annuler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		List<Categorie> categorie = new ArrayList<>();
+		EnchereModel modelEnchere = new EnchereModel();
+
+		try {
+		    categorie = managerCategorie.getAll();
+		    modelEnchere.setLstEnchere(enchereManager.getAll());
+		} catch (BLLException e) {
+		    e.printStackTrace();
+		    modelEnchere.setMessage("Erreur lors de la récupération des enchères.");
+		}
+
+		request.setAttribute("categorie", categorie);
+		request.setAttribute("modelEnchere", modelEnchere);
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-		
 	}
 }

@@ -71,7 +71,7 @@
 		<h1>Liste des enchères</h1>
 	</div>
 
-	<c:if test="${utilisateurInscrit != null}">
+<c:if test="${utilisateurInscrit != null}">
 
 		<div
 			class="container transparent-card">

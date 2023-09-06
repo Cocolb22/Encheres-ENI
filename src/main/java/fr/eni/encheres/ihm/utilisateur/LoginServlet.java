@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			Utilisateur utilisateurInscrit = manager.connectUtilisateur(pseudo, motDePasse);
-			System.out.println(utilisateurInscrit);
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurInscrit", utilisateurInscrit);
 			

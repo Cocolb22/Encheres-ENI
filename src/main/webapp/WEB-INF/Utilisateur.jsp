@@ -20,7 +20,11 @@
 
 <div class="container transparent-card" style="max-width:750px">
 
+	<div class="d-flex justify-content-around">
 	<h1> Bonjour ${utilisateurInscrit.pseudo }</h1>
+	<h1> ${utilisateurInscrit.credit } crédits</h1>
+	</div>
+	
   
   <c:if test="${listeCodesErreur != null}">
 	    	<c:forEach items="${listeCodesErreur}" var="codeErreur">
@@ -28,48 +32,48 @@
 	    	</c:forEach>
 	    </c:if>
   
- 	<form action="InscriptionServlet" method="post">
+ 	<form action="UtilisateurServlet" method="post">
         <div class="row">
             <div class="col-md-6 p-3">
                 <!-- Champs de gauche -->
                 <div class="form-group">
                     <label for="nom">Nom :</label>
-                    <input type="text" class="form-control" id="nom" name="nom" value=" ${utilisateurInscrit.nom}" required>
+                    <input type="text" class="form-control" id="nom" name="nom" value="${utilisateurInscrit.nom}" required>
                 </div>
                 <div class="form-group">
                     <label for="prenom">Prénom :</label>
-                    <input type="text" class="form-control" id="prenom" name="prenom" value=" ${utilisateurInscrit.prenom}" required>
+                    <input type="text" class="form-control" id="prenom" name="prenom" value="${utilisateurInscrit.prenom}" required>
                 </div>
                 <div class="form-group">
                     <label for="pseudo">Pseudo :</label>
-                    <input type="text" class="form-control" id="pseudo" name="pseudo" value=" ${utilisateurInscrit.pseudo}" required>
+                    <input type="text" class="form-control" id="pseudo" name="pseudo" value="${utilisateurInscrit.pseudo}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email :</label>
-                    <input type="email" class="form-control" id="email" name="email" value=" ${utilisateurInscrit.email}" required>
+                    <input type="email" class="form-control" id="email" name="email" value="${utilisateurInscrit.email}" required>
                 </div>
                 <div class="form-group">
                     <label for="telephone">Téléphone :</label>
-                    <input type="tel" class="form-control" id="telephone" name="telephone" value=" ${utilisateurInscrit.telephone}">
+                    <input type="tel" class="form-control" id="telephone" name="telephone" value="${utilisateurInscrit.telephone}">
                 </div>
             </div>
             <div class="col-md-6 p-3">
                 <!-- Champs de droite -->
                 <div class="form-group">
                     <label for="rue">Rue :</label>
-                    <input type="text" class="form-control" id="rue" name="rue" value=" ${utilisateurInscrit.rue}" required>
+                    <input type="text" class="form-control" id="rue" name="rue" value="${utilisateurInscrit.rue}" required>
                 </div>
                 <div class="form-group">
                     <label for="codePostal">Code Postal :</label>
-                    <input type="text" class="form-control" id="codePostal" name="codePostal" value=" ${utilisateurInscrit.codePostal}" required>
+                    <input type="text" class="form-control" id="codePostal" name="codePostal" value="${utilisateurInscrit.codePostal}" required>
                 </div>
                 <div class="form-group">
                     <label for="ville">Ville :</label>
-                    <input type="text" class="form-control" id="ville" name="ville" value=" ${utilisateurInscrit.ville}" required>
+                    <input type="text" class="form-control" id="ville" name="ville" value="${utilisateurInscrit.ville}" required>
                 </div>
                 <div class="form-group">
                     <label for="motDePasse">Mot de passe :</label>
-                    <input type="password" class="form-control" id="motDePasse" name="motDePasse" value=" ${utilisateurInscrit.motDePasse}" required>
+                    <input type="password" class="form-control" id="motDePasse" name="motDePasse" value="${utilisateurInscrit.motDePasse}" required>
                 </div>
                  <div class="form-group">
 	                    <label for="confirmationMotDePasse">Confirmation du mot de passe :</label>
@@ -79,10 +83,10 @@
         </div>
 			<div class="row d-flex">
 			     <div class="col-md-6 p-2 d-flex justify-content-end">
-			     <button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="update">Modifier</button>
+			     <button type="submit" class="btn btn-primary m-3 pd-2" name="modifier">Modifier</button>
 			     </div>
 			     <div class="col-md-6 p-2 d-flex justify-content-start">
-			     <button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="delete">Supprimer</button>
+			     <button type="submit" class="btn btn-primary m-3 pd-2" name="supprimer">Supprimer</button>
 			     </div>
 			</div>
     </form>

@@ -13,7 +13,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	public void addUtilisateur(Utilisateur utilisateur, String confirmationMDP) throws BusinessException {
 
 		BusinessException  be = new BusinessException();
-		
+		validerUtilisateur(utilisateur, confirmationMDP, be);
 		if(be.hasErreurs()) {
 			System.out.println(be);
 			throw be;
@@ -90,7 +90,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	private void validerTelephone(String telephone, BusinessException be) throws BusinessException {
-		if(telephone.length() >= 15 || !telephone.matches("\\d+")) {
+		if(telephone.length() >= 15 || !telephone.matches("^[0-9]+$")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_TELEPHONE_ECHEC);
 		};
 	}
@@ -102,7 +102,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private void validerCodePostal(String codePostal, BusinessException be) throws BusinessException {
-		if(codePostal == null || codePostal.isBlank() || codePostal.length() >= 10 || !codePostal.matches("\\d+")) {
+		if(codePostal == null || codePostal.isBlank() || codePostal.length() >= 10 || !codePostal.matches("^[0-9]+$")) {
 			be.ajouterErreur(CodeResultDAL.INSERT_CODE_POSTAL_ECHEC);
 		};
 	}

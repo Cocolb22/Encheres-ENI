@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
@@ -57,8 +58,20 @@ public class DetailVenteServlet extends HttpServlet {
 		}
 			try {
 				articleVendu = manager.getArticleById(noArticle);
+				List<Enchere> encheresArticle;
+				Enchere enchere=null;
+				try {
+					encheresArticle = enchereManager.findByNomArticle(articleVendu.getNomArticle());
+					Collections.sort(encheresArticle, (e1, e2) -> e1.getMontantEnchere().compareTo(e2.getMontantEnchere()));
+					enchere = encheresArticle.get(0);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				System.out.println("articleVendu:" +" " + articleVendu);
 				request.setAttribute("articleVendu", articleVendu);
+				request.setAttribute("enchere", enchere);
 				request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
@@ -83,6 +96,7 @@ public class DetailVenteServlet extends HttpServlet {
 			enchereManager.addEnchere(enchere);
 			Integer meilleureOffre = enchereManager.getMontantMax(article);
 			enchere.setMontantEnchere(meilleureOffre);
+			utilisateurInscrit.setCredit(utilisateurInscrit.getCredit()-proposition);
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("articleVendu", article);
 			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
