@@ -116,10 +116,16 @@
 				<input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
 			</div>
 			<div class="categories">
-				<label for="categorie"><h4>Catégorie :</h4></label> <select id="categorie"name="categorie">
-					<option name="categorie" value="0">Aucune</option>
+				<label for="categorie"><h4>Catégorie :</h4></label>
+				<select id="categorie" name="categorie">
+					<option value="0">Aucune</option>
 					<c:forEach items="${categorie}" var="lstCategorie">
-						<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+						<c:if test="${categorieSelectionnee == lstCategorie.noCategorie }">
+							<option value="${lstCategorie.noCategorie }" selected>${lstCategorie.libelle }</option>
+						</c:if>
+						<c:if test="${categorieSelectionnee != lstCategorie.noCategorie }">
+							<option value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</div>

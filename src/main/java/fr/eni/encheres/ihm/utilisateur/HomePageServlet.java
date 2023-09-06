@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,13 +45,12 @@ public class HomePageServlet extends HttpServlet {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-        		categorie = managerCategorie.getAll();
+        		categorie = managerCategorie.getAll();;
         		modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
             	e.printStackTrace();
             	modelEnchere.setMessage("zut alors");
             }
-        	
         	request.setAttribute("categorie", categorie);
             request.setAttribute("modelEnchere", modelEnchere);
         	request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
@@ -59,16 +59,17 @@ public class HomePageServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-    	List<Categorie> categorie = new ArrayList<>();
+		System.out.println(request.getParameter("categorie"));
+		
+    	List<Categorie> categories = new ArrayList<>();
     	EnchereModel modelEnchere = new EnchereModel();
     	Utilisateur sessionUser = ((Utilisateur) request.getSession().getAttribute("utilisateurInscrit"));
-
+    	Integer categorieSelectionnee = 0;
     	if(request.getParameter("BT_SELECT_CATEGORIE") != null) {
     		if(request.getParameter("nomArticle").equals("") && !request.getParameter("categorie").equals("0")) {
-    			
 	            try {
-	            	categorie = managerCategorie.getAll();	            
-	            	
+	            	categories = managerCategorie.getAll();	            
+	        		categorieSelectionnee = request.getParameter("categorie") != null ? Integer.parseInt(request.getParameter("categorie")): 0;
 	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
 	            	
 	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))),
@@ -91,7 +92,7 @@ public class HomePageServlet extends HttpServlet {
     		}else if(!request.getParameter("nomArticle").equals("") ) {
     		
 	    		try {
-	            	categorie = managerCategorie.getAll();
+	            	categories = managerCategorie.getAll();
 	            	
 	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
 	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByNomArticle(request.getParameter("nomArticle")),
@@ -111,10 +112,9 @@ public class HomePageServlet extends HttpServlet {
 	            }
     		
     		}else if(request.getParameter("categorie").equals("0") && request.getParameter("nomArticle").equals("")){
-    		
 	    		try {
-		            	categorie = managerCategorie.getAll();
-		            	
+		            	categories = managerCategorie.getAll();
+		        		categorieSelectionnee = request.getParameter("categorie") != null ? Integer.parseInt(request.getParameter("categorie")): 0;
 		            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
 		            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.getAll(),
 		            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
@@ -133,9 +133,9 @@ public class HomePageServlet extends HttpServlet {
 	            	modelEnchere.setMessage("zut alors");
 	            }
     		}
-    		
-    	
-	        request.setAttribute("categorie", categorie);
+    		categorieSelectionnee = request.getParameter("categorie") != null ? Integer.parseInt(request.getParameter("categorie")): 0;
+    		request.setAttribute("categorieSelectionnee", categorieSelectionnee);
+	        request.setAttribute("categorie", categories);
 	        request.setAttribute("modelEnchere", modelEnchere);
 			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
         	}
