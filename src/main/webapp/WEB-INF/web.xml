@@ -86,12 +86,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>EnchereRemporteeServlet</display-name>
-    <servlet-name>EnchereRemporteeServlet</servlet-name>
-    <servlet-class>fr.eni.encheres.ihm.encheres.EnchereRemporteeServlet</servlet-class>
+    <display-name>EnchereRemporteServlet</display-name>
+    <servlet-name>EnchereRemporteServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.encheres.EnchereRemporteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EnchereRemporteeServlet</servlet-name>
-    <url-pattern>/EnchereRemporteeServlet</url-pattern>
+    <servlet-name>EnchereRemporteServlet</servlet-name>
+    <url-pattern>/EnchereRemporteServlet</url-pattern>
   </servlet-mapping>
 </web-app>
