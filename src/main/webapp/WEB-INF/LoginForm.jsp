@@ -52,7 +52,7 @@
 	        <div class="d-flex justify-content-center align-items-center p-3">
 		        <div class="m-3">
 		            <label class="form-check-label">
-		                <input type="checkbox" class="form-check-input"> Se souvenir de moi
+		                <input type="checkbox" class="form-check-input" name="rememberMe"> Se souvenir de moi
 		            </label>
 		        </div>
 		        <div class="m-3">

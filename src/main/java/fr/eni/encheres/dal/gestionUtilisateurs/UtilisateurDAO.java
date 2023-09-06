@@ -12,4 +12,5 @@ public interface UtilisateurDAO {
 	public void delete(Integer noUtilisateur)throws BusinessException;
 	public Utilisateur findByLoginAndPassword(String pseudo, String motDePasse) throws BusinessException;
 	public List<Utilisateur> getUsers() throws BusinessException;
+	public Utilisateur findById(Integer idUser) throws BusinessException;
 }

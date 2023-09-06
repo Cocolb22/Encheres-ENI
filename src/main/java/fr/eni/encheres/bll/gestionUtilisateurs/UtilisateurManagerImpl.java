@@ -144,4 +144,21 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		validerMotDePasse(utilisateur.getMotDePasse(), be);
 		validerConfirmationMDP(confirmationMDP, utilisateur.getMotDePasse(), be);
 	}
+
+	@Override
+	public Utilisateur checkIdUser(Integer idUser) throws BusinessException {
+		Utilisateur user;
+		try {
+			user = dao.findById(idUser);
+			if(user != null) {
+				return user;
+			}
+			else {
+				return null;
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
