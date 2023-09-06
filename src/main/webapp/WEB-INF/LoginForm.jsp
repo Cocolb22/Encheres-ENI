@@ -17,6 +17,12 @@
 
 <jsp:include page="Header.jsp"/>
 
+	<div class=" texte ">
+		<p> Doudou, tu viens plus aux soirées ?
+		<p> On a fait une soirée privatisation de la poste, </p>
+	    <p> Je peux te dire que j'ai reçu des gros colis, y a même des gens qui ont payé en liquide.</p>
+	</div>
+
 	<div class="container d-flex justify-content-center align-items-center vh-100">
 	    <div class="col-md-6 transparent-card">
 	        <h2 class="mb-3">Connexion</h2>

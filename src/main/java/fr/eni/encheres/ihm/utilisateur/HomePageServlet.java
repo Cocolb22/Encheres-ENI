@@ -40,7 +40,7 @@ public class HomePageServlet extends HttpServlet {
             login(request, response);
         } else if ("deconnexion".equals(action)) {
             deconnexion(request, response);
-        } else { // Si l'action n'est pas "inscription", rediriger vers Home.jsp
+        } else {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
