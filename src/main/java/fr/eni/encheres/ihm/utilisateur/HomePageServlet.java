@@ -14,7 +14,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
@@ -174,4 +176,10 @@ public class HomePageServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 
 	}
+	
+	private String changeDateFormat(Date date) {
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	    return formatter.format(date);
+	}
+
 }
