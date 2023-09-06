@@ -41,13 +41,10 @@ public class HomePageServlet extends HttpServlet {
             login(request, response);
         } else if ("deconnexion".equals(action)) {
             deconnexion(request, response);
-        } else { // Si l'action n'est pas "inscription", rediriger vers Home.jsp
+        } else {
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
-
-
-
         		categorie = managerCategorie.getAll();
         		modelEnchere.setLstEnchere(managerEnchere.getAll());
             }catch(BLLException e){
@@ -175,11 +172,6 @@ public class HomePageServlet extends HttpServlet {
 		request.setAttribute("modelEnchere", modelEnchere);
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 
-	}
-	
-	private String changeDateFormat(Date date) {
-	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-	    return formatter.format(date);
 	}
 
 }

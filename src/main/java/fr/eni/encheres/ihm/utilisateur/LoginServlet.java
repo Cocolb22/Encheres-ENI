@@ -54,12 +54,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("categorie", categorie);
 			request.setAttribute("modelEnchere", modelEnchere);
 			
-			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-			
-			
-			
-			
-			
+			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);	
 			
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
