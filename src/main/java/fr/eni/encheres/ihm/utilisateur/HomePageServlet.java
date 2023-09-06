@@ -173,10 +173,4 @@ public class HomePageServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 
 	}
-	
-	private String changeDateFormat(Date date) {
-	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-	    return formatter.format(date);
-	}
-
 }

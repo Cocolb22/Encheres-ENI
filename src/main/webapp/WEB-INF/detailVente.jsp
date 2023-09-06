@@ -46,15 +46,25 @@
 			<p><span style="font-weight: bold;">Mise à prix :</span>${articleVendu.prixInitial } points</p>
 		</div>
 		<div class="mb-5 ps-2 element">
-			<p><span style="font-weight: bold;">Fin de l'enchère:</span> ${articleVendu.dateFinEncheresFormatted} </p>
-			
+			<p>
+				<span style="font-weight: bold;">Fin de l'enchère:</span> ${ articleVendu.dateFinEncheresFormatted }
+			</p>
 		</div>
 		<div class="mb-3 mt-4 ps-2 element retrait">
 			<p class=titre-retrait><span style="font-weight: bold;">Retrait</span></p>
 			<div class="p-3">
-				<p><span style="font-weight: bold;">Rue:</span>${articleVendu.pointRetrait.rue}</p>
-				<p><span style="font-weight: bold;">Code Postal:</span>${articleVendu.pointRetrait.codePostal}</p>
-				<p><span style="font-weight: bold;">Ville:</span>${articleVendu.pointRetrait.ville}</p>
+				<p>
+					<span style="font-weight: bold;">Rue :</span>
+					${articleVendu.pointRetrait.rue}
+				</p>
+				<p>
+					<span style="font-weight: bold;">Code Postal :</span>
+					${articleVendu.pointRetrait.codePostal}
+				</p>
+				<p>
+					<span style="font-weight: bold;">Ville :</span>
+					${articleVendu.pointRetrait.ville}
+				</p>
 			</div>
 		</div>
 		<div class="mb-3 ps-2 element">
@@ -62,30 +72,33 @@
 		</div>
 
 
-		<div class="container">
-			<div class="row">
-				<c:if test="${utilisateurInscrit != null}">
-					<div class="d-flex justify-content-center text-align-center">
-						<div class="col-sm-6 d-flex justify-content-center ">
-							<label for="propositionPrix" class="form-label form-label-sm m-1 element">Ma proposition</label>
-						</div>
-						<div class="col-sm-6 ">
-							<input type="number" step="10" min="0" id="propositionPrix"
-								name="propositionPrix" class="form-control" required>
+		<c:if test="${utilisateurInscrit != null}">
+			<form action="DetailVenteServlet" method="post">
+				<div class="container">
+					<div class="row">
+						<div class="d-flex justify-content-center text-align-center">
+							<div class="col-sm-6 d-flex justify-content-center ">
+								<label for="propositionPrix"
+									class="form-label form-label-sm m-1 element">Ma
+									proposition</label>
+							</div>
+							<div class="col-sm-6 ">
+								<input type="number" step="1" min="0" id="propositionPrix"
+									name="propositionPrix" class="form-control" required>
+							</div>
 						</div>
 					</div>
-				</c:if>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row d-flex justify-content-center">
-				<div class="col-sm-6">
-					<a
-						class="nav-link active btn btn-primary btn-lg btn-block btn-encherir m-2 p-3 "
-						aria-current="page" href="DetailVenteServlet?action=encherir">Enchérir</a>
 				</div>
-			</div>
-		</div>
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="col-sm-6">
+							<button type="submit" class="btn btn-primary m-2" name="encherir">Enchérir</button>
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</c:if>
 	</div>
 
 </body>
