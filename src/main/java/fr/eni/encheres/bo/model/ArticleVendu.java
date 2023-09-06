@@ -1,6 +1,7 @@
 package fr.eni.encheres.bo.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ArticleVendu {
 	
@@ -138,6 +139,15 @@ public class ArticleVendu {
 				+ ", utilisateur=" + utilisateur + ", categorie=" + categorie + ", retrait=" + pointRetrait + "]";
 	}
 	
+	public String getDateDebutEncheresFormatted() {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+	    return dateDebutEncheres.format(formatter);
+	}
+
+	public String getDateFinEncheresFormatted() {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+	    return dateFinEncheres.format(formatter);
+	}
 	
 
 }
