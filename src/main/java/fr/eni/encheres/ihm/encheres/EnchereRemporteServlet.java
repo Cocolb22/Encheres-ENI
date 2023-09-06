@@ -73,7 +73,7 @@ public class EnchereRemporteServlet extends HttpServlet {
 		
 		
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/EnchereRemporte.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
