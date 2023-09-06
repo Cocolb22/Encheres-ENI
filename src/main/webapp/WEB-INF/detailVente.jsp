@@ -59,7 +59,7 @@
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
-				<span style="font-weight: bold;">Fin de l'enchère:</span> ${ articleVendu.dateFinEncheres }
+				<span style="font-weight: bold;">Fin de l'enchère:</span> ${ articleVendu.dateFinEncheresFormatted }
 			</p>
 		</div>
 		<div class="mb-3 mt-4 ps-2 element retrait">
@@ -68,15 +68,15 @@
 			</p>
 			<div class="p-3">
 				<p>
-					<span style="font-weight: bold;">Rue:</span>
+					<span style="font-weight: bold;">Rue :</span>
 					${articleVendu.pointRetrait.rue}
 				</p>
 				<p>
-					<span style="font-weight: bold;">Code Postal:</span>
+					<span style="font-weight: bold;">Code Postal :</span>
 					${articleVendu.pointRetrait.codePostal}
 				</p>
 				<p>
-					<span style="font-weight: bold;">Ville:</span>
+					<span style="font-weight: bold;">Ville :</span>
 					${articleVendu.pointRetrait.ville}
 				</p>
 			</div>
