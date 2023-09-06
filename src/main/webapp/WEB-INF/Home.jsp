@@ -117,6 +117,7 @@
 			</div>
 			<div class="categories">
 				<label for="categorie"><h4>Catégorie :</h4></label> <select id="categorie"name="categorie">
+					<option name="categorie" value="0">Aucune</option>
 					<c:forEach items="${categorie}" var="lstCategorie">
 						<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
 					</c:forEach>

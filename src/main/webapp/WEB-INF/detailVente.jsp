@@ -40,10 +40,10 @@
 			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Meilleure offre :</span></p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Mise à prix :</span>${articleVendu.prixInitial } points</p>
+			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
