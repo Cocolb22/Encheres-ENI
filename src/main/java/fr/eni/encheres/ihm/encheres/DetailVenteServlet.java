@@ -96,6 +96,7 @@ public class DetailVenteServlet extends HttpServlet {
 			enchereManager.addEnchere(enchere);
 			Integer meilleureOffre = enchereManager.getMontantMax(article);
 			enchere.setMontantEnchere(meilleureOffre);
+			utilisateurInscrit.setCredit(utilisateurInscrit.getCredit()-proposition);
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("articleVendu", article);
 			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);

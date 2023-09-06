@@ -51,12 +51,11 @@
 			               <input type="number" step="10" min="0" id="miseAPrix" name="miseAPrix" class="form-control" required>
 			            </div>
 			             <div class="mb-2">
-			                <label for="dateDebut" class="form-label form-label-sm">Date de début de l'enchère :</label>
-			               <input type="date" id="dateDebut" name="dateDebut" class="form-control" required>
-			            </div>
+				            <label for="dateDebut" class="form-label form-label-sm">Date de début de l'enchère :</label>
+						    <input type="date" id="dateDebut" name="dateDebut" class="form-control" required value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>"></div>
 			            <div class="mb-2">
 			                <label for="dateFin" class="form-label form-label-sm">Date de fin de l'enchère :</label>
-			               <input type="date" id="dateFin" name="dateFin" class="form-control" required>
+	   						<input type="date" id="dateFin" name="dateFin" class="form-control" required value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>">
 			            </div>
 			        </div>    
 		            <div class="retrait">
