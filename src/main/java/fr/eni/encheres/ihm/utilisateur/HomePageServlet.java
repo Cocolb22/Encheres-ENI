@@ -64,10 +64,9 @@ public class HomePageServlet extends HttpServlet {
     	Utilisateur sessionUser = ((Utilisateur) request.getSession().getAttribute("utilisateurInscrit"));
 
     	if(request.getParameter("BT_SELECT_CATEGORIE") != null) {
-    		if(request.getParameter("categorie") != null && request.getParameter("nomArticle").equals("")) {
+    		if(request.getParameter("nomArticle").equals("") && !request.getParameter("categorie").equals("0")) {
     			
 	            try {
-	            	
 	            	categorie = managerCategorie.getAll();	            
 	            	
 	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
@@ -92,7 +91,6 @@ public class HomePageServlet extends HttpServlet {
     		}else if(!request.getParameter("nomArticle").equals("") ) {
     		
 	    		try {
-	    			
 	            	categorie = managerCategorie.getAll();
 	            	
 	            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {
@@ -112,10 +110,9 @@ public class HomePageServlet extends HttpServlet {
 	            	modelEnchere.setMessage("zut alors");
 	            }
     		
-    		}else {
+    		}else if(request.getParameter("categorie").equals("0") && request.getParameter("nomArticle").equals("")){
     		
 	    		try {
-
 		            	categorie = managerCategorie.getAll();
 		            	
 		            	if(request.getSession().getAttribute("utilisateurInscrit") != null) {

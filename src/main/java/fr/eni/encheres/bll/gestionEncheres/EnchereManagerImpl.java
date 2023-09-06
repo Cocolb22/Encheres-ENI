@@ -73,6 +73,7 @@ public class EnchereManagerImpl implements EnchereManager {
 
 	@Override
 	public List<Enchere> findByCategorie(Integer noCategorie) throws BLLException {
+		
 		try{
 			Comparator<Enchere> dateComparator = Comparator.comparing(Enchere::getDateEnchere);
 			
@@ -143,13 +144,13 @@ public class EnchereManagerImpl implements EnchereManager {
 			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) && enchere.getEnchereur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(encheresParticipees) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) && enchere.getEnchereur().getNoUtilisateur().equals(sessionUser));
+			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getEnchereur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(encheresGagnees) {
 			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(venteEnchereDebutes) {
-			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
+			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
 		}
 		if(VenteEnchereTermines) {
 			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
@@ -169,6 +170,8 @@ public class EnchereManagerImpl implements EnchereManager {
 			throw new BLLException();
 		}
 	}
+
+
 
 
 }

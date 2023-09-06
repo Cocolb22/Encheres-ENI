@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Détail vente</title>
+<title>Detail vente</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/detailVente.css">
@@ -31,31 +31,19 @@
 	<div class="container transparent-card p-4" style="max-width: 750px;">
 
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Article :</span> ${ articleVendu.nomArticle }
-			</p>
+			<p><span style="font-weight: bold;">Article :</span> ${ articleVendu.nomArticle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Description :</span> ${ articleVendu.description }
-			</p>
+			<p><span style="font-weight: bold;">Description :</span> ${ articleVendu.description }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }
-			</p>
+			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Meilleure offre :</span> ${ enchere.montantEnchere }
-				points
-			</p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Mise à prix :</span> ${ articleVendu.prixInitial }
-				points
-			</p>
+			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
@@ -63,9 +51,7 @@
 			</p>
 		</div>
 		<div class="mb-3 mt-4 ps-2 element retrait">
-			<p class=titre-retrait>
-				<span style="font-weight: bold;">Retrait 
-			</p>
+			<p class=titre-retrait><span style="font-weight: bold;">Retrait</span></p>
 			<div class="p-3">
 				<p>
 					<span style="font-weight: bold;">Rue :</span>
@@ -82,10 +68,9 @@
 			</div>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p>
-				<span style="font-weight: bold;">Vendeur :</span> ${ articleVendu.utilisateur.pseudo }
-			</p>
+			<p><span style="font-weight: bold;">Vendeur :</span> ${ articleVendu.utilisateur.pseudo }</p>
 		</div>
+
 
 		<c:if test="${utilisateurInscrit != null}">
 			<form action="DetailVenteServlet" method="post">
@@ -115,7 +100,6 @@
 			</form>
 		</c:if>
 	</div>
-
 
 </body>
 </html>

@@ -24,7 +24,11 @@ public interface EnchereManager {
 			boolean encheresGagnees,
 			boolean venteEnchereDebutes,
 			boolean VenteEnchereTermines,
+
 			Integer sessionUser) throws BLLException;
+
+
+
 
 	public Integer getMontantMax(ArticleVendu article) throws BLLException;
 }

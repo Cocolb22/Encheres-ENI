@@ -71,68 +71,71 @@
 		<h1>Liste des enchères</h1>
 	</div>
 
-<c:if test="${utilisateurInscrit != null}">
+<div class="container transparent-card">
+	<h3>Filtres : </h3>
+	<form action="HomePageServlet" method="post">
+	
+			<c:if test="${utilisateurInscrit != null}">
+					<div class="row">
 
-		<div
-			class="container transparent-card">
-			<div class="row">
-			
-				<div class="btn-group-vertical d-flex flex-row" role="group"
-					aria-label="Basic checkbox toggle button group">
-					<div class="col-md-4 achat grid">
-						<h3 class="ms-2">Achat</h3>
-						<label class="btn  checkbox-label"><input
-							name="achatEnchereOuverte" type="checkbox" value="true"
-							onchange="updateCheckboxes('achat')"> Enchères ouvertes</label> <label
-							class="btn  checkbox-label"><input
-							name="achatEnchereEnCours" type="checkbox" value="true"
-							onchange="updateCheckboxes('achat')"> Mes enchères en cours</label> <label
-							class="btn  checkbox-label"><input
-							name="achatEnchereRemportées" type="checkbox" value="true"
-							onchange="updateCheckboxes('achat')"> Mes enchères remportées</label>
+						<div class="btn-group-vertical d-flex flex-row" role="group"
+							aria-label="Basic checkbox toggle button group">
+							<div class="col-md-4 achat grid">
+								<h4 class="ms-2">Achat</h4>
+								<label class="btn  checkbox-label"><input
+									name="achatEnchereOuverte" type="checkbox" value="true" <c:if test="${not empty param.achatEnchereOuverte}">checked="checked"</c:if>
+									onchange="updateCheckboxes('achat')"> Enchères ouvertes</label>
+								<label class="btn  checkbox-label"><input
+									name="achatEnchereEnCours" type="checkbox" value="true" <c:if test="${not empty param.achatEnchereEnCours}">checked="checked"</c:if>
+									onchange="updateCheckboxes('achat')"> Mes enchères en
+									cours</label> <label class="btn  checkbox-label"><input
+									name="achatEnchereRemportées" type="checkbox" value="true" <c:if test="${not empty param.achatEnchereRemportées}">checked="checked"</c:if>
+									onchange="updateCheckboxes('achat')"> Mes enchères
+									remportées</label>
+							</div>
+							<div class="col-md-4 vente grid">
+								<h4 class="ms-2">Vente</h4>
+								<label class="btn  checkbox-label"><input
+									name="venteEnchereEnCours" type="checkbox" value="true" <c:if test="${not empty param.venteEnchereEnCours}">checked="checked"</c:if>
+									onchange="updateCheckboxes('vente')">Mes ventes en
+									cours</label> <label class="btn  checkbox-label"><input
+									name="venteEnchereDebutes" type="checkbox" value="true" <c:if test="${not empty param.venteEnchereDebutes}">checked="checked"</c:if>
+									onchange="updateCheckboxes('vente')"> Ventes non
+									débutées</label> <label class="btn  checkbox-label"><input
+									name="VenteEnchereTermines" type="checkbox" value="true" <c:if test="${not empty param.VenteEnchereTermines}">checked="checked"</c:if>
+									onchange="updateCheckboxes('vente')">Ventes terminées</label>
+							</div>
+
+						</div>
 					</div>
-					<div class="col-md-4 vente grid">
-						<h3 class="ms-2">Vente</h3>
-						<label class="btn  checkbox-label"><input
-							name="venteEnchereEnCours" type="checkbox" value="true"
-							onchange="updateCheckboxes('vente')">Mes ventes en cours</label> <label
-							class="btn  checkbox-label"><input
-							name="venteEnchereDebutes" type="checkbox" value="true"
-							onchange="updateCheckboxes('vente')"> Ventes non débutées</label> <label
-							class="btn  checkbox-label"><input
-							name="VenteEnchereTermines" type="checkbox" value="true"
-							onchange="updateCheckboxes('vente')">Ventes terminées</label>
-					</div>
-					
-					<form action="HomePageServlet" method="post">
-						<div class=" col-md-4 d-flex flex-column">
-							<div>
-								<label for="recherche">Rechercher :</label> <input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
-							</div>
-					
-							<div class="categories">
-								<label for="categorie">Catégorie :</label> 
-									<select id="categorie" name="categorie">
-										<c:forEach items="${categorie}" var="lstCategorie">
-											<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
-										</c:forEach>
-									</select>
-							</div>
-					
-							<div class="d-flex justify-content-center">
-								<button type="submit" class="submit" name="BT_SELECT_CATEGORIE" value="recherche" style="margin: 10px">Rechercher</button> 
-							</div>
-						</div>	
-					</form>
-					
-				</div>
+				
+			</c:if>
+		<div class=" col-md-4 d-flex flex-column">
+			<div>
+				<label for="recherche"><h4>Rechercher :</h4></label>
+				<input type="text" id="recherche" name="nomArticle" placeholder="Entrez votre recherche">
+			</div>
+			<div class="categories">
+				<label for="categorie"><h4>Catégorie :</h4></label> <select id="categorie"name="categorie">
+					<option name="categorie" value="0">Aucune</option>
+					<c:forEach items="${categorie}" var="lstCategorie">
+						<option name="categorie" value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+					</c:forEach>
+				</select>
 			</div>
 		</div>
-	</c:if>
+			<div class="d-flex justify-content-center">
+			<button type="submit" class="submit" name="BT_SELECT_CATEGORIE"
+				value="recherche" style="margin: 10px">Rechercher</button>
+		</div>
+	</form>
+</div>
+
+
 
 
 	<div class="row">
-    <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
+	<c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
         <div class="col-md-4 mb-3 d-flex justify-content-center align-items-center">
 	    	<div class="card ">  
 		    	<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
