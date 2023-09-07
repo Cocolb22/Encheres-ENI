@@ -29,6 +29,13 @@
 
 	<h1 class="detail">Détail vente</h1>
 
+	<c:if test="${erreurMessage != null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Attention !</strong> ${erreurMessage}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   </c:if>
+
 	<div class="container transparent-card p-4" style="max-width: 750px;">
 
 		<div class="mb-3 ps-2 element">
@@ -41,14 +48,14 @@
 			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere} points par ${enchere.enchereur.pseudo}</p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere} points par ${meilleurEncherisseur}</p>
 		</div>
 		<div class="mb-3 ps-2 element">
 			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
-				<span style="font-weight: bold;">Fin de l'enchère:</span> ${ articleVendu.dateFinEncheresFormatted }
+				<span style="font-weight: bold;">Fin de l'enchère :</span> ${ articleVendu.dateFinEncheresFormatted }
 			</p>
 		</div>
 		<div class="mb-3 mt-4 ps-2 element retrait">
@@ -74,7 +81,7 @@
 
 
 		<c:if test="${utilisateurInscrit != null && utilisateurInscrit.pseudo != articleVendu.utilisateur.pseudo && (articleVendu.dateFinEncheres.isAfter(LocalDate.now()) || articleVendu.dateFinEncheres.isEqual(LocalDate.now()))}">
-			<form action="DetailVenteServlet" method="post">
+			<form action="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" method="post">
 				<div class="container">
 					<div class="row">
 						<div class="d-flex justify-content-center text-align-center">

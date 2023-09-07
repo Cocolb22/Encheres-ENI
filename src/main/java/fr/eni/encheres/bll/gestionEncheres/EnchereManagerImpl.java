@@ -31,8 +31,8 @@ public class EnchereManagerImpl implements EnchereManager {
 		
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
-		if(getMontantMax(enchere.getArticleVendu()) > enchere.getMontantEnchere() ) {
-			throw new BLLException("ms_mauvaiseoffre");
+		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() ) {
+			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article");
 		}
 		try{
 			daoEnchere.insert(enchere);

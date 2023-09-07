@@ -69,9 +69,12 @@ public class DetailVenteServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				
+				System.out.println(enchere);
 				System.out.println("articleVendu:" +" " + articleVendu);
 				request.setAttribute("articleVendu", articleVendu);
 				request.setAttribute("enchere", enchere);
+				System.out.println(enchere.getEnchereur().getPseudo());
+				request.setAttribute("meilleurEncherisseur", enchere.getEnchereur().getPseudo());
 				request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
@@ -98,11 +101,13 @@ public class DetailVenteServlet extends HttpServlet {
 			enchere.setMontantEnchere(meilleureOffre);
 			utilisateurInscrit.setCredit(utilisateurInscrit.getCredit()-proposition);
 			request.setAttribute("enchere", enchere);
+			request.setAttribute("meilleurEncherisseur", enchere.getEnchereur().getPseudo());
 			request.setAttribute("articleVendu", article);
 			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("erreurMessage", e.getMessage());
+			doGet(request, response);
 		}
 		
 	}
