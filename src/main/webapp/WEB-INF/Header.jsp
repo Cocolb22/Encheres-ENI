@@ -39,9 +39,6 @@
 	    <div class="container">
 	      <a href="${pageContext.request.contextPath}/HomePageServlet" class="navbar-brand">Eni Enchères</a>
 	      
-	     <div>
-			<h5 class="header-name"> Bonjour ${utilisateurInscrit.pseudo} </h5>
-		</div>
 	     
 	      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
