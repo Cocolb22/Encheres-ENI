@@ -170,8 +170,4 @@ public class EnchereManagerImpl implements EnchereManager {
 			throw new BLLException();
 		}
 	}
-
-
-
-
 }

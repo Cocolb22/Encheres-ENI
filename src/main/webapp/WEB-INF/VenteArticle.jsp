@@ -20,10 +20,8 @@
 
 <h1 class="mt-5 text-center display-1">Vendre un article</h1>
 
-    <div class="container pb-5"  >
-        
-        <div class="container p-4 w-4">    
-            
+    <div class="container p-5 w-50"  >
+
             <form action="VenteArticleServlet" method="post">
                 
                 <div class="form-body">
@@ -88,6 +86,6 @@
                     </div>
             </form>
         </div>
-    </div>
+
 </body>
 </html>

@@ -17,7 +17,7 @@ import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
-
+import fr.eni.encheres.bo.model.Enchere;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.bundles.BusinessException;
 
