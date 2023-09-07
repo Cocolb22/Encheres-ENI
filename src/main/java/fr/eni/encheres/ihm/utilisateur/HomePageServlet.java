@@ -1,6 +1,7 @@
 package fr.eni.encheres.ihm.utilisateur;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,18 +22,23 @@ import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
+import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
+import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerImpl;
+import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
 
 import fr.eni.encheres.bo.model.Utilisateur;
+import fr.eni.encheres.bundles.BusinessException;
 
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EnchereManager managerEnchere = EnchereManagerSing.getInstance();
 	private CategorieManager managerCategorie = CategorieManagerSing.getInstance();
+	private UtilisateurManager utilisateurManager = UtilisateurManagerSing.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	
     	String action = request.getParameter("action");
        
         if ("inscription".equals(action)) {
@@ -42,6 +48,24 @@ public class HomePageServlet extends HttpServlet {
         } else if ("deconnexion".equals(action)) {
             deconnexion(request, response);
         } else {
+        	
+        	Cookie[] cookies = request.getCookies();
+            
+        	if(cookies != null) {
+        	   for(Cookie cookie : cookies) {
+        	        if(cookie.getName().equals("rememberMe")) {
+        	            String rememberMeValue = cookie.getValue();
+        	            Utilisateur utilisateur;
+						try {
+							utilisateur = utilisateurManager.checkIdUser(Integer.parseInt(rememberMeValue));
+							request.getSession().setAttribute("user", utilisateur);
+						} catch (NumberFormatException | BusinessException e) {
+							e.printStackTrace();
+						}
+        	        }
+        	    }
+        	 }
+        	
         	EnchereModel modelEnchere = new EnchereModel();
         	List<Categorie> categorie = new ArrayList<>();
         	try {
@@ -152,8 +176,15 @@ public class HomePageServlet extends HttpServlet {
 
 	}
 
-	private void deconnexion(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void deconnexion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("rememberMe")) {
+					cookie.setMaxAge(0);
+				}
+			}
+		}
 		request.getSession().invalidate();
 		
 		List<Categorie> categorie = new ArrayList<>();

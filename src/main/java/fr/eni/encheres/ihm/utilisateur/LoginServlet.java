@@ -1,6 +1,7 @@
 package fr.eni.encheres.ihm.utilisateur;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,6 +41,12 @@ public class LoginServlet extends HttpServlet {
 			Utilisateur utilisateurInscrit = manager.connectUtilisateur(pseudo, motDePasse);
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurInscrit", utilisateurInscrit);
+			
+			if(request.getParameter("rememberMe") != null) {
+			    Cookie rememberMeCookie = new Cookie("rememberMe", String.valueOf(utilisateurInscrit.getNoUtilisateur()));
+			    rememberMeCookie.setMaxAge(30*24*60*60);
+			    response.addCookie(rememberMeCookie);
+			}
 			
 			List<Categorie> categorie = new ArrayList<>();
 			EnchereModel modelEnchere = new EnchereModel();
