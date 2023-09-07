@@ -18,11 +18,11 @@
 
 <jsp:include page="Header.jsp"/>
 
-<h1 class="m-3 d-flex justify-content-center text-align-center">Vendre un article</h1>
+<h1 class="mt-5 text-center display-1">Vendre un article</h1>
 
-    <div class="container pb-5" style="max-width: 750px;" >
+    <div class="container pb-5"  >
         
-        <div class="container pt-3 p-5">    
+        <div class="container p-4 w-4">    
             
             <form action="VenteArticleServlet" method="post">
                 
@@ -33,7 +33,8 @@
                         </div>
                         <div class="mb-2">
                             <label for="description" class="form-label form-label-sm">Description :</label>
-                            <input type="text" id="description" name="description" class="form-control" required>
+                            <textarea id="story" id="description" name="description" class="form-control" required></textarea>
+                           <!--  <input type="text" id="description" name="description" class="form-control" required> -->
                         </div>
                         <div class="categories mb-2 ">
                             <label for="categorie">Catégorie :</label>
@@ -75,8 +76,8 @@
                             <input type="text" id="ville" name="ville" class="form-control" value="${utilisateurInscrit.ville }" required>
                         </div>
                     </div>
-                    <div class="btn-list">
-                        <div class=" d-inline-flex">
+                    <div class="btn-list d-flex flex-wrap wrap justify-content-end">
+                        <div class="d-inline-flex ">
                              <div class="col-md-6 p-2 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary m-3 pd-2" name="action" value="enregistrer">Enregistrer</button>
                              </div>

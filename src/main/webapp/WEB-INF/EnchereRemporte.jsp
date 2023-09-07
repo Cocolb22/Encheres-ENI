@@ -22,7 +22,7 @@
 
 <div class="container" style="max-width: 700px">
 
-	<h1 class="d-flex justify-content-center pt-3">Vous avez remporté la vente</h1>
+	<h1 class="display-1 text-center mt-5">Vous avez remporté la vente</h1>
 	
 	<div class="container transparent-card p-4" style="max-width: 750px;">
 
@@ -40,7 +40,7 @@
 		</div>
 		
 		<div class="mb-3 mt-4 ps-2 element retrait">
-			<p class=titre-retrait><span style="font-weight: bold;">Retrait</span></p>
+			<p class=titre-retrait><span style="font-weight: bold;">Retrait :</span></p>
 			<div class="p-3">
 				<p>
 					<span style="font-weight: bold;">Rue :</span>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.time.LocalDate" %>
 
 
 <!DOCTYPE html>
@@ -107,8 +108,12 @@
     <div class="row mt-4">
         <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
             <div class="enchere col-md-4 mb-4">
-            <a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}"
-                    class="a-title">
+            	<c:if test="${enchere.articleVendu.dateFinEncheres.isBefore(LocalDate.now())}">
+	    			<a href="EnchereRemporteServlet?noArticle=${enchere.articleVendu.noArticle }" class="a-title">
+		    	</c:if> 
+		    	<c:if test="${enchere.articleVendu.dateFinEncheres.isAfter(LocalDate.now())}"> 
+		    		<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
+			    </c:if> 
                 <div class="card">
                     <img src="${pageContext.request.contextPath}/images/fouet.jpg" class="card-img-top p-3" alt="Image de l'enchère">
                     <div class="card-body">
@@ -123,6 +128,7 @@
                     </div>
                 </div>
                 </a>
+                
             </div>
         </c:forEach>
     </div>

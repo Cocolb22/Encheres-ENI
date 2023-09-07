@@ -25,14 +25,8 @@
 
 <jsp:include page="Header.jsp"/>
 
-<div class="texte background-content">
-    <p>Doudou, tu viens plus aux soirées ?</p>
-    <p>On a fait une soirée privatisation de la poste,</p>
-    <p>Je peux te dire que j'ai reçu des gros colis,</p>
-    <p> y a même des gens qui ont payé en liquide.</p>
-</div>
 
-<div class="container d-flex justify-content-end align-items-center vh-100  ">
+<div class="container d-flex justify-content-center align-items-center vh-100  ">
     <div class="col-md-6 transparent-card  ">
         <h2 class="mb-3">Connexion</h2>
 
@@ -58,12 +52,12 @@
                         type="password" id="motDePasse" name="motDePasse"
                         class="form-control" required>
                 </div>
-                <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center p-2">
                     <button type="submit" class="btn btn-primary">Connexion</button>
                 </div>
             </form>
 
-            <div class="d-flex justify-content-center align-items-center p-3">
+            <div class="d-flex justify-content-center align-items-center p-2">
             <div class="form-check">
                 <label class="form-check-label">
 		                <input type="checkbox" class="form-check-input" name="rememberMe"> Se souvenir de moi
@@ -73,7 +67,7 @@
                 <a href="MotDePasseOublie.jsp" class="link">Mot de passe oublié?</a>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center text-align-center p-3">
+        <div class="d-flex justify-content-center align-items-center text-align-center p-2">
             <p>Vous n'avez pas de compte?</p>
             <a href="HomePageServlet?action=inscription" class="btn btn-secondary m-4">S'inscrire</a>
         </div>
