@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Categorie;
 import fr.eni.encheres.bo.model.Enchere;
+import fr.eni.encheres.bo.model.Retrait;
 import fr.eni.encheres.bo.model.Utilisateur;
 import fr.eni.encheres.dal.util.ConnectionProvider;
 import fr.eni.encheres.dal.util.DALException;
@@ -25,14 +26,35 @@ public class EnchereDAOImpl implements EnchereDAO {
     final String SELECT_MAX = "SELECT MAX(montant_enchere) max_enchere FROM ENCHERES WHERE no_article=?";
 
     final String SELECT = """
-    	SELECT *
+    	SELECT *, 
+    	v.no_utilisateur as no_vendeur, 
+    	en.no_utilisateur as no_encherisseur,
+    	en.pseudo as en_pseudo,
+    	en.nom as en_nom,
+    	en.prenom as en_prenom,
+    	en.email as en_email,
+    	en.telephone as en_telephone,
+    	en.rue as en_rue,
+    	en.code_postal as en_code_postal,
+    	en.ville as en_ville,
+    	en.mot_de_passe as en_mot_de_passe,
+    	en.credit as en_credit,
+    	en.administrateur as en_administrateur
 	    FROM ENCHERES e
 	    INNER JOIN ARTICLES_VENDUS a ON e.no_article = a.no_article
-	    INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur
+	    INNER JOIN UTILISATEURS v ON a.no_utilisateur = v.no_utilisateur
+	    INNER JOIN UTILISATEURS en ON e.no_utilisateur = en.no_utilisateur
     	INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie
     	LEFT JOIN RETRAITS r ON r.no_article = a.no_article
     		    		""";
     final String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
+    
+	final String INSERT_RETRAIT = """
+			INSERT INTO RETRAITS(
+			rue,
+			code_postal,
+			ville) VALUES (?,?,?);
+			""";
 
     @Override
     public void insert(Enchere enchere) throws DALException {
@@ -49,6 +71,11 @@ public class EnchereDAOImpl implements EnchereDAO {
                     enchere.setNoEnchere(rs.getInt(1));
                 }
             }
+            
+            PreparedStatement pstmt = con.prepareStatement(INSERT_RETRAIT, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, enchere.getArticleVendu().getPointRetrait().getRue());
+			pstmt.setString(2, enchere.getArticleVendu().getPointRetrait().getCodePostal());
+			pstmt.setString(1, enchere.getArticleVendu().getPointRetrait().getVille());
         } catch (SQLException e) {
         	e.printStackTrace();
             throw new DALException("ms_insert");
@@ -69,8 +96,8 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("no_categorie"),
             			rs.getString("libelle")
             			);
-            	Utilisateur utilisateur = new Utilisateur(
-            			rs.getInt("no_utilisateur"),
+            	Utilisateur vendeur = new Utilisateur(
+            			rs.getInt("no_vendeur"),
             			rs.getString("pseudo"),
             			rs.getString("nom"),
             			rs.getString("prenom"),
@@ -83,6 +110,24 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("credit"),
             			rs.getBoolean("administrateur")
             			);
+            	Utilisateur encherisseur = new Utilisateur(
+            			rs.getInt("no_encherisseur"),
+            			rs.getString("en_pseudo"),
+            			rs.getString("en_nom"),
+            			rs.getString("en_prenom"),
+            			rs.getString("en_email"),
+            			rs.getString("en_telephone"),
+            			rs.getString("en_rue"),
+            			rs.getString("en_code_postal"),
+            			rs.getString("en_ville"),
+            			rs.getString("en_mot_de_passe"),
+            			rs.getInt("en_credit"),
+            			rs.getBoolean("en_administrateur")
+            			);
+        		Retrait pointDeRetrait = new Retrait(
+        				rs.getString("rue"), 
+        				rs.getString("code_postal"), 
+        				rs.getString("ville"));
             	ArticleVendu article = new ArticleVendu(
             			rs.getInt("no_article"),
             			rs.getString("nom_article"),
@@ -91,13 +136,13 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getDate("date_fin_encheres").toLocalDate(),
             			rs.getInt("prix_initial"),
             			rs.getInt("prix_vente"),
-            			utilisateur,
+            			vendeur,
             			categorie,
-            			null	//TODO : ajouter Retrait
+            			pointDeRetrait
             			);
                 Enchere enchere = new Enchere(
                 		rs.getInt("no_enchere"),
-                		utilisateur,
+                		encherisseur,
                         article,
                         rs.getTimestamp("date_enchere").toLocalDateTime(),
                         rs.getInt("montant_enchere")
@@ -143,6 +188,10 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("credit"),
             			rs.getBoolean("administrateur")
             			);
+            	Retrait pointDeRetrait = new Retrait(
+        				rs.getString("rue"), 
+        				rs.getString("code_postal"), 
+        				rs.getString("ville"));
             	ArticleVendu article = new ArticleVendu(
             			rs.getInt("no_article"),
             			rs.getString("nom_article"),
@@ -153,7 +202,7 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("prix_vente"),
             			utilisateur,
             			categorie,
-            			null	//TODO : ajouter Retrait
+            			pointDeRetrait
             			);
                 Enchere enchere = new Enchere(
                 		rs.getInt("no_enchere"),
@@ -198,6 +247,10 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("credit"),
             			rs.getBoolean("administrateur")
             			);
+            	Retrait pointDeRetrait = new Retrait(
+        				rs.getString("rue"), 
+        				rs.getString("code_postal"), 
+        				rs.getString("ville"));
             	ArticleVendu article = new ArticleVendu(
             			rs.getInt("no_article"),
             			rs.getString("nom_article"),
@@ -208,7 +261,7 @@ public class EnchereDAOImpl implements EnchereDAO {
             			rs.getInt("prix_vente"),
             			utilisateur,
             			categorie,
-            			null	//TODO : ajouter Retrait
+            			pointDeRetrait
             			);
                 Enchere enchere = new Enchere(
                 		rs.getInt("no_enchere"),

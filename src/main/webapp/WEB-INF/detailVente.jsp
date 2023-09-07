@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Detail vente</title>
+<title>Détail vente</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/detailVente.css">
@@ -40,7 +41,7 @@
 			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points</p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere} points par ${enchere.enchereur.pseudo}</p>
 		</div>
 		<div class="mb-3 ps-2 element">
 			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
@@ -72,7 +73,7 @@
 		</div>
 
 
-		<c:if test="${utilisateurInscrit != null}">
+		<c:if test="${utilisateurInscrit != null && utilisateurInscrit.pseudo != articleVendu.utilisateur.pseudo && (articleVendu.dateFinEncheres.isAfter(LocalDate.now()) || articleVendu.dateFinEncheres.isEqual(LocalDate.now()))}">
 			<form action="DetailVenteServlet" method="post">
 				<div class="container">
 					<div class="row">
