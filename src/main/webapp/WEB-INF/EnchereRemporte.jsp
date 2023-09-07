@@ -20,6 +20,10 @@
 
 <jsp:include page="Header.jsp"/>
 
+<audio id="myAudio" autoplay>
+    <source src="${pageContext.request.contextPath}/song/SF-violent.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" style="max-width: 700px">
 
 	<h1 class="d-flex justify-content-center pt-3">Vous avez remporté la vente</h1>
@@ -70,6 +74,14 @@
 	</div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var audio = document.getElementById("myAudio");
 
+    audio.addEventListener("canplay", function() {
+        audio.play();
+    });
+});
+</script>
 </body>
 </html>

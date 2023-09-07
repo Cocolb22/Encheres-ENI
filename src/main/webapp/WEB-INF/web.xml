@@ -94,4 +94,8 @@
     <servlet-name>EnchereRemporteServlet</servlet-name>
     <url-pattern>/EnchereRemporteServlet</url-pattern>
   </servlet-mapping>
+  <session-config>
+    <session-timeout>5</session-timeout>
+  </session-config>
+
 </web-app>
