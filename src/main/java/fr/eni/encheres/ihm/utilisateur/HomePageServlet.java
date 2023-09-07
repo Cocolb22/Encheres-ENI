@@ -176,8 +176,15 @@ public class HomePageServlet extends HttpServlet {
 
 	}
 
-	private void deconnexion(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void deconnexion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("rememberMe")) {
+					cookie.setMaxAge(0);
+				}
+			}
+		}
 		request.getSession().invalidate();
 		
 		List<Categorie> categorie = new ArrayList<>();
