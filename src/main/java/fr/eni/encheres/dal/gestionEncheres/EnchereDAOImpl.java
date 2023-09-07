@@ -92,61 +92,7 @@ public class EnchereDAOImpl implements EnchereDAO {
             PreparedStatement stmt = con.prepareStatement(SELECT);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-            	Categorie categorie = new Categorie(
-            			rs.getInt("no_categorie"),
-            			rs.getString("libelle")
-            			);
-            	Utilisateur vendeur = new Utilisateur(
-            			rs.getInt("no_vendeur"),
-            			rs.getString("pseudo"),
-            			rs.getString("nom"),
-            			rs.getString("prenom"),
-            			rs.getString("email"),
-            			rs.getString("telephone"),
-            			rs.getString("rue"),
-            			rs.getString("code_postal"),
-            			rs.getString("ville"),
-            			rs.getString("mot_de_passe"),
-            			rs.getInt("credit"),
-            			rs.getBoolean("administrateur")
-            			);
-            	Utilisateur encherisseur = new Utilisateur(
-            			rs.getInt("no_encherisseur"),
-            			rs.getString("en_pseudo"),
-            			rs.getString("en_nom"),
-            			rs.getString("en_prenom"),
-            			rs.getString("en_email"),
-            			rs.getString("en_telephone"),
-            			rs.getString("en_rue"),
-            			rs.getString("en_code_postal"),
-            			rs.getString("en_ville"),
-            			rs.getString("en_mot_de_passe"),
-            			rs.getInt("en_credit"),
-            			rs.getBoolean("en_administrateur")
-            			);
-        		Retrait pointDeRetrait = new Retrait(
-        				rs.getString("rue"), 
-        				rs.getString("code_postal"), 
-        				rs.getString("ville"));
-            	ArticleVendu article = new ArticleVendu(
-            			rs.getInt("no_article"),
-            			rs.getString("nom_article"),
-            			rs.getString("description"),
-            			rs.getDate("date_debut_encheres").toLocalDate(),
-            			rs.getDate("date_fin_encheres").toLocalDate(),
-            			rs.getInt("prix_initial"),
-            			rs.getInt("prix_vente"),
-            			vendeur,
-            			categorie,
-            			pointDeRetrait
-            			);
-                Enchere enchere = new Enchere(
-                		rs.getInt("no_enchere"),
-                		encherisseur,
-                        article,
-                        rs.getTimestamp("date_enchere").toLocalDateTime(),
-                        rs.getInt("montant_enchere")
-                        );
+            	Enchere enchere = mapEnchere(rs);
                 result.add(enchere);
             }
         } catch (SQLException e) {
@@ -156,6 +102,67 @@ public class EnchereDAOImpl implements EnchereDAO {
 		
         return result;
     }
+
+
+
+	private Enchere mapEnchere(ResultSet rs) throws SQLException {
+		Categorie categorie = new Categorie(
+				rs.getInt("no_categorie"),
+				rs.getString("libelle")
+				);
+		Utilisateur vendeur = new Utilisateur(
+				rs.getInt("no_vendeur"),
+				rs.getString("pseudo"),
+				rs.getString("nom"),
+				rs.getString("prenom"),
+				rs.getString("email"),
+				rs.getString("telephone"),
+				rs.getString("rue"),
+				rs.getString("code_postal"),
+				rs.getString("ville"),
+				rs.getString("mot_de_passe"),
+				rs.getInt("credit"),
+				rs.getBoolean("administrateur")
+				);
+		Utilisateur encherisseur = new Utilisateur(
+				rs.getInt("no_encherisseur"),
+				rs.getString("en_pseudo"),
+				rs.getString("en_nom"),
+				rs.getString("en_prenom"),
+				rs.getString("en_email"),
+				rs.getString("en_telephone"),
+				rs.getString("en_rue"),
+				rs.getString("en_code_postal"),
+				rs.getString("en_ville"),
+				rs.getString("en_mot_de_passe"),
+				rs.getInt("en_credit"),
+				rs.getBoolean("en_administrateur")
+				);
+		Retrait pointDeRetrait = new Retrait(
+				rs.getString("rue"), 
+				rs.getString("code_postal"), 
+				rs.getString("ville"));
+		ArticleVendu article = new ArticleVendu(
+				rs.getInt("no_article"),
+				rs.getString("nom_article"),
+				rs.getString("description"),
+				rs.getDate("date_debut_encheres").toLocalDate(),
+				rs.getDate("date_fin_encheres").toLocalDate(),
+				rs.getInt("prix_initial"),
+				rs.getInt("prix_vente"),
+				vendeur,
+				categorie,
+				pointDeRetrait
+				);
+		Enchere enchere = new Enchere(
+				rs.getInt("no_enchere"),
+				encherisseur,
+		        article,
+		        rs.getTimestamp("date_enchere").toLocalDateTime(),
+		        rs.getInt("montant_enchere")
+		        );
+		return enchere;
+	}
 
 
     
@@ -229,48 +236,7 @@ public class EnchereDAOImpl implements EnchereDAO {
             stmt.setString(1,"%" + nomArticle +"%" );
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-            	Categorie categorie = new Categorie(
-            			rs.getInt("no_categorie"),
-            			rs.getString("libelle")
-            			);
-            	Utilisateur utilisateur = new Utilisateur(
-            			rs.getInt("no_utilisateur"),
-            			rs.getString("pseudo"),
-            			rs.getString("nom"),
-            			rs.getString("prenom"),
-            			rs.getString("email"),
-            			rs.getString("telephone"),
-            			rs.getString("rue"),
-            			rs.getString("code_postal"),
-            			rs.getString("ville"),
-            			rs.getString("mot_de_passe"),
-            			rs.getInt("credit"),
-            			rs.getBoolean("administrateur")
-            			);
-            	Retrait pointDeRetrait = new Retrait(
-        				rs.getString("rue"), 
-        				rs.getString("code_postal"), 
-        				rs.getString("ville"));
-            	ArticleVendu article = new ArticleVendu(
-            			rs.getInt("no_article"),
-            			rs.getString("nom_article"),
-            			rs.getString("description"),
-            			rs.getDate("date_debut_encheres").toLocalDate(),
-            			rs.getDate("date_fin_encheres").toLocalDate(),
-            			rs.getInt("prix_initial"),
-            			rs.getInt("prix_vente"),
-            			utilisateur,
-            			categorie,
-            			pointDeRetrait
-            			);
-                Enchere enchere = new Enchere(
-                		rs.getInt("no_enchere"),
-                		utilisateur,
-                        article,
-                        rs.getTimestamp("date_enchere").toLocalDateTime(),
-                        rs.getInt("montant_enchere")
-                        );
-                result.add(enchere);
+                result.add(mapEnchere(rs));
             }
         } catch (SQLException e) {
         	e.printStackTrace();
