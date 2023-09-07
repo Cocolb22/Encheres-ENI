@@ -3,3 +3,7 @@
     margin-bottom: auto;
     padding-left: 50px;
    }
+   
+a:hover, button:hover, label:hover, input:hover {
+	cursor: url('../images/gody2.jpg'), auto;
+}
