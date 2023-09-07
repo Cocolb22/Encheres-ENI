@@ -50,7 +50,7 @@ public class InscriptionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("motDePasse");
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 
-		Utilisateur utilisateurInscrit = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 1000, false);
+		Utilisateur utilisateurInscrit = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, null, false);
 		
 		try {
 			manager.addUtilisateur(utilisateurInscrit, confirmationMotDePasse);
