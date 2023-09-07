@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="fr.eni.encheres.bundles.LecteurMessage" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -35,12 +37,13 @@
         <h2 class="mb-3">Connexion</h2>
 
             <c:if test="${listeCodesErreur != null}">
-                <c:forEach items="${listeCodesErreur}" var="codeErreur">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Attention!</strong> ${codeErreur.getMessageErreur(codeErreur)}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </c:forEach>
+            	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            		<strong>Attention!</strong> 
+                    <c:forEach items="${listeCodesErreur}" var="codeErreur">
+                        <p>${LecteurMessage.getMessageErreur(codeErreur)}</p>
+                    </c:forEach>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+                </div> 
             </c:if>
 
 
