@@ -9,4 +9,5 @@ public interface UtilisateurManager {
 	public void updateUtilisateur (Utilisateur utilisateur, String confirmationMdp) throws BusinessException;
 	public void deleteUtilisateur (Utilisateur utilisateur)throws BusinessException;
 	public Utilisateur connectUtilisateur (String pseudo, String motDePasse) throws BusinessException;
+	public Utilisateur checkIdUser(Integer idUser) throws BusinessException;
 }

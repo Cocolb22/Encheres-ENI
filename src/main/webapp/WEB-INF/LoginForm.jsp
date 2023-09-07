@@ -60,8 +60,9 @@
 
             <div class="d-flex justify-content-center align-items-center p-3">
             <div class="form-check">
-                <input type="checkbox" class="form-check-input">
-                <label class="form-check-label">Se souvenir de moi</label>
+                <label class="form-check-label">
+		                <input type="checkbox" class="form-check-input" name="rememberMe"> Se souvenir de moi
+		            </label>
             </div>
             <div class="ms-3">
                 <a href="MotDePasseOublie.jsp" class="link">Mot de passe oublié?</a>
@@ -74,9 +75,9 @@
     </div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous" defer></script>
+
 </body>
 </html>
