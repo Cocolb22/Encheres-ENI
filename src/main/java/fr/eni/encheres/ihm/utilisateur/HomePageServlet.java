@@ -8,22 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
-import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerImpl;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
