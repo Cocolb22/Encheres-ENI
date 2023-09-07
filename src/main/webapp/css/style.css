@@ -1,14 +1,18 @@
 body{
-	font-family: sans-serif;
-	background-image: url('../images/tips-strip-tease-reussi.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+    font-family: sans-serif;
+    background-image: url('../images/tips-strip-tease-reussi.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
 }
 
+h1{
+    text-shadow:1px 1px 2px rgb(128, 0, 64), 0 0 1em rgb(255, 0, 255), 0 0 0.2em rgb(255, 255, 0); ;
+}
+
 .header{
-	display: flex;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -24,86 +28,56 @@ body{
     color: blueviolet;
 }
 
-.submit {
-	text-align: center;
+.card {
+    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+    transition: all .3s ease;
 }
 
-.card {
-	border-radius: 20px;
-	width: 600px; 
-	height: 300px;
-	display: flex;
-	margin: 20px;
-	align-items: center;
-	background-color: rgba(255, 255, 255, 0.6); 
-
+.enchere a{
+	text-decoration: none;
 }
 
 .card img {
-	width: 280px;
-	height: 250px;
-	
+      display: block;
+  margin-left: auto;
+  margin-right: auto;
+    object-fit: cover;
+    
 }
 
-.elements {
-	margin: 10px;
+.card:hover {
+
+	transform: translate3D(0,-1px,0) scale(1.03);
+
+  	box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+
+  	transition: all .3s ease;
+
 }
 
-.transparent-card {
-    background-color: rgba(255, 255, 255, 0.8); 
+.a-title{
+
+	text-decoration: none !important;
+
+	color: black;
+
+}
+
+.a-title:hover{
+
+	text-decoration: none !important;
+
+	color: rgb(255, 128, 192);
+
+}
+ .transparent-card {
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px; 
     margin: 60px;
     border-radius: 20px;
     font-weight: bold;
 }
 
-#categorie {
-	height: 30px;
-	
-}
-
-.checkbox-label {
-    border: none !important;
-    color: black !important;
-    font-weight: bold !important;
-    transition: color 0.3s ease;
-}
-
-.checkbox-label:hover {
-    border: none !important;
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: bold !important;
-
-}
-
-.grid {
-    display: contents;
-}
-
-.a-title{
-	text-decoration: none !important;
-	color: black;
-}
-
-.card {
-  	box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
-  	transition: all .3s ease;
-}
-
-.card:hover {
-	transform: translate3D(0,-1px,0) scale(1.03);
-  	box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
-  	transition: all .3s ease;
-}
-
-.achat {
-	display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.vente {
-	display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.elements {
+    margin: 10px;
 }

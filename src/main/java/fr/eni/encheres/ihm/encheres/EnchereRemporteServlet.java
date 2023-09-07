@@ -65,7 +65,7 @@ public class EnchereRemporteServlet extends HttpServlet {
 			System.out.println("articleVendu:" +" " + articleVendu);
 			request.setAttribute("articleVendu", articleVendu);
 			request.setAttribute("enchere", enchere);
-			request.getRequestDispatcher("/WEB-INF/enchereRemporte.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/EnchereRemporte.jsp").forward(request, response);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
