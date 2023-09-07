@@ -31,9 +31,10 @@ public class EnchereManagerImpl implements EnchereManager {
 		
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
-		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() ) {
-			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article");
+		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() || enchere.getEnchereur().getCredit() < enchere.getMontantEnchere()) {
+			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article ou votre solde de crédit doit être positif");
 		}
+		
 		try{
 			daoEnchere.insert(enchere);
 		}catch(DALException e ) {
