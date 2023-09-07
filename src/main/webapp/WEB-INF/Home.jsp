@@ -34,43 +34,43 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h4>Achat</h4>
-                        <div class="form-check">
+                        <div class="form-check achat">
                             <input class="form-check-input" type="checkbox" name="achatEnchereOuverte"
                                    value="true" <c:if test="${not empty param.achatEnchereOuverte}">checked="checked"</c:if>
-                                   onchange="updateCheckboxes('achat')">
+                                   onchange="updateCheckboxes()">
                             <label class="form-check-label">Enchères ouvertes</label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check achat">
                             <input class="form-check-input" name="achatEnchereEnCours" type="checkbox" value="true"
                                 <c:if test="${not empty param.achatEnchereEnCours}">checked="checked"</c:if>
-                                onchange="updateCheckboxes('achat')">
+                                onchange="updateCheckboxes()">
                             <label class="form-check-label">Mes enchères en cours</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="achatEnchereRemportées" type="checkbox" value="true"
+                        <div class="form-check achat">
+                            <input class="form-check-input" name="achatEnchereRemportees" type="checkbox" value="true"
                                 <c:if test="${not empty param.achatEnchereRemportées}">checked="checked"</c:if>
-                                onchange="updateCheckboxes('achat')">
+                                onchange="updateCheckboxes()">
                             <label class="form-check-label">Mes enchères remportées</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h4>Vente</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="venteEnchereEnCours"
+                        <div class="form-check vente">
+                            <input class="form-check-input" type="checkbox" name="ventesEnCours"
                                    value="true" <c:if test="${not empty param.venteEnchereEnCours}">checked="checked"</c:if>
-                                   onchange="updateCheckboxes('vente')">
+                                   onchange="updateCheckboxes()">
                             <label class="form-check-label">Mes ventes en cours</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="venteEnchereDebutes" type="checkbox" value="true"
+                        <div class="form-check vente">
+                            <input class="form-check-input" name="ventesNonDebutees" type="checkbox" value="true"
                                 <c:if test="${not empty param.venteEnchereDebutes}">checked="checked"</c:if>
-                                onchange="updateCheckboxes('vente')">
+                                onchange="updateCheckboxes()">
                             <label class="form-check-label"> Ventes non débutées</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="VenteEnchereTermines" type="checkbox" value="true"
+                        <div class="form-check vente">
+                            <input class="form-check-input" name="ventesTerminees" type="checkbox" value="true"
                                 <c:if test="${not empty param.VenteEnchereTermines}">checked="checked"</c:if>
-                                onchange="updateCheckboxes('vente')">
+                                onchange="updateCheckboxes()">
                             <label class="form-check-label">Ventes terminées</label>
                         </div>
                     </div>
@@ -87,8 +87,13 @@
                         <select id="categorie" name="categorie" class="form-select">
                             <option value="0">Aucune</option>
                             <c:forEach items="${categorie}" var="lstCategorie">
-                                <option value="${lstCategorie.noCategorie}">${lstCategorie.libelle}</option>
-                            </c:forEach>
+								<c:if test="${categorieSelectionnee == lstCategorie.noCategorie }">
+									<option value="${lstCategorie.noCategorie }" selected>${lstCategorie.libelle }</option>
+								</c:if>
+								<c:if test="${categorieSelectionnee != lstCategorie.noCategorie }">
+									<option value="${lstCategorie.noCategorie }">${lstCategorie.libelle }</option>
+								</c:if>
+							</c:forEach>
                         </select>
                     </div>
                 </div>
@@ -102,8 +107,7 @@
     <div class="row mt-4">
         <c:forEach items="${modelEnchere.lstEnchere}" var="enchere">
             <div class="enchere col-md-4 mb-4">
-            <a
-                    href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}"
+            <a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}"
                     class="a-title">
                 <div class="card">
                     <img src="${pageContext.request.contextPath}/images/fouet.jpg" class="card-img-top p-3" alt="Image de l'enchère">
@@ -125,31 +129,29 @@
 </div>
 
 <script>
-    function updateCheckboxes(column) {
-        var checkboxes = document.querySelectorAll("." + column
-                + " input[type='checkbox']");
-        var oppositeColumn = column === "achat" ? "vente" : "achat";
+    function updateCheckboxes() {
+    	var checkboxesAchat = document.querySelectorAll(".achat input[type='checkbox']");
+        var checkboxesVente = document.querySelectorAll(".vente input[type='checkbox']");
 
-        checkboxes.forEach(function(checkbox) {
-            checkbox.disabled = false;
+        checkboxesAchat.forEach(function(checkboxAchat) {
+            checkboxAchat.addEventListener("change", function() {
+                if (checkboxAchat.checked) {
+                    checkboxesVente.forEach(function(checkboxVente) {
+                        checkboxVente.checked = false;
+                    });
+                }
+            });
         });
 
-        var selectedCheckboxes = document.querySelectorAll("." + column
-                + " input[type='checkbox']:checked");
-
-        if (selectedCheckboxes.length > 0) {
-            var oppositeCheckboxes = document.querySelectorAll("."
-                    + oppositeColumn + " input[type='checkbox']");
-            oppositeCheckboxes.forEach(function(checkbox) {
-                checkbox.disabled = true;
+        checkboxesVente.forEach(function(checkboxVente) {
+            checkboxVente.addEventListener("change", function() {
+                if (checkboxVente.checked) {
+                    checkboxesAchat.forEach(function(checkboxAchat) {
+                        checkboxAchat.checked = false;
+                    });
+                }
             });
-        } else {
-            var oppositeCheckboxes = document.querySelectorAll("."
-                    + oppositeColumn + " input[type='checkbox']");
-            oppositeCheckboxes.forEach(function(checkbox) {
-                checkbox.disabled = false;
-            });
-        }
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -158,10 +160,13 @@
         audio.addEventListener("canplay", function() {
             audio.play();
         });
+        
+        updateCheckboxes();
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous" defer></script>
+
 </body>
 </html>

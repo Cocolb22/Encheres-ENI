@@ -8,22 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import fr.eni.encheres.bll.categories.CategorieManager;
 import fr.eni.encheres.bll.categories.CategorieManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
-import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerImpl;
 import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.Categorie;
@@ -99,10 +89,10 @@ public class HomePageServlet extends HttpServlet {
 	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
-	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
-	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
-	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
-	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportees")),
+	            			Boolean.parseBoolean(request.getParameter("ventesEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("ventesNonDebutees")),
+	            			Boolean.parseBoolean(request.getParameter("ventesTerminees")),
 	            			sessionUser.getNoUtilisateur()));
 	            	}else {
 	            		modelEnchere.setLstEnchere(managerEnchere.findByCategorie(Integer.parseInt(request.getParameter("categorie"))));
@@ -122,10 +112,10 @@ public class HomePageServlet extends HttpServlet {
 	            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.findByNomArticle(request.getParameter("nomArticle")),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
 	            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
-	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
-	            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
-	            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
-	            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+	            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportees")),
+	            			Boolean.parseBoolean(request.getParameter("ventesEnCours")),
+	            			Boolean.parseBoolean(request.getParameter("ventesNonDebutees")),
+	            			Boolean.parseBoolean(request.getParameter("ventesTerminees")),
 	            			sessionUser.getNoUtilisateur()));
 	            	}else {
 	            		modelEnchere.setLstEnchere(managerEnchere.findByNomArticle(request.getParameter("nomArticle")));
@@ -143,10 +133,10 @@ public class HomePageServlet extends HttpServlet {
 		            	modelEnchere.setLstEnchere(managerEnchere.filtrer(managerEnchere.getAll(),
 		            			Boolean.parseBoolean(request.getParameter("achatEnchereOuverte")),
 		            			Boolean.parseBoolean(request.getParameter("achatEnchereEnCours")),
-		            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportées")),
-		            			Boolean.parseBoolean(request.getParameter("venteEnchereEnCours")),
-		            			Boolean.parseBoolean(request.getParameter("venteEnchereDebutes")),
-		            			Boolean.parseBoolean(request.getParameter("VenteEnchereTermines")),
+		            			Boolean.parseBoolean(request.getParameter("achatEnchereRemportees")),
+		            			Boolean.parseBoolean(request.getParameter("ventesEnCours")),
+		            			Boolean.parseBoolean(request.getParameter("ventesNonDebutees")),
+		            			Boolean.parseBoolean(request.getParameter("ventesTerminees")),
 		            			sessionUser.getNoUtilisateur()));
 		            	}else {
 		            		modelEnchere.setLstEnchere(managerEnchere.getAll());

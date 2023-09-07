@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 			    response.addCookie(rememberMeCookie);
 			}
 			
+			
 			List<Categorie> categorie = new ArrayList<>();
 			EnchereModel modelEnchere = new EnchereModel();
 			try {
