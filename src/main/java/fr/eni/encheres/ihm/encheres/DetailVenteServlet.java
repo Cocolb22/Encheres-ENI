@@ -17,6 +17,8 @@ import fr.eni.encheres.bll.gestionEncheres.EnchereManager;
 import fr.eni.encheres.bll.gestionEncheres.EnchereManagerSing;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManager;
 import fr.eni.encheres.bll.gestionEncheres.VenteArticleManagerSing;
+import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManager;
+import fr.eni.encheres.bll.gestionUtilisateurs.UtilisateurManagerSing;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Enchere;
@@ -31,6 +33,7 @@ public class DetailVenteServlet extends HttpServlet {
 
 	private VenteArticleManager manager = VenteArticleManagerSing.getInstance();
 	private EnchereManager enchereManager = EnchereManagerSing.getInstance();
+	private UtilisateurManager userManager = UtilisateurManagerSing.getInstance();
 	
 	 private List<Enchere> lstEnchere = new ArrayList<>();
 	 private Integer noArticle;
@@ -93,13 +96,32 @@ public class DetailVenteServlet extends HttpServlet {
 		Integer proposition = Integer.parseInt(request.getParameter("propositionPrix"));
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurInscrit = (Utilisateur) session.getAttribute("utilisateurInscrit");
-		
+
 		try {
 			Enchere enchere = new Enchere(utilisateurInscrit, article, LocalDateTime.now(), proposition);
 			enchereManager.addEnchere(enchere);
+			
 			Integer meilleureOffre = enchereManager.getMontantMax(article);
 			enchere.setMontantEnchere(meilleureOffre);
+			
 			utilisateurInscrit.setCredit(utilisateurInscrit.getCredit()-proposition);
+			userManager.updateUtilisateur(utilisateurInscrit, utilisateurInscrit.getMotDePasse());
+			
+			List<Enchere> encheresArticle = enchereManager.findByNomArticle(enchere.getArticleVendu().getNomArticle());
+			
+			if(encheresArticle.size() > 1) {
+				Collections.sort(encheresArticle, (e1, e2) -> e1.getMontantEnchere().compareTo(e2.getMontantEnchere()));
+				Enchere encherePrecedente = encheresArticle.get(1);
+				Utilisateur enchereur = encherePrecedente.getEnchereur();
+				enchereur.setCredit(enchereur.getCredit() + enchere.getMontantEnchere());
+				try {
+					userManager.updateUtilisateur(enchereur, enchereur.getMotDePasse());
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("meilleurEncherisseur", enchere.getEnchereur().getPseudo());
 			request.setAttribute("articleVendu", article);
@@ -108,6 +130,9 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("erreurMessage", e.getMessage());
 			doGet(request, response);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
