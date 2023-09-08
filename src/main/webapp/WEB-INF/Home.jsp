@@ -48,7 +48,7 @@
                             <label class="form-check-label">Mes enchères en cours</label>
                         </div>
                         <div class="form-check achat">
-                            <input class="form-check-input" name="achatEnchereRemportées" type="checkbox" value="true"
+                            <input class="form-check-input" name="achatEnchereRemportees" type="checkbox" value="true"
                                 <c:if test="${not empty param.achatEnchereRemportées}">checked="checked"</c:if>
                                 onchange="updateCheckboxes()">
                             <label class="form-check-label">Mes enchères remportées</label>
@@ -57,19 +57,19 @@
                     <div class="col-md-6">
                         <h4>Vente</h4>
                         <div class="form-check vente">
-                            <input class="form-check-input" type="checkbox" name="venteEnchereEnCours"
+                            <input class="form-check-input" type="checkbox" name="ventesEnCours"
                                    value="true" <c:if test="${not empty param.venteEnchereEnCours}">checked="checked"</c:if>
                                    onchange="updateCheckboxes()">
                             <label class="form-check-label">Mes ventes en cours</label>
                         </div>
                         <div class="form-check vente">
-                            <input class="form-check-input" name="venteEnchereDebutes" type="checkbox" value="true"
+                            <input class="form-check-input" name="ventesNonDebutees" type="checkbox" value="true"
                                 <c:if test="${not empty param.venteEnchereDebutes}">checked="checked"</c:if>
                                 onchange="updateCheckboxes()">
                             <label class="form-check-label"> Ventes non débutées</label>
                         </div>
                         <div class="form-check vente">
-                            <input class="form-check-input" name="VenteEnchereTermines" type="checkbox" value="true"
+                            <input class="form-check-input" name="ventesTerminees" type="checkbox" value="true"
                                 <c:if test="${not empty param.VenteEnchereTermines}">checked="checked"</c:if>
                                 onchange="updateCheckboxes()">
                             <label class="form-check-label">Ventes terminées</label>

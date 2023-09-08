@@ -15,24 +15,25 @@ import java.util.stream.Stream;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Enchere;
-
-
+import fr.eni.encheres.bundles.BusinessException;
 import fr.eni.encheres.dal.gestionEncheres.DAOFact;
+import fr.eni.encheres.dal.gestionUtilisateurs.DAOFactUtilisateur;
 import fr.eni.encheres.dal.gestionEncheres.EnchereDAO;
+import fr.eni.encheres.dal.gestionUtilisateurs.UtilisateurDAO;
 import fr.eni.encheres.dal.util.DALException;
 
 public class EnchereManagerImpl implements EnchereManager {
 	private EnchereDAO daoEnchere = DAOFact.getEnchereDAO();
 	List<Integer> prixProposes = new ArrayList<Integer>();
 	private EnchereDAO dao = DAOFact.getEnchereDAO();
+	private UtilisateurDAO userDAO = DAOFactUtilisateur.getUtilisateurDAO();
 
 	@Override
 	public void addEnchere(Enchere enchere) throws BLLException {
-		
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
-		if(getMontantMax(enchere.getArticleVendu()) > enchere.getMontantEnchere() ) {
-			throw new BLLException("ms_mauvaiseoffre");
+		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() || enchere.getEnchereur().getCredit() < enchere.getMontantEnchere()) {
+			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article ou votre solde de crédit doit être positif");
 		}
 		try{
 			daoEnchere.insert(enchere);
@@ -133,27 +134,40 @@ public class EnchereManagerImpl implements EnchereManager {
 
 
 	public List<Enchere> filtrer(List<Enchere> lst, boolean achatEnchereOuverte, boolean achatEnchereEnCours,
-			boolean encheresParticipees, boolean encheresGagnees, boolean venteEnchereDebutes,
-			boolean VenteEnchereTermines, Integer sessionUser) throws BLLException {
+			boolean encheresRemportees, boolean ventesEnCours, boolean ventesNonDebutees,
+			boolean ventesTerminees, Integer sessionUser) throws BLLException {
 		Stream<Enchere> stream = lst.stream();
 		
 		if(achatEnchereOuverte) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()));
+			stream = stream.filter(
+					enchere -> enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now())
+					|| enchere.getArticleVendu().getDateFinEncheres().isEqual(LocalDate.now()));
 		}
 		if(achatEnchereEnCours) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) && enchere.getEnchereur().getNoUtilisateur().equals(sessionUser));
+			stream = stream.filter(
+					enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) 
+					&& enchere.getEnchereur().getNoUtilisateur() == sessionUser);
 		}
-		if(encheresParticipees) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getEnchereur().getNoUtilisateur().equals(sessionUser));
+		if(encheresRemportees) {
+			stream = stream.filter(
+					enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) 
+					&& enchere.getEnchereur().getNoUtilisateur() == sessionUser);
 		}
-		if(encheresGagnees) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
+		if(ventesEnCours) {
+			stream = stream.filter(
+					enchere -> (enchere.getArticleVendu().getDateFinEncheres().isAfter(LocalDate.now())
+							|| enchere.getArticleVendu().getDateFinEncheres().isEqual(LocalDate.now()))
+					&& enchere.getArticleVendu().getUtilisateur().getNoUtilisateur() == sessionUser);
 		}
-		if(venteEnchereDebutes) {
-			stream = stream.filter(enchere ->enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
+		if(ventesNonDebutees) {
+			stream = stream.filter(
+					enchere -> enchere.getArticleVendu().getDateDebutEncheres().isAfter(LocalDate.now()) 
+					&& enchere.getArticleVendu().getUtilisateur().getNoUtilisateur() == sessionUser);
 		}
-		if(VenteEnchereTermines) {
-			stream = stream.filter(enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) && enchere.getArticleVendu().getUtilisateur().getNoUtilisateur().equals(sessionUser));
+		if(ventesTerminees) {
+			stream = stream.filter(
+					enchere -> enchere.getArticleVendu().getDateFinEncheres().isBefore(LocalDate.now()) 
+					&& enchere.getArticleVendu().getUtilisateur().getNoUtilisateur() == sessionUser);
 		}
 
 		return stream.toList();

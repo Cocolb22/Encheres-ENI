@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Detail vente</title>
+<title>Détail vente</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/detailVente.css">
@@ -28,6 +29,13 @@
 
 	<h1 class="display-1 text-center mt-5">Détail vente</h1>
 
+	<c:if test="${erreurMessage != null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Attention !</strong> ${erreurMessage}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   </c:if>
+
 	<div class="container transparent-card p-4" style="max-width: 750px;">
 
 		<div class="mb-3 ps-2 element">
@@ -40,14 +48,14 @@
 			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points</p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere} points par ${meilleurEncherisseur}</p>
 		</div>
 		<div class="mb-3 ps-2 element">
 			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
-				<span style="font-weight: bold;">Fin de l'enchère:</span> ${ articleVendu.dateFinEncheresFormatted }
+				<span style="font-weight: bold;">Fin de l'enchère :</span> ${ articleVendu.dateFinEncheresFormatted }
 			</p>
 		</div>
 		<div class="mb-3 mt-4 ps-2 element retrait">
@@ -72,8 +80,8 @@
 		</div>
 
 
-		<c:if test="${utilisateurInscrit != null}">
-			<form action="DetailVenteServlet" method="post">
+		<c:if test="${utilisateurInscrit != null && utilisateurInscrit.pseudo != articleVendu.utilisateur.pseudo && (articleVendu.dateFinEncheres.isAfter(LocalDate.now()) || articleVendu.dateFinEncheres.isEqual(LocalDate.now()))}">
+			<form action="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" method="post">
 				<div class="container">
 					<div class="row">
 						<div class="d-flex justify-content-center text-align-center">
