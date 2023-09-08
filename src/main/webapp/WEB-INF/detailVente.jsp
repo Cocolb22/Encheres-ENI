@@ -115,6 +115,13 @@
     <jsp:include page="Header.jsp" />
 
     <h1 class="display-1 text-center mt-5">Détail vente</h1>
+    
+    <c:if test="${erreurMessage != null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Attention !</strong> ${erreurMessage}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+   </c:if>
 
     <div class="container transparent-card p-4">
         <div class="mb-3 ps-2 element">
@@ -127,10 +134,10 @@
 			<p><span style="font-weight: bold;">Catégorie :</span> ${ articleVendu.categorie.libelle }</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points</p>
+			<p><span style="font-weight: bold;">Meilleure offre :</span> ${enchere.montantEnchere } points par ${meilleurEncherisseur}</p>
 		</div>
 		<div class="mb-3 ps-2 element">
-			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points</p>
+			<p><span style="font-weight: bold;">Mise à prix :</span> ${articleVendu.prixInitial } points </p>
 		</div>
 		<div class="mb-5 ps-2 element">
 			<p>
@@ -156,27 +163,33 @@
             <p><span style="font-weight: bold;">Vendeur :</span> ${ articleVendu.utilisateur.pseudo }</p>
         </div>
 
-        <c:if test="${utilisateurInscrit != null}">
-            <form action="DetailVenteServlet" method="post">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="propositionPrix" class="form-label form-label-sm m-1 element">Ma proposition</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" step="1" min="0" id="propositionPrix" name="propositionPrix" class="form-control" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary m-2" name="encherir">Enchérir</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </c:if>
+        <c:if test="${utilisateurInscrit != null && utilisateurInscrit.pseudo != articleVendu.utilisateur.pseudo && (articleVendu.dateFinEncheres.isAfter(LocalDate.now()) || articleVendu.dateFinEncheres.isEqual(LocalDate.now()))}">
+			<form action="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" method="post">
+				<div class="container">
+					<div class="row">
+						<div class="d-flex justify-content-center text-align-center">
+							<div class="col-sm-6 d-flex justify-content-center ">
+								<label for="propositionPrix"
+									class="form-label form-label-sm m-1 element">Ma
+									proposition</label>
+							</div>
+							<div class="col-sm-6 ">
+								<input type="number" step="1" min="0" id="propositionPrix"
+									name="propositionPrix" class="form-control" required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="col-sm-6">
+							<button type="submit" class="btn btn-primary m-2" name="encherir">Enchérir</button>
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</c:if>
     </div>
 </body>
 </html>

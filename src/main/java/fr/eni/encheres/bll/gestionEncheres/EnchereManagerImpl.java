@@ -32,7 +32,7 @@ public class EnchereManagerImpl implements EnchereManager {
 	public void addEnchere(Enchere enchere) throws BLLException {
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
-		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() || enchere.getEnchereur().getCredit() < enchere.getMontantEnchere()) {
+		if(getMontantMax(enchere.getArticleVendu()) > enchere.getMontantEnchere() || enchere.getEnchereur().getCredit() < enchere.getMontantEnchere()) {
 			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article ou votre solde de crédit doit être positif");
 		}
 		try{
@@ -145,7 +145,8 @@ public class EnchereManagerImpl implements EnchereManager {
 		}
 		if(achatEnchereEnCours) {
 			stream = stream.filter(
-					enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now()) 
+					enchere -> enchere.getArticleVendu().getDateDebutEncheres().isBefore(LocalDate.now())
+					|| enchere.getArticleVendu().getDateDebutEncheres().isEqual(LocalDate.now()) 
 					&& enchere.getEnchereur().getNoUtilisateur() == sessionUser);
 		}
 		if(encheresRemportees) {

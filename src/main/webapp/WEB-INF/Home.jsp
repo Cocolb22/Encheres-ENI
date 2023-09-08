@@ -111,7 +111,7 @@
             	<c:if test="${enchere.articleVendu.dateFinEncheres.isBefore(LocalDate.now())}">
 	    			<a href="EnchereRemporteServlet?noArticle=${enchere.articleVendu.noArticle }" class="a-title">
 		    	</c:if> 
-		    	<c:if test="${enchere.articleVendu.dateFinEncheres.isAfter(LocalDate.now())}"> 
+		    	<c:if test="${enchere.articleVendu.dateFinEncheres.isAfter(LocalDate.now()) || enchere.articleVendu.dateFinEncheres.isEqual(LocalDate.now())}"> 
 		    		<a href="DetailVenteServlet?noArticle=${enchere.articleVendu.noArticle}" class="a-title">
 			    </c:if> 
                 <div class="card">
