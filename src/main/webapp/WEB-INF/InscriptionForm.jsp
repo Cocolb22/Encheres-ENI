@@ -23,7 +23,7 @@
 
 <div class="container-fluid d-flex justify-content-center align-items-center">
     <div class="col-md-8 col-lg-6 transparent-card">
-        <h1 class="text-center">Formulaire d'inscription</h1>
+        <h1 class="mt-3 text-center display-1">Formulaire d'inscription</h1>
 
        <c:if test="${listeCodesErreur != null}">
                 <c:forEach items="${listeCodesErreur}" var="codeErreur">
