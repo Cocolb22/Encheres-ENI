@@ -15,26 +15,26 @@ import java.util.stream.Stream;
 import fr.eni.encheres.bll.util.BLLException;
 import fr.eni.encheres.bo.model.ArticleVendu;
 import fr.eni.encheres.bo.model.Enchere;
-
-
+import fr.eni.encheres.bundles.BusinessException;
 import fr.eni.encheres.dal.gestionEncheres.DAOFact;
+import fr.eni.encheres.dal.gestionUtilisateurs.DAOFactUtilisateur;
 import fr.eni.encheres.dal.gestionEncheres.EnchereDAO;
+import fr.eni.encheres.dal.gestionUtilisateurs.UtilisateurDAO;
 import fr.eni.encheres.dal.util.DALException;
 
 public class EnchereManagerImpl implements EnchereManager {
 	private EnchereDAO daoEnchere = DAOFact.getEnchereDAO();
 	List<Integer> prixProposes = new ArrayList<Integer>();
 	private EnchereDAO dao = DAOFact.getEnchereDAO();
+	private UtilisateurDAO userDAO = DAOFactUtilisateur.getUtilisateurDAO();
 
 	@Override
 	public void addEnchere(Enchere enchere) throws BLLException {
-		
 		System.out.println(getMontantMax(enchere.getArticleVendu()));
 		System.out.println(enchere.getMontantEnchere());
 		if(getMontantMax(enchere.getArticleVendu()) >= enchere.getMontantEnchere() || enchere.getEnchereur().getCredit() < enchere.getMontantEnchere()) {
 			throw new BLLException("Le montant proposé doit être supérieur au prix initial de l'article ou votre solde de crédit doit être positif");
 		}
-		
 		try{
 			daoEnchere.insert(enchere);
 		}catch(DALException e ) {
